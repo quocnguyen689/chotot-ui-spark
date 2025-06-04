@@ -15,8 +15,7 @@ const ExchangeZone = () => {
       memberCount: 156,
       timeAgo: 'Cập nhật hôm nay',
       color: 'bg-yellow-brand',
-      letter: 'T',
-      thumbnail: 'https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=400&h=300&fit=crop'
+      letter: 'T'
     },
     {
       id: 2,
@@ -25,8 +24,7 @@ const ExchangeZone = () => {
       memberCount: 89,
       timeAgo: 'Cập nhật hôm nay',
       color: 'bg-yellow-brand',
-      letter: 'C',
-      thumbnail: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=300&fit=crop'
+      letter: 'C'
     },
     {
       id: 3,
@@ -35,8 +33,7 @@ const ExchangeZone = () => {
       memberCount: 234,
       timeAgo: 'Cập nhật hôm nay',
       color: 'bg-yellow-brand',
-      letter: 'S',
-      thumbnail: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=300&fit=crop'
+      letter: 'S'
     }
   ];
 
@@ -91,34 +88,25 @@ const ExchangeZone = () => {
             </div>
           </div>
 
-          {/* Exchange Group Cards - Grid Layout */}
-          <div className="grid grid-cols-2 gap-3">
+          {/* Exchange Group Cards */}
+          <div className="space-y-3">
             {exchangeGroups.map((group) => (
               <div 
                 key={group.id} 
-                className="bg-white rounded-lg border border-gray-200 overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
+                className="bg-white rounded-lg border border-gray-200 p-4 cursor-pointer hover:shadow-md transition-shadow"
                 onClick={() => handleCollectionClick(group.id)}
               >
-                {/* Thumbnail */}
-                <div className="relative h-24 w-full">
-                  <img 
-                    src={group.thumbnail} 
-                    alt={group.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-2 right-2">
-                    <div className={`w-6 h-6 ${group.color} rounded-md flex items-center justify-center`}>
-                      <span className="text-black font-bold text-xs">{group.letter}</span>
-                    </div>
+                <div className="flex items-start space-x-3">
+                  <div className={`w-12 h-12 ${group.color} rounded-lg flex items-center justify-center`}>
+                    <span className="text-black font-bold text-lg">{group.letter}</span>
                   </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-3">
-                  <h4 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">{group.name}</h4>
-                  <p className="text-gray-600 text-xs mb-2 line-clamp-2">{group.description}</p>
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span className="font-medium">{group.memberCount} món đồ</span>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-gray-900 mb-1">{group.name}</h4>
+                    <p className="text-gray-600 text-sm mb-2">{group.description}</p>
+                    <div className="flex items-center space-x-4 text-xs text-gray-500">
+                      <span className="font-medium">{group.memberCount} món đồ</span>
+                      <span>• {group.timeAgo}</span>
+                    </div>
                   </div>
                 </div>
               </div>
