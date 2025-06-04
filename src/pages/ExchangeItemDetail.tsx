@@ -16,7 +16,7 @@ const ExchangeItemDetail = () => {
     description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
     location: 'Trung tâm, cách 2km',
     owner: 'StyleSeeker',
-    image: '/lovable-uploads/c4c262d2-2e73-4923-bae2-efbd2ed88747.png',
+    image: '/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png',
     offersCount: 3,
     recentOffers: [
       {
