@@ -77,10 +77,10 @@ const AIQuickPost = () => {
 
       {/* Camera View */}
       <div className="relative w-full h-full min-h-screen bg-gradient-to-br from-amber-100 to-orange-200">
-        {/* Simulated book image */}
+        {/* Book image */}
         <div className="absolute inset-0 flex items-center justify-center">
           <img 
-            src="/lovable-uploads/ec848a53-ed59-4fb1-8be5-6f609482815f.png"
+            src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=800&fit=crop"
             alt="Book filming view"
             className="w-full h-full object-cover"
           />
