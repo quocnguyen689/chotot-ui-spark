@@ -42,7 +42,7 @@ const categories = [{
   color: 'bg-lime-100'
 }];
 const CategoryMenu = () => {
-  return <div className="px-4 py-6 bg-white">
+  return <div className="px-4 bg-white py-[16px]">
       <div className="grid grid-cols-5 gap-4">
         {categories.map((category, index) => <div key={index} className="flex flex-col items-center">
             <div className="mx-0 rounded-full">
