@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-
 const PostForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,10 +29,9 @@ const PostForm = () => {
     });
     navigate('/exchange');
   };
-  return (
-    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
-      <div className="p-4 flex items-center justify-center bg-yellow-brand">
+      <div className="p-4 flex items-center justify-center bg-white">
         <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
           <ArrowLeft className="w-6 h-6 text-black" />
         </button>
@@ -153,8 +151,6 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PostForm;
