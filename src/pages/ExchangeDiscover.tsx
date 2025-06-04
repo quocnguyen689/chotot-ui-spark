@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, X, Heart } from 'lucide-react';
@@ -17,7 +16,7 @@ const ExchangeDiscover = () => {
       description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
       location: 'Trung tâm, cách 2km',
       owner: 'StyleSeeker',
-      video: '/lovable-uploads/44ccf7e9-1938-4d5f-8d89-ce7d58b8410c.png', // Using uploaded image as placeholder
+      video: 'https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=400&h=600&fit=crop', // Fashion/clothing
       offers: 3
     },
     {
@@ -26,7 +25,7 @@ const ExchangeDiscover = () => {
       description: 'Túi xách da thật cao cấp, được bảo quản cẩn thận. Thiết kế thanh lịch và sang trọng.',
       location: 'Quận 1, cách 1.5km',
       owner: 'FashionLover',
-      video: '/lovable-uploads/44ccf7e9-1938-4d5f-8d89-ce7d58b8410c.png',
+      video: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=600&fit=crop', // Handbag
       offers: 5
     },
     {
@@ -35,7 +34,7 @@ const ExchangeDiscover = () => {
       description: 'Giày sneaker phiên bản giới hạn, chỉ đi vài lần. Còn nguyên hộp và phụ kiện.',
       location: 'Quận 3, cách 3km',
       owner: 'SneakerHead',
-      video: '/lovable-uploads/44ccf7e9-1938-4d5f-8d89-ce7d58b8410c.png',
+      video: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=600&fit=crop', // Sneakers
       offers: 2
     }
   ];
