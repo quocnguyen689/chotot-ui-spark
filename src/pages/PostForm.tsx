@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Camera, Plus, X } from 'lucide-react';
@@ -6,12 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-
 const PostForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const category = location.state?.category || 'Chưa chọn danh mục';
-
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -21,14 +18,12 @@ const PostForm = () => {
     giveAway: false,
     forSale: false
   });
-
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
-
   const handleSubmit = () => {
     console.log('Posting item:', {
       category,
@@ -36,9 +31,7 @@ const PostForm = () => {
     });
     navigate('/exchange');
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
       <div className="p-4 flex items-center justify-center relative bg-white">
         <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
@@ -55,10 +48,6 @@ const PostForm = () => {
             <span className="text-red-500">*</span>
           </div>
           <div className="mt-2 text-sm text-gray-900">{category}</div>
-        </div>
-
-        {/* Moved section to top */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
         </div>
 
         {/* Condition Selection */}
@@ -101,14 +90,12 @@ const PostForm = () => {
         </div>
 
         {/* Price Input */}
-        {!formData.freeGiveaway && (
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+        {!formData.freeGiveaway && <div className="bg-white rounded-lg border border-gray-200 p-4">
             <Label className="text-gray-600 mb-3 block">
               Giá bán <span className="text-red-500">*</span>
             </Label>
             <Input type="text" value={formData.price} onChange={e => handleInputChange('price', e.target.value)} className="w-full" placeholder="Nhập giá bán" />
-          </div>
-        )}
+          </div>}
 
         {/* Title and Description Section */}
         <div className="rounded-lg px-[16px] my-[16px] bg-white border border-gray-200 p-4">
@@ -162,6 +149,13 @@ const PostForm = () => {
                   <X className="w-3 h-3 text-white" />
                 </button>
               </div>
+              
+              
+            </div>
+            
+            <div className="text-center">
+              
+              
             </div>
           </div>
         </div>
@@ -181,6 +175,9 @@ const PostForm = () => {
           </div>
         </div>
 
+        {/* Seller Information */}
+        
+
         {/* Action Buttons */}
         <div className="flex space-x-2 pb-20">
           <Button variant="outline" onClick={() => navigate('/')} className="flex-1 py-3 text-gray-900 border-gray-300">
@@ -191,8 +188,6 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PostForm;
