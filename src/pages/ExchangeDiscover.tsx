@@ -131,9 +131,7 @@ const ExchangeDiscover = () => {
             </button>
 
             {/* Swap Button */}
-            <button onClick={handleSwap} className="bg-yellow-brand text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-yellow-brand/90 transition-colors">
-              Swap
-            </button>
+            <button onClick={handleSwap} className="bg-yellow-brand px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-yellow-brand/90 transition-colors text-white">Trao đổi</button>
           </div>
         </div>
       </div>
