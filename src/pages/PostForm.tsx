@@ -31,8 +31,8 @@ const PostForm = () => {
   };
   return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
-      <div className="bg-white p-4 flex items-center justify-between border-b border-gray-200">
-        <button onClick={() => navigate('/post/category')} className="p-2">
+      <div className="p-4 flex items-center justify-center relative bg-white">
+        <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
           <ArrowLeft className="w-6 h-6 text-black" />
         </button>
         <h1 className="text-lg font-bold text-black text-center">Đăng tin với AI</h1>
