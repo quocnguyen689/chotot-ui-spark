@@ -11,31 +11,31 @@ const ExchangeItemDetail = () => {
   // Sample data - in real app this would come from API
   const itemDetail = {
     id: 1,
-    title: 'Vintage Denim Jacket',
-    category: 'Fashion',
-    description: 'Classic 90s denim jacket in excellent condition. Perfect for layering!',
-    location: 'Downtown, 2km away',
+    title: 'Áo khoác Denim Vintage',
+    category: 'Thời trang',
+    description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
+    location: 'Trung tâm, cách 2km',
     owner: 'StyleSeeker',
     image: '/lovable-uploads/c4c262d2-2e73-4923-bae2-efbd2ed88747.png',
     offersCount: 3,
     recentOffers: [
       {
         id: 1,
-        item: 'Bluetooth Speaker',
+        item: 'Loa Bluetooth',
         owner: 'TechLover',
-        timeAgo: '2 hours ago'
+        timeAgo: '2 giờ trước'
       },
       {
         id: 2,
-        item: 'Retro Camera',
+        item: 'Máy ảnh Retro',
         owner: 'VintageHunter',
-        timeAgo: '5 hours ago'
+        timeAgo: '5 giờ trước'
       },
       {
         id: 3,
-        item: 'Design Books Set',
+        item: 'Bộ sách thiết kế',
         owner: 'BookWorm',
-        timeAgo: '1 day ago'
+        timeAgo: '1 ngày trước'
       }
     ]
   };
@@ -73,11 +73,11 @@ const ExchangeItemDetail = () => {
 
         {/* Category and Offers */}
         <div className="flex items-center justify-between">
-          <div className="bg-purple-100 px-3 py-1 rounded-full">
-            <span className="text-purple-600 text-sm font-medium">{itemDetail.category}</span>
+          <div className="bg-yellow-light px-3 py-1 rounded-full">
+            <span className="text-yellow-brand text-sm font-medium">{itemDetail.category}</span>
           </div>
           <div className="bg-green-100 px-3 py-1 rounded-full">
-            <span className="text-green-600 text-sm font-medium">{itemDetail.offersCount} offers received</span>
+            <span className="text-green-600 text-sm font-medium">{itemDetail.offersCount} lời đề nghị</span>
           </div>
         </div>
 
@@ -102,20 +102,20 @@ const ExchangeItemDetail = () => {
 
         {/* Recent Offers Section */}
         <div className="space-y-4">
-          <h2 className="text-lg font-bold text-gray-900">Recent Offers</h2>
+          <h2 className="text-lg font-bold text-gray-900">Lời đề nghị gần đây</h2>
           
           <div className="space-y-3">
             {itemDetail.recentOffers.map((offer) => (
               <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="space-y-1">
                   <h3 className="font-medium text-gray-900">{offer.item}</h3>
-                  <p className="text-sm text-gray-600">by {offer.owner} • {offer.timeAgo}</p>
+                  <p className="text-sm text-gray-600">bởi {offer.owner} • {offer.timeAgo}</p>
                 </div>
                 <button 
                   onClick={() => handleViewOffer(offer.id)}
-                  className="text-purple-600 font-medium text-sm hover:text-purple-700 transition-colors"
+                  className="text-yellow-brand font-medium text-sm hover:text-yellow-600 transition-colors"
                 >
-                  View
+                  Xem
                 </button>
               </div>
             ))}
@@ -127,10 +127,10 @@ const ExchangeItemDetail = () => {
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-sm p-4 bg-white border-t border-gray-200">
         <Button 
           onClick={handleMakeOffer}
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-lg font-semibold flex items-center justify-center space-x-2"
+          className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-3 rounded-lg font-semibold flex items-center justify-center space-x-2"
         >
           <ArrowRight className="w-5 h-5" />
-          <span>Make an Offer</span>
+          <span>Đưa ra lời đề nghị</span>
         </Button>
       </div>
 
