@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, Camera, Plus } from 'lucide-react';
+import { ArrowLeft, Camera, Plus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+
 const PostForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const category = location.state?.category || 'Chưa chọn danh mục';
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -18,12 +20,14 @@ const PostForm = () => {
     giveAway: false,
     forSale: false
   });
+
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
+
   const handleSubmit = () => {
     console.log('Posting item:', {
       category,
@@ -31,7 +35,9 @@ const PostForm = () => {
     });
     navigate('/exchange');
   };
-  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+
+  return (
+    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
       <div className="p-4 flex items-center justify-center relative bg-white">
         <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
@@ -129,13 +135,51 @@ const PostForm = () => {
 
           {/* Photo Upload Areas */}
           <div className="space-y-4">
-            <div className="border-2 border-dashed border-yellow-400 rounded-lg p-8 text-center">
+            <div className="grid grid-cols-4 gap-2">
+              {/* Add Photo Button */}
+              <div className="aspect-square border-2 border-dashed border-yellow-400 rounded-lg flex items-center justify-center bg-yellow-50">
+                <Plus className="w-6 h-6 text-yellow-600" />
+              </div>
+              
+              {/* Uploaded Images */}
+              <div className="relative aspect-square rounded-lg overflow-hidden">
+                <img 
+                  src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" 
+                  alt="Uploaded product" 
+                  className="w-full h-full object-cover"
+                />
+                <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
+                  <X className="w-3 h-3 text-white" />
+                </button>
+              </div>
+              
+              <div className="relative aspect-square rounded-lg overflow-hidden">
+                <img 
+                  src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" 
+                  alt="Uploaded product" 
+                  className="w-full h-full object-cover"
+                />
+                <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
+                  <X className="w-3 h-3 text-white" />
+                </button>
+              </div>
+              
+              <div className="relative aspect-square rounded-lg overflow-hidden">
+                <img 
+                  src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" 
+                  alt="Uploaded product" 
+                  className="w-full h-full object-cover"
+                />
+                <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
+                  <X className="w-3 h-3 text-white" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="text-center">
               <div className="text-blue-500 mb-2">ℹ️ Hình ảnh hợp lệ</div>
-              <Camera className="w-12 h-12 text-yellow-500 mx-auto mb-2" />
               <div className="text-gray-600 text-sm">ĐĂNG TỪ 01 ĐẾN 06 HÌNH</div>
             </div>
-
-            
           </div>
         </div>
 
@@ -167,6 +211,8 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PostForm;
