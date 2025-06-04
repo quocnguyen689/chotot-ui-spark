@@ -10,6 +10,7 @@ import PostForm from "./pages/PostForm";
 import AIQuickPost from "./pages/AIQuickPost";
 import ExchangeZone from "./pages/ExchangeZone";
 import ExchangeDiscover from "./pages/ExchangeDiscover";
+import ExchangeItemDetail from "./pages/ExchangeItemDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/post/ai-quick" element={<AIQuickPost />} />
           <Route path="/exchange" element={<ExchangeZone />} />
           <Route path="/exchange/:groupId/discover" element={<ExchangeDiscover />} />
+          <Route path="/exchange/:groupId/item/:itemId" element={<ExchangeItemDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
