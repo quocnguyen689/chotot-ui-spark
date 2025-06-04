@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import PostCategory from "./pages/PostCategory";
 import PostForm from "./pages/PostForm";
 import ExchangeZone from "./pages/ExchangeZone";
+import ExchangeDiscover from "./pages/ExchangeDiscover";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/post/category" element={<PostCategory />} />
           <Route path="/post/form" element={<PostForm />} />
           <Route path="/exchange" element={<ExchangeZone />} />
+          <Route path="/exchange/:groupId/discover" element={<ExchangeDiscover />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

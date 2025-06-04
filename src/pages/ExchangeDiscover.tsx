@@ -1,0 +1,171 @@
+
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ArrowLeft, X, Heart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+const ExchangeDiscover = () => {
+  const navigate = useNavigate();
+  const { groupId } = useParams();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Sample data - in real app this would come from API based on groupId
+  const items = [
+    {
+      id: 1,
+      title: 'Áo khoác Denim Vintage',
+      description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
+      location: 'Trung tâm, cách 2km',
+      owner: 'StyleSeeker',
+      video: '/lovable-uploads/44ccf7e9-1938-4d5f-8d89-ce7d58b8410c.png', // Using uploaded image as placeholder
+      offers: 3
+    },
+    {
+      id: 2,
+      title: 'Túi xách da thật',
+      description: 'Túi xách da thật cao cấp, được bảo quản cẩn thận. Thiết kế thanh lịch và sang trọng.',
+      location: 'Quận 1, cách 1.5km',
+      owner: 'FashionLover',
+      video: '/lovable-uploads/44ccf7e9-1938-4d5f-8d89-ce7d58b8410c.png',
+      offers: 5
+    },
+    {
+      id: 3,
+      title: 'Giày sneaker limited',
+      description: 'Giày sneaker phiên bản giới hạn, chỉ đi vài lần. Còn nguyên hộp và phụ kiện.',
+      location: 'Quận 3, cách 3km',
+      owner: 'SneakerHead',
+      video: '/lovable-uploads/44ccf7e9-1938-4d5f-8d89-ce7d58b8410c.png',
+      offers: 2
+    }
+  ];
+
+  const currentItem = items[currentIndex];
+
+  const handlePass = () => {
+    if (currentIndex < items.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      // Show end message or loop back
+      setCurrentIndex(0);
+    }
+  };
+
+  const handleLike = () => {
+    console.log('Liked item:', currentItem.id);
+    if (currentIndex < items.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      setCurrentIndex(0);
+    }
+  };
+
+  const handleSwap = () => {
+    console.log('Swap initiated for item:', currentItem.id);
+    // Navigate to swap details or chat
+  };
+
+  if (!currentItem) {
+    return (
+      <div className="min-h-screen bg-gray-50 max-w-sm mx-auto flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Hết món đồ rồi!</h2>
+          <p className="text-gray-600 mb-4">Quay lại sau để xem thêm món đồ mới</p>
+          <Button onClick={() => navigate('/exchange')} className="bg-yellow-brand text-black">
+            Quay lại
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-900 max-w-sm mx-auto relative overflow-hidden">
+      {/* Header */}
+      <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/50 to-transparent p-4">
+        <div className="flex items-center justify-between">
+          <button onClick={() => navigate('/exchange')} className="p-2">
+            <ArrowLeft className="w-6 h-6 text-white" />
+          </button>
+          <div className="bg-black/30 px-3 py-1 rounded-full">
+            <span className="text-white text-sm font-medium">{currentItem.offers} lời đề nghị</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="relative h-screen">
+        {/* Video/Image Background */}
+        <div className="absolute inset-0">
+          <img 
+            src={currentItem.video} 
+            alt={currentItem.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20"></div>
+        </div>
+
+        {/* Yellow note overlay */}
+        <div className="absolute top-24 left-4 right-4 z-10">
+          <div className="bg-yellow-brand p-4 rounded-lg shadow-lg max-w-[200px]">
+            <p className="text-black text-sm font-medium leading-tight">
+              Giao diện ads giống tinder, chỉ có video, title và 3 nút CTA
+            </p>
+          </div>
+        </div>
+
+        {/* Item Info */}
+        <div className="absolute bottom-32 left-0 right-0 p-6 text-white z-10">
+          <h1 className="text-2xl font-bold mb-2">{currentItem.title}</h1>
+          <p className="text-gray-200 text-sm mb-3 leading-relaxed">
+            {currentItem.description}
+          </p>
+          <div className="flex items-center justify-between text-sm text-gray-300">
+            <div className="flex items-center space-x-1">
+              <span>📍</span>
+              <span>{currentItem.location}</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <span>👤</span>
+              <span>{currentItem.owner}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="absolute bottom-6 left-0 right-0 px-6 z-10">
+          <p className="text-center text-gray-300 text-sm mb-4">
+            Vuốt trái để bỏ qua • Vuốt phải để thích • Nhấn để xem chi tiết
+          </p>
+          <div className="flex items-center justify-center space-x-6">
+            {/* Pass Button */}
+            <button
+              onClick={handlePass}
+              className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Like Button */}
+            <button
+              onClick={handleLike}
+              className="w-14 h-14 bg-pink-500 rounded-full flex items-center justify-center shadow-lg hover:bg-pink-600 transition-colors"
+            >
+              <Heart className="w-6 h-6 text-white" />
+            </button>
+
+            {/* Swap Button */}
+            <button
+              onClick={handleSwap}
+              className="bg-yellow-brand text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-yellow-brand/90 transition-colors"
+            >
+              Swap
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ExchangeDiscover;

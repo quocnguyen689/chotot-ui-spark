@@ -10,32 +10,36 @@ const ExchangeZone = () => {
   const exchangeGroups = [
     {
       id: 1,
-      name: 'Fashion Exchange',
-      description: 'Swap your style with the latest fashion trends',
+      name: 'Trao đổi thời trang',
+      description: 'Trao đổi phong cách với xu hướng thời trang mới nhất',
       memberCount: 156,
-      timeAgo: 'Cập nhật hôm nay',
-      color: 'bg-yellow-brand',
-      letter: 'F'
-    },
-    {
-      id: 2,
-      name: 'Tech Gadgets',
-      description: 'Exchange your tech for something new',
-      memberCount: 89,
       timeAgo: 'Cập nhật hôm nay',
       color: 'bg-yellow-brand',
       letter: 'T'
     },
     {
+      id: 2,
+      name: 'Thiết bị công nghệ',
+      description: 'Trao đổi công nghệ của bạn để có thứ gì đó mới',
+      memberCount: 89,
+      timeAgo: 'Cập nhật hôm nay',
+      color: 'bg-yellow-brand',
+      letter: 'C'
+    },
+    {
       id: 3,
-      name: 'Book Circle',
-      description: 'Trade books and discover new stories',
+      name: 'Câu lạc bộ sách',
+      description: 'Trao đổi sách và khám phá những câu chuyện mới',
       memberCount: 234,
       timeAgo: 'Cập nhật hôm nay',
       color: 'bg-yellow-brand',
-      letter: 'B'
+      letter: 'S'
     }
   ];
+
+  const handleCollectionClick = (groupId: number) => {
+    navigate(`/exchange/${groupId}/discover`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
@@ -87,7 +91,11 @@ const ExchangeZone = () => {
           {/* Exchange Group Cards */}
           <div className="space-y-3">
             {exchangeGroups.map((group) => (
-              <div key={group.id} className="bg-white rounded-lg border border-gray-200 p-4">
+              <div 
+                key={group.id} 
+                className="bg-white rounded-lg border border-gray-200 p-4 cursor-pointer hover:shadow-md transition-shadow"
+                onClick={() => handleCollectionClick(group.id)}
+              >
                 <div className="flex items-start space-x-3">
                   <div className={`w-12 h-12 ${group.color} rounded-lg flex items-center justify-center`}>
                     <span className="text-black font-bold text-lg">{group.letter}</span>
