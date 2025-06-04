@@ -154,8 +154,8 @@ const PostForm = () => {
             </div>
             
             <div className="text-center">
-              <div className="text-blue-500 mb-2">ℹ️ Hình ảnh hợp lệ</div>
-              <div className="text-gray-600 text-sm">ĐĂNG TỪ 01 ĐẾN 06 HÌNH</div>
+              
+              
             </div>
           </div>
         </div>
