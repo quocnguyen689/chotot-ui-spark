@@ -5,10 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+
 const PostForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const category = location.state?.category || 'Chưa chọn danh mục';
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -16,12 +18,14 @@ const PostForm = () => {
     condition: 'Đã sử dụng',
     freeGiveaway: false
   });
+
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
+
   const handleSubmit = () => {
     console.log('Posting item:', {
       category,
@@ -29,7 +33,9 @@ const PostForm = () => {
     });
     navigate('/');
   };
-  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+
+  return (
+    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
       <div className="bg-yellow-brand p-4 flex items-center justify-between">
         <button onClick={() => navigate('/post/category')} className="p-2">
@@ -66,11 +72,11 @@ const PostForm = () => {
           </div>
         </div>
 
-        {/* Free Giveaway Option */}
+        {/* Exchange Option */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <label className="flex items-center space-x-3">
             <input type="checkbox" checked={formData.freeGiveaway} onChange={e => handleInputChange('freeGiveaway', e.target.checked)} className="w-4 h-4" />
-            <span className="text-gray-900">Tôi muốn cho tặng miễn phí</span>
+            <span className="text-gray-900">Tôi muốn trao đổi</span>
           </label>
         </div>
 
@@ -154,6 +160,8 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PostForm;
