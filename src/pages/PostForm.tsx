@@ -153,7 +153,7 @@ const PostForm = () => {
               <Label className="text-gray-600 mb-2 block">
                 Mô tả chi tiết <span className="text-red-500">*</span>
               </Label>
-              <Textarea value={formData.description} onChange={e => handleInputChange('description', e.target.value)} className="w-full min-h-[120px]" placeholder="- Tựa sách, tên tác giả&#10;- Thể loại&#10;- Nhà xuất bản, năm xuất bản&#10;- Tình trạng: ví dụ: còn mới, Không trầy xước, còn bao hành 3 tháng" />
+              <Textarea value={formData.description} onChange={e => handleInputChange('description', e.target.value)} className="w-full min-h-[120px]" placeholder="Sách New Moon của Stephenie Meyer, bản tiếng Anh.&#10;- Câu chuyện tiếp nối Twilight, xoay quanh Bella và Edward.&#10;- Lần này, cuộc sống của Bella sẽ có nhiều thử thách mới.&#10;- Sách được giữ gìn cẩn thận.&#10;Nội dung: Bella đối mặt với cuộc sống khó khăn sau khi chia tay Edward. Cô tìm cách vượt qua nỗi đau và khám phá những bí ẩn mới." />
               <div className="text-xs text-gray-500 mt-1">0/1500 kí tự</div>
             </div>
           </div>
