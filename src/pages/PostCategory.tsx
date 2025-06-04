@@ -34,7 +34,6 @@ const categories = [{
 }];
 const PostCategory = () => {
   const navigate = useNavigate();
-  
   const handleCategorySelect = (categoryName: string) => {
     navigate('/post/form', {
       state: {
@@ -42,14 +41,12 @@ const PostCategory = () => {
       }
     });
   };
-  
   const handleAIQuickPost = () => {
     navigate('/post/ai-quick');
   };
-
   return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
-      <div className="bg-yellow-brand p-4 flex items-center justify-center relative">
+      <div className="p-4 flex items-center justify-center relative bg-white">
         <button onClick={() => navigate('/')} className="absolute left-4 p-2">
           <X className="w-6 h-6 text-black" />
         </button>
