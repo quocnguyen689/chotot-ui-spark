@@ -53,6 +53,11 @@ const PostCategory = () => {
     navigate('/post/form', { state: { category: categoryName } });
   };
 
+  const handleAIQuickPost = () => {
+    // Navigate to AI quick post functionality
+    console.log('Navigate to AI quick post');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
@@ -66,8 +71,34 @@ const PostCategory = () => {
         </button>
       </div>
 
-      {/* Category Selection */}
+      {/* Content */}
       <div className="p-4">
+        {/* Quick Post Section */}
+        <div className="mb-6">
+          <h2 className="text-lg font-bold text-gray-900 mb-3">ĐĂNG TIN NHANH</h2>
+          
+          <button 
+            onClick={handleAIQuickPost}
+            className="w-full bg-gradient-to-r from-orange-100 to-yellow-100 border-2 border-orange-200 rounded-2xl p-4 flex items-center justify-between hover:from-orange-200 hover:to-yellow-200 transition-colors"
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-yellow-brand rounded-lg flex items-center justify-center">
+                <span className="text-2xl font-bold text-black">AI</span>
+              </div>
+              <div className="text-left">
+                <h3 className="text-lg font-bold text-gray-900">Đăng nhanh bằng AI</h3>
+                <p className="text-sm text-gray-600">Bạn quay sản phẩm, AI tạo tin đăng</p>
+              </div>
+            </div>
+            <ChevronRight className="w-6 h-6 text-gray-400" />
+          </button>
+          
+          <p className="text-center text-sm text-gray-500 mt-3 italic">
+            Chưa hỗ trợ Bất động sản, Việc làm và Dịch vụ
+          </p>
+        </div>
+
+        {/* Category Selection */}
         <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between">
             <span className="text-gray-600">Danh Mục Tin Đăng</span>
