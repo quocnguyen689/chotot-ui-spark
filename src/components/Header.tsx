@@ -1,10 +1,7 @@
-
 import React from 'react';
 import { Search, Bell } from 'lucide-react';
-
 const Header = () => {
-  return (
-    <div className="bg-yellow-brand p-4 rounded-b-3xl shadow-lg">
+  return <div className="bg-yellow-brand p-4 rounded-b-3xl shadow-lg">
       {/* Status bar simulation */}
       <div className="flex justify-between items-center text-black text-sm font-medium mb-4">
         <span>9:41</span>
@@ -40,11 +37,7 @@ const Header = () => {
 
       {/* Search bar */}
       <div className="relative">
-        <input
-          type="text"
-          placeholder="Tìm lành aqua..."
-          className="w-full bg-white rounded-full py-3 pl-4 pr-12 text-gray-700 placeholder-gray-400 shadow-sm"
-        />
+        <input type="text" placeholder="Tìm lành aqua..." className="w-full bg-white rounded-full py-3 pl-4 pr-12 text-gray-700 placeholder-gray-400 shadow-sm" />
         <button className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-yellow-brand rounded-full flex items-center justify-center">
           <Search className="w-4 h-4 text-black" />
         </button>
@@ -52,20 +45,17 @@ const Header = () => {
 
       {/* Phone illustration */}
       <div className="absolute top-16 right-4">
-        <div className="w-16 h-20 bg-gradient-to-br from-gray-800 to-black rounded-lg transform rotate-12">
-          <div className="w-2 h-2 bg-gray-600 rounded-full absolute top-1 left-1"></div>
-          <div className="w-2 h-2 bg-gray-600 rounded-full absolute top-1 right-1"></div>
-        </div>
+        
       </div>
-    </div>
-  );
+    </div>;
 };
 
 // Simple Heart icon component since it's not in the allowed lucide icons
-const Heart = ({ className }: { className: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const Heart = ({
+  className
+}: {
+  className: string;
+}) => <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-  </svg>
-);
-
+  </svg>;
 export default Header;
