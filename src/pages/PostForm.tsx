@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Camera, Plus } from 'lucide-react';
@@ -31,7 +32,7 @@ const PostForm = () => {
       category,
       ...formData
     });
-    navigate('/');
+    navigate('/exchange');
   };
 
   return (
