@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ChevronRight, X } from 'lucide-react';
-
 const categories = [{
   name: 'Bất động sản',
   icon: '🏢'
@@ -34,7 +32,6 @@ const categories = [{
   name: 'Mẹ và bé',
   icon: '🍼'
 }];
-
 const PostCategory = () => {
   const navigate = useNavigate();
   
@@ -50,17 +47,7 @@ const PostCategory = () => {
     navigate('/post/ai-quick');
   };
 
-  const handleExchange = (type: string) => {
-    navigate('/post/form', {
-      state: {
-        category: 'Trao đổi',
-        exchangeType: type
-      }
-    });
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
       <div className="bg-yellow-brand p-4 flex items-center justify-center relative">
         <button onClick={() => navigate('/')} className="absolute left-4 p-2">
@@ -93,62 +80,21 @@ const PostCategory = () => {
           </p>
         </div>
 
-        {/* Exchange Section */}
-        <div className="p-4 bg-gray-50">
-          <h2 className="text-lg font-bold text-gray-900 mb-3">TÔI MUỐN TRAO ĐỔI</h2>
-          
-          <div className="space-y-3">
-            <button onClick={() => handleExchange('cho tặng')} className="w-full bg-gradient-to-r from-green-100 to-emerald-100 border border-green-200 rounded-2xl p-4 flex items-center justify-between hover:from-green-200 hover:to-emerald-200 transition-colors">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-                  <span className="text-xl">🎁</span>
-                </div>
-                <div className="text-left">
-                  <h3 className="text-base font-bold text-gray-900">Tôi muốn cho tặng</h3>
-                  <p className="text-sm text-gray-600">Chia sẻ đồ không dùng đến</p>
-                </div>
-              </div>
-              <ChevronRight className="w-5 h-5 text-gray-400" />
-            </button>
-
-            <button onClick={() => handleExchange('bán')} className="w-full bg-gradient-to-r from-blue-100 to-sky-100 border border-blue-200 rounded-2xl p-4 flex items-center justify-between hover:from-blue-200 hover:to-sky-200 transition-colors">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-                  <span className="text-xl">💰</span>
-                </div>
-                <div className="text-left">
-                  <h3 className="text-base font-bold text-gray-900">Tôi muốn bán</h3>
-                  <p className="text-sm text-gray-600">Bán sản phẩm với giá tốt</p>
-                </div>
-              </div>
-              <ChevronRight className="w-5 h-5 text-gray-400" />
-            </button>
-          </div>
-        </div>
-
         {/* Category Selection */}
         <div className="p-4 bg-gray-50">
           <h2 className="text-lg font-bold text-gray-900 mb-4">CHỌN DANH MỤC</h2>
         </div>
 
         <div className="bg-white">
-          {categories.map((category, index) => (
-            <button 
-              key={index} 
-              onClick={() => handleCategorySelect(category.name)} 
-              className="w-full flex items-center justify-between p-4 border-b border-gray-100 hover:bg-gray-50 transition-colors"
-            >
+          {categories.map((category, index) => <button key={index} onClick={() => handleCategorySelect(category.name)} className="w-full flex items-center justify-between p-4 border-b border-gray-100 hover:bg-gray-50 transition-colors">
               <div className="flex items-center space-x-4">
                 <span className="text-2xl">{category.icon}</span>
                 <span className="text-gray-900 text-left font-medium">{category.name}</span>
               </div>
               <ChevronRight className="w-5 h-5 text-gray-400" />
-            </button>
-          ))}
+            </button>)}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PostCategory;
