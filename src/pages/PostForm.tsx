@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Camera, Plus } from 'lucide-react';
@@ -6,12 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-
 const PostForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const category = location.state?.category || 'Chưa chọn danh mục';
-
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -19,14 +16,12 @@ const PostForm = () => {
     condition: 'Đã sử dụng',
     freeGiveaway: false
   });
-
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
-
   const handleSubmit = () => {
     console.log('Posting item:', {
       category,
@@ -34,18 +29,14 @@ const PostForm = () => {
     });
     navigate('/exchange');
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
-      <div className="bg-yellow-brand p-4 flex items-center justify-between">
+      <div className="p-4 flex items-center justify-between center align bg-white">
         <button onClick={() => navigate('/post/category')} className="p-2">
           <ArrowLeft className="w-6 h-6 text-black" />
         </button>
-        <h1 className="text-lg font-bold text-black">Đăng tin với AI</h1>
-        <button className="bg-white/20 px-4 py-2 rounded-lg">
-          <span className="text-black text-sm font-medium">Lưu nhập</span>
-        </button>
+        <h1 className="text-lg font-bold text-black text-center">Đăng tin với AI</h1>
+        
       </div>
 
       <div className="p-4 space-y-6">
@@ -161,8 +152,6 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PostForm;
