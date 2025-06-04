@@ -62,8 +62,8 @@ const SwapOfferModal = ({ isOpen, onClose, targetItem }: SwapOfferModalProps) =>
       <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto">
         <DialogHeader className="space-y-3 pb-4">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-              <BookOpen className="w-5 h-5 text-purple-600" />
+            <div className="w-8 h-8 bg-yellow-light rounded-lg flex items-center justify-center">
+              <BookOpen className="w-5 h-5 text-amber-500" />
             </div>
             <DialogTitle className="text-lg font-bold text-gray-900">
               Chọn món đồ để trao đổi
@@ -80,7 +80,7 @@ const SwapOfferModal = ({ isOpen, onClose, targetItem }: SwapOfferModalProps) =>
               key={item.id}
               className={`p-4 border rounded-lg cursor-pointer transition-all ${
                 selectedItem === item.id
-                  ? 'border-yellow-brand bg-yellow-50'
+                  ? 'border-yellow-brand bg-yellow-light'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
               onClick={() => setSelectedItem(item.id)}
@@ -125,7 +125,7 @@ const SwapOfferModal = ({ isOpen, onClose, targetItem }: SwapOfferModalProps) =>
           <Button
             onClick={handleRequestSwap}
             disabled={!selectedItem}
-            className="flex-1 bg-purple-600 hover:bg-purple-700 text-white"
+            className="flex-1 bg-yellow-brand hover:bg-yellow-600 text-black font-semibold"
           >
             Đề nghị trao đổi
           </Button>
