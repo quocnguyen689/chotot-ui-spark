@@ -5,12 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-
 const PostForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const category = location.state?.category || 'Chưa chọn danh mục';
-
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -20,14 +18,12 @@ const PostForm = () => {
     giveAway: false,
     forSale: false
   });
-
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
-
   const handleSubmit = () => {
     console.log('Posting item:', {
       category,
@@ -35,9 +31,7 @@ const PostForm = () => {
     });
     navigate('/exchange');
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
       <div className="p-4 flex items-center justify-center relative bg-white">
         <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
@@ -143,33 +137,21 @@ const PostForm = () => {
               
               {/* Uploaded Images */}
               <div className="relative aspect-square rounded-lg overflow-hidden">
-                <img 
-                  src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" 
-                  alt="Uploaded product" 
-                  className="w-full h-full object-cover"
-                />
+                <img src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" alt="Uploaded product" className="w-full h-full object-cover" />
                 <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
                   <X className="w-3 h-3 text-white" />
                 </button>
               </div>
               
               <div className="relative aspect-square rounded-lg overflow-hidden">
-                <img 
-                  src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" 
-                  alt="Uploaded product" 
-                  className="w-full h-full object-cover"
-                />
+                <img src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" alt="Uploaded product" className="w-full h-full object-cover" />
                 <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
                   <X className="w-3 h-3 text-white" />
                 </button>
               </div>
               
               <div className="relative aspect-square rounded-lg overflow-hidden">
-                <img 
-                  src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" 
-                  alt="Uploaded product" 
-                  className="w-full h-full object-cover"
-                />
+                <img src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" alt="Uploaded product" className="w-full h-full object-cover" />
                 <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
                   <X className="w-3 h-3 text-white" />
                 </button>
@@ -211,8 +193,6 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PostForm;
