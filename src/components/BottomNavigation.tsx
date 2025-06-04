@@ -1,9 +1,21 @@
-
 import React, { useState } from 'react';
-import { Home, Search, Bell, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Home, User } from 'lucide-react';
 
 const BottomNavigation = () => {
   const [activeTab, setActiveTab] = useState('Trang chủ');
+  const navigate = useNavigate();
+
+  const handleNavigation = (itemName: string) => {
+    setActiveTab(itemName);
+    
+    if (itemName === 'Đăng tin') {
+      navigate('/post/category');
+    } else {
+      // Handle other navigation items
+      console.log(`Navigate to ${itemName}`);
+    }
+  };
 
   const navItems = [
     { name: 'Trang chủ', icon: Home, active: true },
@@ -19,7 +31,7 @@ const BottomNavigation = () => {
         {navItems.map((item, index) => (
           <button
             key={item.name}
-            onClick={() => setActiveTab(item.name)}
+            onClick={() => handleNavigation(item.name)}
             className={`flex flex-col items-center py-2 px-2 transition-colors ${
               item.isSpecial 
                 ? 'bg-yellow-brand rounded-full px-4 py-2 shadow-md' 
