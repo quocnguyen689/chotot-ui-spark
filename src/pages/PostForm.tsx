@@ -5,10 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+
 const PostForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const category = location.state?.category || 'Chưa chọn danh mục';
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -18,12 +20,14 @@ const PostForm = () => {
     giveAway: false,
     forSale: false
   });
+
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
+
   const handleSubmit = () => {
     console.log('Posting item:', {
       category,
@@ -31,7 +35,9 @@ const PostForm = () => {
     });
     navigate('/exchange');
   };
-  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+
+  return (
+    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
       <div className="p-4 flex items-center justify-center relative bg-white">
         <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
@@ -47,7 +53,7 @@ const PostForm = () => {
             <span className="text-gray-600">Danh Mục Tin Đăng</span>
             <span className="text-red-500">*</span>
           </div>
-          <div className="mt-2 text-sm text-gray-900">{category}</div>
+          <div className="mt-2 text-sm text-gray-900">Giải trí, Thể thao, Sở thích - Sách</div>
         </div>
 
         {/* Photo Upload Section - Moved to top */}
@@ -178,6 +184,8 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PostForm;
