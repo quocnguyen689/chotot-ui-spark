@@ -144,18 +144,13 @@ const PostForm = () => {
               </div>
               
               <div className="relative aspect-square rounded-lg overflow-hidden">
-                <img src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" alt="Uploaded product" className="w-full h-full object-cover" />
+                <img alt="Uploaded product" src="/lovable-uploads/472fd08c-ec7e-4d0d-be6e-295b8963125a.png" className="w-full h-full object-scale-down" />
                 <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
                   <X className="w-3 h-3 text-white" />
                 </button>
               </div>
               
-              <div className="relative aspect-square rounded-lg overflow-hidden">
-                <img src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" alt="Uploaded product" className="w-full h-full object-cover" />
-                <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
-                  <X className="w-3 h-3 text-white" />
-                </button>
-              </div>
+              
             </div>
             
             <div className="text-center">
