@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Camera, Plus } from 'lucide-react';
@@ -41,7 +40,7 @@ const PostForm = () => {
         <h1 className="text-lg font-bold text-black text-center">Đăng tin với AI</h1>
       </div>
 
-      <div className="p-4 space-y-6">
+      <div className="p-4 space-y-6 py-[16px]">
         {/* Category Display */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
@@ -67,7 +66,7 @@ const PostForm = () => {
         </div>
 
         {/* Exchange Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 py-[16px] my-[16px]">
           <label className="flex items-center space-x-3">
             <input type="checkbox" checked={formData.freeGiveaway} onChange={e => handleInputChange('freeGiveaway', e.target.checked)} className="w-4 h-4" />
             <span className="text-gray-900">Tôi muốn trao đổi</span>
@@ -99,7 +98,7 @@ const PostForm = () => {
           </div>}
 
         {/* Title and Description Section */}
-        <div className="bg-gray-100 p-4 rounded-lg">
+        <div className="rounded-lg px-[16px] my-[16px] bg-white border border-gray-200 p-4">
           <h3 className="font-bold text-gray-700 mb-4">TIÊU ĐỀ TIN ĐĂNG VÀ MÔ TẢ CHI TIẾT</h3>
           
           <div className="space-y-4">
@@ -125,7 +124,7 @@ const PostForm = () => {
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <h3 className="font-bold text-gray-700 mb-4">THÔNG TIN CHI TIẾT</h3>
           <p className="text-sm text-gray-600 mb-4">
-            Xem thêm về <span className="text-blue-500 underline">Quy định đăng tin của Chợ Tốt</span>
+            Xem thêm về <span className="underline text-gray-950">Quy định đăng tin của Chợ Tốt</span>
           </p>
 
           {/* Photo Upload Areas */}
@@ -156,9 +155,7 @@ const PostForm = () => {
         </div>
 
         {/* Seller Information */}
-        <div className="bg-gray-100 p-4 rounded-lg">
-          <h3 className="font-bold text-gray-700 mb-4">THÔNG TIN NGƯỜI BÁN</h3>
-        </div>
+        
 
         {/* Action Buttons */}
         <div className="flex space-x-2 pb-20">
