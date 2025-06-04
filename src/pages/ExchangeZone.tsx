@@ -14,7 +14,7 @@ const ExchangeZone = () => {
       description: 'Swap your style with the latest fashion trends',
       memberCount: 156,
       timeAgo: 'Cập nhật hôm nay',
-      color: 'bg-orange-500',
+      color: 'bg-yellow-brand',
       letter: 'F'
     },
     {
@@ -23,7 +23,7 @@ const ExchangeZone = () => {
       description: 'Exchange your tech for something new',
       memberCount: 89,
       timeAgo: 'Cập nhật hôm nay',
-      color: 'bg-orange-500',
+      color: 'bg-yellow-brand',
       letter: 'T'
     },
     {
@@ -32,7 +32,7 @@ const ExchangeZone = () => {
       description: 'Trade books and discover new stories',
       memberCount: 234,
       timeAgo: 'Cập nhật hôm nay',
-      color: 'bg-orange-500',
+      color: 'bg-yellow-brand',
       letter: 'B'
     }
   ];
@@ -51,8 +51,8 @@ const ExchangeZone = () => {
       <div className="p-4 space-y-6">
         {/* Hero Section */}
         <div className="text-center py-6">
-          <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <div className="text-white text-2xl">⇄</div>
+          <div className="w-16 h-16 bg-yellow-brand rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-black text-2xl">⇄</div>
           </div>
           <h2 className="text-xl font-bold text-gray-900 mb-2">Khu vực trao đổi</h2>
           <p className="text-gray-600 text-sm px-4">
@@ -64,12 +64,12 @@ const ExchangeZone = () => {
         <div className="flex space-x-3">
           <Button 
             variant="outline" 
-            className="flex-1 py-3 text-orange-500 border-orange-500 hover:bg-orange-50"
+            className="flex-1 py-3 text-yellow-brand border-yellow-brand hover:bg-yellow-light"
           >
             <Settings className="w-4 h-4 mr-2" />
             Tin của tôi
           </Button>
-          <Button className="flex-1 py-3 bg-orange-500 text-white hover:bg-orange-600">
+          <Button className="flex-1 py-3 bg-yellow-brand text-black hover:bg-yellow-brand/90">
             <MapPin className="w-4 h-4 mr-2" />
             Gần tôi
           </Button>
@@ -79,8 +79,8 @@ const ExchangeZone = () => {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-gray-900">Bộ sưu tập trao đổi</h3>
-            <div className="bg-orange-100 px-3 py-1 rounded-full">
-              <span className="text-orange-600 text-sm font-medium">AI tuyển chọn</span>
+            <div className="bg-yellow-light px-3 py-1 rounded-full">
+              <span className="text-yellow-brand text-sm font-medium">AI tuyển chọn</span>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ const ExchangeZone = () => {
               <div key={group.id} className="bg-white rounded-lg border border-gray-200 p-4">
                 <div className="flex items-start space-x-3">
                   <div className={`w-12 h-12 ${group.color} rounded-lg flex items-center justify-center`}>
-                    <span className="text-white font-bold text-lg">{group.letter}</span>
+                    <span className="text-black font-bold text-lg">{group.letter}</span>
                   </div>
                   <div className="flex-1">
                     <h4 className="font-bold text-gray-900 mb-1">{group.name}</h4>
