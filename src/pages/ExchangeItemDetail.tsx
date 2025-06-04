@@ -1,12 +1,13 @@
-
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { X, MapPin, User, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
 const ExchangeItemDetail = () => {
   const navigate = useNavigate();
-  const { groupId, itemId } = useParams();
+  const {
+    groupId,
+    itemId
+  } = useParams();
 
   // Sample data - in real app this would come from API
   const itemDetail = {
@@ -18,40 +19,32 @@ const ExchangeItemDetail = () => {
     owner: 'StyleSeeker',
     image: '/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png',
     offersCount: 3,
-    recentOffers: [
-      {
-        id: 1,
-        item: 'Loa Bluetooth',
-        owner: 'TechLover',
-        timeAgo: '2 giờ trước'
-      },
-      {
-        id: 2,
-        item: 'Máy ảnh Retro',
-        owner: 'VintageHunter',
-        timeAgo: '5 giờ trước'
-      },
-      {
-        id: 3,
-        item: 'Bộ sách thiết kế',
-        owner: 'BookWorm',
-        timeAgo: '1 ngày trước'
-      }
-    ]
+    recentOffers: [{
+      id: 1,
+      item: 'Loa Bluetooth',
+      owner: 'TechLover',
+      timeAgo: '2 giờ trước'
+    }, {
+      id: 2,
+      item: 'Máy ảnh Retro',
+      owner: 'VintageHunter',
+      timeAgo: '5 giờ trước'
+    }, {
+      id: 3,
+      item: 'Bộ sách thiết kế',
+      owner: 'BookWorm',
+      timeAgo: '1 ngày trước'
+    }]
   };
-
   const handleMakeOffer = () => {
     console.log('Make offer for item:', itemDetail.id);
     // Navigate to make offer screen or open modal
   };
-
   const handleViewOffer = (offerId: number) => {
     console.log('View offer:', offerId);
     // Navigate to offer details
   };
-
-  return (
-    <div className="min-h-screen bg-white max-w-sm mx-auto">
+  return <div className="min-h-screen bg-white max-w-sm mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <h1 className="text-lg font-bold text-gray-900">{itemDetail.title}</h1>
@@ -64,17 +57,13 @@ const ExchangeItemDetail = () => {
       <div className="p-4 space-y-6">
         {/* Image */}
         <div className="w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
-          <img 
-            src={itemDetail.image} 
-            alt={itemDetail.title}
-            className="w-full h-full object-cover"
-          />
+          <img src={itemDetail.image} alt={itemDetail.title} className="w-full h-full object-cover" />
         </div>
 
         {/* Category and Offers */}
         <div className="flex items-center justify-between">
           <div className="bg-yellow-light px-3 py-1 rounded-full">
-            <span className="text-yellow-brand text-sm font-medium">{itemDetail.category}</span>
+            <span className="text-sm font-medium text-amber-500">{itemDetail.category}</span>
           </div>
           <div className="bg-green-100 px-3 py-1 rounded-full">
             <span className="text-green-600 text-sm font-medium">{itemDetail.offersCount} lời đề nghị</span>
@@ -105,30 +94,20 @@ const ExchangeItemDetail = () => {
           <h2 className="text-lg font-bold text-gray-900">Lời đề nghị gần đây</h2>
           
           <div className="space-y-3">
-            {itemDetail.recentOffers.map((offer) => (
-              <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            {itemDetail.recentOffers.map(offer => <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="space-y-1">
                   <h3 className="font-medium text-gray-900">{offer.item}</h3>
                   <p className="text-sm text-gray-600">bởi {offer.owner} • {offer.timeAgo}</p>
                 </div>
-                <button 
-                  onClick={() => handleViewOffer(offer.id)}
-                  className="text-yellow-brand font-medium text-sm hover:text-yellow-600 transition-colors"
-                >
-                  Xem
-                </button>
-              </div>
-            ))}
+                <button onClick={() => handleViewOffer(offer.id)} className="font-medium text-sm transition-colors text-amber-500">Xem </button>
+              </div>)}
           </div>
         </div>
       </div>
 
       {/* Bottom CTA */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-sm p-4 bg-white border-t border-gray-200">
-        <Button 
-          onClick={handleMakeOffer}
-          className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-3 rounded-lg font-semibold flex items-center justify-center space-x-2"
-        >
+        <Button onClick={handleMakeOffer} className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-3 rounded-lg font-semibold flex items-center justify-center space-x-2">
           <ArrowRight className="w-5 h-5" />
           <span>Đưa ra lời đề nghị</span>
         </Button>
@@ -136,8 +115,6 @@ const ExchangeItemDetail = () => {
 
       {/* Bottom spacing for fixed button */}
       <div className="pb-20"></div>
-    </div>
-  );
+    </div>;
 };
-
 export default ExchangeItemDetail;
