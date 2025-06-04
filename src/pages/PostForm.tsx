@@ -137,7 +137,7 @@ const PostForm = () => {
               
               {/* Uploaded Images */}
               <div className="relative aspect-square rounded-lg overflow-hidden">
-                <img src="/lovable-uploads/26b82c63-9606-4e8b-ae6a-dadb6e0dee9f.png" alt="Uploaded product" className="w-full h-full object-cover" />
+                <img alt="Uploaded product" src="/lovable-uploads/8bb782bc-9971-4492-a1bd-566fb74c9978.png" className="w-full h-full object-fill" />
                 <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
                   <X className="w-3 h-3 text-white" />
                 </button>
