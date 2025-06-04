@@ -74,8 +74,8 @@ const PostForm = () => {
         </div>
 
         {/* Give Away Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 py-0 px-0">
-          <label className="flex items-center space-x-3 py-[8px]">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 my-[16px] px-0 py-0">
+          <label className="bg-white rounded-lg border border-gray-200 p-4 py-[8px]">
             <input type="checkbox" checked={formData.giveAway} onChange={e => handleInputChange('giveAway', e.target.checked)} className="w-4 h-4" />
             <span className="text-gray-900">Tôi muốn cho tặng</span>
           </label>
