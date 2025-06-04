@@ -34,6 +34,7 @@ const categories = [{
 }];
 const PostCategory = () => {
   const navigate = useNavigate();
+  
   const handleCategorySelect = (categoryName: string) => {
     navigate('/post/form', {
       state: {
@@ -41,10 +42,11 @@ const PostCategory = () => {
       }
     });
   };
+  
   const handleAIQuickPost = () => {
-    // Navigate to AI quick post functionality
-    console.log('Navigate to AI quick post');
+    navigate('/post/ai-quick');
   };
+
   return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
       <div className="bg-yellow-brand p-4 flex items-center justify-center relative">
