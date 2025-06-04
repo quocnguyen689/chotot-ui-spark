@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Camera, Plus } from 'lucide-react';
@@ -14,7 +15,9 @@ const PostForm = () => {
     description: '',
     price: '',
     condition: 'Đã sử dụng',
-    freeGiveaway: false
+    freeGiveaway: false,
+    giveAway: false,
+    forSale: false
   });
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
@@ -68,6 +71,22 @@ const PostForm = () => {
           <label className="flex items-center space-x-3">
             <input type="checkbox" checked={formData.freeGiveaway} onChange={e => handleInputChange('freeGiveaway', e.target.checked)} className="w-4 h-4" />
             <span className="text-gray-900">Tôi muốn trao đổi</span>
+          </label>
+        </div>
+
+        {/* Give Away Option */}
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <label className="flex items-center space-x-3">
+            <input type="checkbox" checked={formData.giveAway} onChange={e => handleInputChange('giveAway', e.target.checked)} className="w-4 h-4" />
+            <span className="text-gray-900">Tôi muốn cho tặng</span>
+          </label>
+        </div>
+
+        {/* For Sale Option */}
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <label className="flex items-center space-x-3">
+            <input type="checkbox" checked={formData.forSale} onChange={e => handleInputChange('forSale', e.target.checked)} className="w-4 h-4" />
+            <span className="text-gray-900">Tôi muốn bán</span>
           </label>
         </div>
 
