@@ -40,7 +40,7 @@ const PostForm = () => {
         <h1 className="text-lg font-bold text-black text-center">Đăng tin với AI</h1>
       </div>
 
-      <div className="p-4 space-y-6 py-0">
+      <div className="p-4 space-y-6 py-[16px]">
         {/* Category Display */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
@@ -66,7 +66,7 @@ const PostForm = () => {
         </div>
 
         {/* Exchange Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 my-[16px] py-[8px]">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 py-[16px] my-[16px]">
           <label className="flex items-center space-x-3">
             <input type="checkbox" checked={formData.freeGiveaway} onChange={e => handleInputChange('freeGiveaway', e.target.checked)} className="w-4 h-4" />
             <span className="text-gray-900">Tôi muốn trao đổi</span>
@@ -74,15 +74,15 @@ const PostForm = () => {
         </div>
 
         {/* Give Away Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 my-[16px] px-0 py-0">
-          <label className="bg-white rounded-lg border border-gray-200 p-4 py-[8px]">
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <label className="flex items-center space-x-3">
             <input type="checkbox" checked={formData.giveAway} onChange={e => handleInputChange('giveAway', e.target.checked)} className="w-4 h-4" />
             <span className="text-gray-900">Tôi muốn cho tặng</span>
           </label>
         </div>
 
         {/* For Sale Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 py-[8px]">
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
           <label className="flex items-center space-x-3">
             <input type="checkbox" checked={formData.forSale} onChange={e => handleInputChange('forSale', e.target.checked)} className="w-4 h-4" />
             <span className="text-gray-900">Tôi muốn bán</span>
@@ -154,8 +154,8 @@ const PostForm = () => {
             </div>
             
             <div className="text-center">
-              
-              
+              <div className="text-blue-500 mb-2">ℹ️ Hình ảnh hợp lệ</div>
+              <div className="text-gray-600 text-sm">ĐĂNG TỪ 01 ĐẾN 06 HÌNH</div>
             </div>
           </div>
         </div>
