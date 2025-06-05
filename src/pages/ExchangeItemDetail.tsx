@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MapPin, User, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,6 +14,24 @@ const ExchangeItemDetail = () => {
   } = useParams();
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [offerCounts, setOfferCounts] = useState({
+    pending: 5,
+    accepted: 3,
+    rejected: 2
+  });
+
+  // Auto-increment offer counts every 3-5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOfferCounts(prev => ({
+        pending: prev.pending + Math.floor(Math.random() * 2) + 1,
+        accepted: prev.accepted + Math.floor(Math.random() * 2),
+        rejected: prev.rejected + Math.floor(Math.random() * 2)
+      }));
+    }, Math.random() * 2000 + 3000); // Random interval between 3-5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Sample data with multiple images for the jacket
   const itemDetail = {
@@ -61,13 +79,14 @@ const ExchangeItemDetail = () => {
     }
   };
   const getStatusText = (status: string) => {
+    const count = offerCounts[status as keyof typeof offerCounts] || 0;
     switch (status) {
       case 'pending':
-        return 'Đang chờ';
+        return `Đang chờ (${count})`;
       case 'accepted':
-        return 'Đang chờ';
+        return `Đang chờ (${count})`;
       case 'rejected':
-        return 'Đã từ chối';
+        return `Đã từ chối (${count})`;
       default:
         return 'Không xác định';
     }
