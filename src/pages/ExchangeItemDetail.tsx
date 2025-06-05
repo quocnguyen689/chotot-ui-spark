@@ -22,7 +22,7 @@ const ExchangeItemDetail = () => {
     description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
     location: 'Trung tâm, cách 2km',
     owner: 'StyleSeeker',
-    images: ['/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png', 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop', 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=300&fit=crop', 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop'],
+    images: ['/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png', 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop', 'https://images.unsplash.com/photo-1576995853123-425c7b97ccd1?w=400&h=300&fit=crop', 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop'],
     offersCount: 3,
     recentOffers: [{
       id: 1,
@@ -50,7 +50,7 @@ const ExchangeItemDetail = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'bg-gray-100 text-gray-600';
+        return 'bg-yellow-100 text-yellow-700 border border-yellow-200';
       case 'accepted':
         return 'bg-gray-100 text-gray-600';
       case 'rejected':
