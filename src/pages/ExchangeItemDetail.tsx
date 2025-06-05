@@ -1,20 +1,16 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MapPin, User, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import SwapOfferModal from '@/components/SwapOfferModal';
-
 const ExchangeItemDetail = () => {
   const navigate = useNavigate();
-  const { groupId, itemId } = useParams();
+  const {
+    groupId,
+    itemId
+  } = useParams();
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -26,41 +22,31 @@ const ExchangeItemDetail = () => {
     description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
     location: 'Trung tâm, cách 2km',
     owner: 'StyleSeeker',
-    images: [
-      '/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png',
-      'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop'
-    ],
+    images: ['/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png', 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop', 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=300&fit=crop', 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop'],
     offersCount: 3,
-    recentOffers: [
-      {
-        id: 1,
-        item: 'Loa Bluetooth',
-        owner: 'TechLover',
-        timeAgo: '2 giờ trước',
-        thumbnail: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop',
-        status: 'pending'
-      },
-      {
-        id: 2,
-        item: 'Máy ảnh Retro',
-        owner: 'VintageHunter',
-        timeAgo: '5 giờ trước',
-        thumbnail: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop',
-        status: 'accepted'
-      },
-      {
-        id: 3,
-        item: 'Bộ sách thiết kế',
-        owner: 'BookWorm',
-        timeAgo: '1 ngày trước',
-        thumbnail: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
-        status: 'rejected'
-      }
-    ]
+    recentOffers: [{
+      id: 1,
+      item: 'Loa Bluetooth',
+      owner: 'TechLover',
+      timeAgo: '2 giờ trước',
+      thumbnail: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop',
+      status: 'pending'
+    }, {
+      id: 2,
+      item: 'Máy ảnh Retro',
+      owner: 'VintageHunter',
+      timeAgo: '5 giờ trước',
+      thumbnail: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop',
+      status: 'accepted'
+    }, {
+      id: 3,
+      item: 'Bộ sách thiết kế',
+      owner: 'BookWorm',
+      timeAgo: '1 ngày trước',
+      thumbnail: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
+      status: 'rejected'
+    }]
   };
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -73,7 +59,6 @@ const ExchangeItemDetail = () => {
         return 'bg-gray-100 text-gray-600';
     }
   };
-
   const getStatusText = (status: string) => {
     switch (status) {
       case 'pending':
@@ -86,33 +71,26 @@ const ExchangeItemDetail = () => {
         return 'Không xác định';
     }
   };
-
   const handleMakeOffer = () => {
     console.log('Make offer for item:', itemDetail.id);
     setIsSwapModalOpen(true);
   };
-
   const handleViewOffer = (offerId: number) => {
     console.log('View offer:', offerId);
   };
-
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % itemDetail.images.length);
+    setCurrentImageIndex(prev => (prev + 1) % itemDetail.images.length);
   };
-
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + itemDetail.images.length) % itemDetail.images.length);
+    setCurrentImageIndex(prev => (prev - 1 + itemDetail.images.length) % itemDetail.images.length);
   };
-
   const handleClose = () => {
     navigate(-1);
   };
-
-  return (
-    <>
+  return <>
       <Sheet open={true} onOpenChange={handleClose}>
         <SheetContent side="bottom" className="h-[90vh] max-w-sm mx-auto p-0 overflow-y-auto">
-          <SheetHeader className="p-4 border-b border-gray-100">
+          <SheetHeader className="p-4 border-b border-gray-100 rounded-2xl">
             <SheetTitle className="text-center">Chi tiết món đồ</SheetTitle>
           </SheetHeader>
 
@@ -120,44 +98,22 @@ const ExchangeItemDetail = () => {
           <div className="p-4 space-y-5">
             {/* Image Carousel */}
             <div className="relative w-full h-64 bg-white rounded-2xl overflow-hidden shadow-sm">
-              <img 
-                src={itemDetail.images[currentImageIndex]} 
-                alt={itemDetail.title} 
-                className="w-full h-full object-cover" 
-              />
+              <img src={itemDetail.images[currentImageIndex]} alt={itemDetail.title} className="w-full h-full object-cover" />
               
               {/* Navigation buttons */}
-              {itemDetail.images.length > 1 && (
-                <>
-                  <button
-                    onClick={prevImage}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors"
-                  >
+              {itemDetail.images.length > 1 && <>
+                  <button onClick={prevImage} className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors">
                     <ChevronLeft className="w-4 h-4 text-gray-700" />
                   </button>
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors"
-                  >
+                  <button onClick={nextImage} className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors">
                     <ChevronRight className="w-4 h-4 text-gray-700" />
                   </button>
-                </>
-              )}
+                </>}
 
               {/* Image indicators */}
-              {itemDetail.images.length > 1 && (
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1">
-                  {itemDetail.images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
+              {itemDetail.images.length > 1 && <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1">
+                  {itemDetail.images.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2 h-2 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`} />)}
+                </div>}
             </div>
 
             {/* Title */}
@@ -187,10 +143,7 @@ const ExchangeItemDetail = () => {
             </div>
 
             {/* CTA Button */}
-            <Button 
-              onClick={handleMakeOffer} 
-              className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-4 rounded-2xl font-medium transition-colors"
-            >
+            <Button onClick={handleMakeOffer} className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-4 rounded-2xl font-medium transition-colors">
               Đưa ra lời đề nghị
             </Button>
 
@@ -204,8 +157,7 @@ const ExchangeItemDetail = () => {
               </div>
               
               <div className="space-y-3">
-                {itemDetail.recentOffers.map(offer => (
-                  <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                {itemDetail.recentOffers.map(offer => <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                     <div className="flex items-center space-x-3">
                       <div className="w-12 h-12 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                         <img src={offer.thumbnail} alt={offer.item} className="w-full h-full object-cover" />
@@ -218,14 +170,10 @@ const ExchangeItemDetail = () => {
                         </Badge>
                       </div>
                     </div>
-                    <button 
-                      onClick={() => handleViewOffer(offer.id)} 
-                      className="p-2 hover:bg-gray-200 rounded-full transition-colors"
-                    >
+                    <button onClick={() => handleViewOffer(offer.id)} className="p-2 hover:bg-gray-200 rounded-full transition-colors">
                       <ChevronRight className="w-4 h-4 text-gray-600" />
                     </button>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
 
@@ -235,16 +183,10 @@ const ExchangeItemDetail = () => {
         </SheetContent>
       </Sheet>
 
-      <SwapOfferModal 
-        isOpen={isSwapModalOpen} 
-        onClose={() => setIsSwapModalOpen(false)} 
-        targetItem={{
-          title: itemDetail.title,
-          owner: itemDetail.owner
-        }} 
-      />
-    </>
-  );
+      <SwapOfferModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} targetItem={{
+      title: itemDetail.title,
+      owner: itemDetail.owner
+    }} />
+    </>;
 };
-
 export default ExchangeItemDetail;
