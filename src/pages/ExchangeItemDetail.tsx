@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MapPin, User, ChevronRight, ChevronLeft, MessageCircle, ThumbsUp, Heart, Smile } from 'lucide-react';
+import { MapPin, User, ChevronRight, ChevronLeft, MessageCircle, ThumbsUp, Heart, Smile, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Input } from '@/components/ui/input';
 import SwapOfferModal from '@/components/SwapOfferModal';
 
 const ExchangeItemDetail = () => {
@@ -12,11 +13,18 @@ const ExchangeItemDetail = () => {
   const { groupId, itemId } = useParams();
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [commentText, setCommentText] = useState('');
   const [offerCounts, setOfferCounts] = useState({
     pending: 5,
     accepted: 3,
     rejected: 2
   });
+  const [reactions, setReactions] = useState({
+    likes: 24,
+    hearts: 18,
+    smiles: 12
+  });
+  const [commentsCount, setCommentsCount] = useState(2);
 
   // Auto-increment offer counts every 3-5 seconds
   useEffect(() => {
@@ -31,6 +39,35 @@ const ExchangeItemDetail = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Auto-increment reactions and comments occasionally
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Randomly choose what to increment
+      const incrementType = Math.random();
+      
+      if (incrementType < 0.3) {
+        setReactions(prev => ({
+          ...prev,
+          likes: prev.likes + 1
+        }));
+      } else if (incrementType < 0.6) {
+        setReactions(prev => ({
+          ...prev,
+          hearts: prev.hearts + 1
+        }));
+      } else if (incrementType < 0.8) {
+        setReactions(prev => ({
+          ...prev,
+          smiles: prev.smiles + 1
+        }));
+      } else {
+        setCommentsCount(prev => prev + 1);
+      }
+    }, Math.random() * 4000 + 3000); // Random interval between 3-7 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Sample data with multiple images for the jacket
   const itemDetail = {
     id: 1,
@@ -41,11 +78,6 @@ const ExchangeItemDetail = () => {
     owner: 'StyleSeeker',
     images: ['/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png', 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop', 'https://images.unsplash.com/photo-1576995853123-425c7b97ccd1?w=400&h=300&fit=crop', 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop'],
     offersCount: 3,
-    reactions: {
-      likes: 24,
-      hearts: 18,
-      smiles: 12
-    },
     comments: [
       {
         id: 1,
@@ -85,6 +117,8 @@ const ExchangeItemDetail = () => {
       status: 'rejected'
     }]
   };
+
+  // ... keep existing code (getStatusColor, getStatusText, getOfferCount functions)
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -112,6 +146,7 @@ const ExchangeItemDetail = () => {
   const getOfferCount = (status: string) => {
     return offerCounts[status as keyof typeof offerCounts] || 0;
   };
+
   const handleMakeOffer = () => {
     console.log('Make offer for item:', itemDetail.id);
     setIsSwapModalOpen(true);
@@ -128,6 +163,16 @@ const ExchangeItemDetail = () => {
   const handleClose = () => {
     navigate(-1);
   };
+
+  const handleCommentSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (commentText.trim()) {
+      console.log('New comment:', commentText);
+      setCommentText('');
+      setCommentsCount(prev => prev + 1);
+    }
+  };
+
   return (
     <>
       <Sheet open={true} onOpenChange={handleClose}>
@@ -202,21 +247,39 @@ const ExchangeItemDetail = () => {
               <div className="flex items-center space-x-4 p-3 bg-gray-50 rounded-xl border">
                 <div className="flex items-center space-x-1">
                   <ThumbsUp className="w-4 h-4 text-blue-500" />
-                  <span className="text-gray-700 text-sm">{itemDetail.reactions.likes}</span>
+                  <span className="text-gray-700 text-sm">{reactions.likes}</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <Heart className="w-4 h-4 text-red-500" />
-                  <span className="text-gray-700 text-sm">{itemDetail.reactions.hearts}</span>
+                  <span className="text-gray-700 text-sm">{reactions.hearts}</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <Smile className="w-4 h-4 text-yellow-500" />
-                  <span className="text-gray-700 text-sm">{itemDetail.reactions.smiles}</span>
+                  <span className="text-gray-700 text-sm">{reactions.smiles}</span>
                 </div>
                 <div className="flex items-center space-x-1 ml-auto">
                   <MessageCircle className="w-4 h-4 text-gray-500" />
-                  <span className="text-gray-500 text-sm">{itemDetail.comments.length}</span>
+                  <span className="text-gray-500 text-sm">{commentsCount}</span>
                 </div>
               </div>
+
+              {/* Comment Input */}
+              <form onSubmit={handleCommentSubmit} className="flex space-x-2">
+                <Input
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  placeholder="Viết bình luận..."
+                  className="flex-1 rounded-xl border-gray-200"
+                />
+                <Button 
+                  type="submit" 
+                  size="icon" 
+                  className="rounded-xl bg-yellow-brand hover:bg-yellow-600 text-black"
+                  disabled={!commentText.trim()}
+                >
+                  <Send className="w-4 h-4" />
+                </Button>
+              </form>
 
               {/* Comments */}
               {itemDetail.comments.length > 0 && (
