@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Camera, Plus, X } from 'lucide-react';
@@ -100,7 +99,7 @@ const PostForm = () => {
                 formData.postType === 'exchange' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'
               }`}
             >
-              Tôi muốn trao đổi
+              Trao đổi
             </button>
             <button 
               onClick={() => handleInputChange('postType', 'giveaway')} 
@@ -108,7 +107,7 @@ const PostForm = () => {
                 formData.postType === 'giveaway' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'
               }`}
             >
-              Tôi muốn cho tặng
+              Cho Tặng
             </button>
             <button 
               onClick={() => handleInputChange('postType', 'sale')} 
@@ -116,7 +115,7 @@ const PostForm = () => {
                 formData.postType === 'sale' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'
               }`}
             >
-              Tôi muốn bán
+              Bán
             </button>
           </div>
         </div>
