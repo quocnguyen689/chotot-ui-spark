@@ -97,19 +97,6 @@ const ExchangeZone = () => {
           </TabsList>
 
           <TabsContent value="foryou" className="mt-6 space-y-5">
-            {/* For You Hero */}
-            <div className="text-center py-4">
-              <div className="relative mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-400 rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-pink-400/25">
-                  <Heart className="w-6 h-6 text-white" />
-                </div>
-              </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Dành riêng cho bạn</h2>
-              <p className="text-gray-600 text-sm leading-relaxed px-2">
-                Những gợi ý trao đổi phù hợp với sở thích của bạn
-              </p>
-            </div>
-
             {/* Collections Grid */}
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-gray-900">Danh mục được đề xuất</h3>
@@ -140,19 +127,6 @@ const ExchangeZone = () => {
           </TabsContent>
 
           <TabsContent value="nearby" className="mt-6 space-y-5">
-            {/* Nearby Hero */}
-            <div className="text-center py-4">
-              <div className="relative mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-yellow-400/25">
-                  <div className="text-white text-2xl font-bold">⇄</div>
-                </div>
-              </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Khám phá xung quanh</h2>
-              <p className="text-gray-600 text-sm leading-relaxed px-2">
-                Tìm kiếm những món đồ tuyệt vời từ người dùng gần bạn
-              </p>
-            </div>
-
             {/* Collections Grid */}
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-gray-900">Danh mục phổ biến</h3>
