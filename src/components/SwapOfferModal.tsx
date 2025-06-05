@@ -140,7 +140,7 @@ const SwapOfferModal = ({
           </div>
         </div>
 
-        <div className="sticky bottom-0 p-4 border-t border-gray-100 bg-white shadow-lg">
+        <div className="sticky bottom-0 p-4 border-t border-gray-100 bg-white shadow-2xl backdrop-blur-sm bg-white/95 rounded-t-3xl">
           <div className="flex space-x-3">
             <Button variant="outline" onClick={onClose} className="flex-1 py-3 rounded-2xl">
               Hủy
