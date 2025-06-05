@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search, MapPin, Heart, Sparkles, TrendingUp, Eye, Star } from 'lucide-react';
@@ -186,13 +185,13 @@ const ExchangeZone = () => {
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <div className="relative">
-                  <Sparkles className="w-5 h-5 text-purple-500 animate-pulse" />
-                  <div className="absolute inset-0 w-5 h-5 bg-purple-500/20 rounded-full animate-ping"></div>
+                  <Sparkles className="w-5 h-5 text-yellow-brand animate-pulse" />
+                  <div className="absolute inset-0 w-5 h-5 bg-yellow-brand/20 rounded-full animate-ping"></div>
                 </div>
                 <h3 className="font-bold text-gray-900 text-base">
                   Bộ sưu tập AI gợi ý cho bạn
                 </h3>
-                <div className="px-2 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-medium rounded-full animate-pulse">
+                <div className="px-2 py-1 bg-gradient-to-r from-yellow-brand to-orange-400 text-white text-xs font-medium rounded-full animate-pulse">
                   AI
                 </div>
               </div>
@@ -205,7 +204,7 @@ const ExchangeZone = () => {
                     onClick={() => handleCollectionClick(group.id)}
                   >
                     {/* AI Shimmer Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-brand/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
                     
                     <div className="aspect-square relative overflow-hidden">
                       <img 
