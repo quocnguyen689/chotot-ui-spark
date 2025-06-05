@@ -10,6 +10,7 @@ const ExchangeDiscover = () => {
   const { groupId } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTooltip, setShowTooltip] = useState(true);
+  const [showHeartAnimation, setShowHeartAnimation] = useState(false);
 
   // Sample data - in real app this would come from API based on groupId
   const items = [{
@@ -50,11 +51,21 @@ const ExchangeDiscover = () => {
   };
   const handleLike = () => {
     console.log('Liked item:', currentItem.id);
-    if (currentIndex < items.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setCurrentIndex(0);
-    }
+    
+    // Trigger heart animation
+    setShowHeartAnimation(true);
+    setTimeout(() => {
+      setShowHeartAnimation(false);
+    }, 1000);
+    
+    // Move to next item after a slight delay
+    setTimeout(() => {
+      if (currentIndex < items.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        setCurrentIndex(0);
+      }
+    }, 300);
   };
   const handleSwap = () => {
     console.log('Swap initiated for item:', currentItem.id);
@@ -84,6 +95,18 @@ const ExchangeDiscover = () => {
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-black max-w-sm mx-auto relative overflow-hidden">
+        {/* Heart Animation Overlay */}
+        {showHeartAnimation && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none">
+            <div className="animate-ping">
+              <Heart className="w-20 h-20 text-red-500 fill-red-500" />
+            </div>
+            <div className="absolute animate-bounce">
+              <Heart className="w-16 h-16 text-red-500 fill-red-500" />
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 z-20 p-6">
           <div className="flex items-center justify-between">
@@ -157,7 +180,10 @@ const ExchangeDiscover = () => {
             
             <div className="flex items-center justify-center space-x-4">
               {/* Like Button */}
-              <button onClick={handleLike} className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 hover:bg-white/25 hover:scale-105">
+              <button 
+                onClick={handleLike} 
+                className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 hover:bg-white/25 hover:scale-105 active:scale-95"
+              >
                 <Heart className="w-6 h-6 text-white" />
               </button>
 
