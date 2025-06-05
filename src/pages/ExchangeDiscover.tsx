@@ -132,24 +132,26 @@ const ExchangeDiscover = () => {
           <h1 className="text-2xl font-bold mb-3 tracking-tight leading-tight">
             {currentItem.title}
           </h1>
+          
+          {/* Owner info under title */}
+          <div className="flex items-center space-x-2 mb-4">
+            <Avatar className="w-6 h-6">
+              <AvatarImage src={currentItem.ownerAvatar} alt={currentItem.owner} />
+              <AvatarFallback className="w-6 h-6 text-xs bg-white/20">
+                {currentItem.owner.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+            <span className="text-white/90 text-sm font-medium">{currentItem.owner}</span>
+          </div>
+          
           <p className="text-white/80 text-base mb-6 leading-relaxed font-light">
             {currentItem.description}
           </p>
           
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 flex-1">
-              <MapPin className="w-4 h-4 text-white/90" />
-              <span className="text-white/90 text-sm font-medium">{currentItem.location}</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 flex-1">
-              <Avatar className="w-5 h-5">
-                <AvatarImage src={currentItem.ownerAvatar} alt={currentItem.owner} />
-                <AvatarFallback className="w-5 h-5 text-xs bg-white/20">
-                  {currentItem.owner.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              <span className="text-white/90 text-sm font-medium">{currentItem.owner}</span>
-            </div>
+          {/* Location in separate row */}
+          <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 w-fit">
+            <MapPin className="w-4 h-4 text-white/90" />
+            <span className="text-white/90 text-sm font-medium">{currentItem.location}</span>
           </div>
         </div>
 
