@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BookOpen, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+
 interface SwapOfferModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -11,6 +12,7 @@ interface SwapOfferModalProps {
     owner: string;
   };
 }
+
 const SwapOfferModal = ({
   isOpen,
   onClose,
@@ -42,6 +44,7 @@ const SwapOfferModal = ({
     condition: 'Rất tốt',
     image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop'
   }];
+
   const handleRequestSwap = () => {
     if (selectedItem) {
       console.log('Requesting swap:', {
@@ -52,13 +55,16 @@ const SwapOfferModal = ({
       onClose();
     }
   };
+
   const handleAddItem = () => {
     navigate('/post/form');
     onClose();
   };
-  return <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent side="bottom" className="h-[90vh] max-w-sm mx-auto p-0 overflow-y-auto">
-        <SheetHeader className="p-4 border-b border-gray-100">
+
+  return (
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent side="bottom" className="h-[90vh] max-w-sm mx-auto p-0 overflow-y-auto flex flex-col">
+        <SheetHeader className="p-4 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center space-x-2 justify-center py-[16px]">
             <SheetTitle className="font-bold text-gray-900 text-xl">
               Chọn món đồ để trao đổi
@@ -69,7 +75,7 @@ const SwapOfferModal = ({
           </p>
         </SheetHeader>
 
-        <div className="p-4 space-y-3 flex-1">
+        <div className="p-4 space-y-3 flex-1 pb-24">
           {/* Add Item Section */}
           <div onClick={handleAddItem} className="p-4 rounded-2xl cursor-pointer transition-all bg-gray-100">
             <div className="flex items-center space-x-3">
@@ -88,7 +94,16 @@ const SwapOfferModal = ({
           </div>
 
           {/* Existing Items */}
-          {userItems.map(item => <div key={item.id} className={`p-4 border rounded-2xl cursor-pointer transition-all ${selectedItem === item.id ? 'border-yellow-brand bg-yellow-light' : 'border-gray-200 hover:border-gray-300 bg-white'}`} onClick={() => setSelectedItem(item.id)}>
+          {userItems.map(item => (
+            <div 
+              key={item.id} 
+              className={`p-4 border rounded-2xl cursor-pointer transition-all ${
+                selectedItem === item.id 
+                  ? 'border-yellow-brand bg-yellow-light' 
+                  : 'border-gray-200 hover:border-gray-300 bg-white'
+              }`} 
+              onClick={() => setSelectedItem(item.id)}
+            >
               <div className="flex items-center space-x-3">
                 <div className="w-16 h-16 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                   <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
@@ -110,10 +125,11 @@ const SwapOfferModal = ({
                   </div>
                 </div>
               </div>
-            </div>)}
+            </div>
+          ))}
         </div>
 
-        <div className="p-4 border-t border-gray-100 bg-white">
+        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 shadow-lg max-w-sm mx-auto">
           <div className="flex space-x-3">
             <Button variant="outline" onClick={onClose} className="flex-1 py-3 rounded-2xl">
               Hủy
@@ -124,6 +140,8 @@ const SwapOfferModal = ({
           </div>
         </div>
       </SheetContent>
-    </Sheet>;
+    </Sheet>
+  );
 };
+
 export default SwapOfferModal;
