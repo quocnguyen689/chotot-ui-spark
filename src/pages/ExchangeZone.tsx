@@ -119,8 +119,8 @@ const ExchangeZone = () => {
       </div>
 
       <div className="px-4 space-y-6 py-0">
-        {/* Trending Section - Minimized */}
-        <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-2xl p-4 mt-4 relative overflow-hidden">
+        {/* Trending Section - Updated with more brand colors */}
+        <div className="bg-gradient-to-br from-yellow-brand via-orange-400 to-pink-500 rounded-2xl p-4 mt-4 relative overflow-hidden">
           {/* Minimized Background Elements */}
           
           {/* Content */}
