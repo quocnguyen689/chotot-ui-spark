@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, Plus } from 'lucide-react';
@@ -127,6 +128,23 @@ const SwapOfferModal = ({
               </div>
             </div>
           ))}
+
+          {/* Add Item Section - moved to end */}
+          <div onClick={handleAddItem} className="p-4 rounded-2xl cursor-pointer transition-all bg-gray-100">
+            <div className="flex items-center space-x-3">
+              <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center bg-gray-200">
+                <Plus className="w-8 h-8 text-black" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-gray-900">
+                  Thêm món đồ để trao đổi
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Đăng món đồ mới của bạn
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 shadow-lg max-w-sm mx-auto">
