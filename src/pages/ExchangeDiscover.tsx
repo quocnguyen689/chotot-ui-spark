@@ -1,14 +1,15 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Heart, MapPin } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, X, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const ExchangeDiscover = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showTooltip, setShowTooltip] = useState(true);
 
   // Sample data - in real app this would come from API based on groupId
   const items = [
@@ -97,90 +98,110 @@ const ExchangeDiscover = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black max-w-sm mx-auto relative overflow-hidden">
-      {/* Header */}
-      <div className="absolute top-0 left-0 right-0 z-20 p-6">
-        <div className="flex items-center justify-between">
-          <button 
-            onClick={() => navigate('/exchange')} 
-            className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all duration-200 hover:bg-black/60"
-          >
-            <ArrowLeft className="w-5 h-5 text-white" />
-          </button>
-          <div className="bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
-            <span className="text-white text-sm font-medium">
-              {currentItem.offers} lời đề nghị
-            </span>
+    <TooltipProvider>
+      <div className="min-h-screen bg-black max-w-sm mx-auto relative overflow-hidden">
+        {/* Header */}
+        <div className="absolute top-0 left-0 right-0 z-20 p-6">
+          <div className="flex items-center justify-between">
+            <button 
+              onClick={() => navigate('/exchange')} 
+              className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all duration-200 hover:bg-black/60"
+            >
+              <ArrowLeft className="w-5 h-5 text-white" />
+            </button>
+            <div className="bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
+              <span className="text-white text-sm font-medium">
+                {currentItem.offers} lời đề nghị
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="relative h-screen" onClick={handleItemClick}>
+          {/* Image Background */}
+          <div className="absolute inset-0">
+            <img 
+              src={currentItem.video} 
+              alt={currentItem.title} 
+              className="w-full h-full object-cover" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40"></div>
+          </div>
+
+          {/* Item Info */}
+          <div className="absolute bottom-36 left-0 right-0 px-6 text-white z-10">
+            <h1 className="text-2xl font-bold mb-3 tracking-tight leading-tight">
+              {currentItem.title}
+            </h1>
+            
+            {/* Owner info under title */}
+            <div className="flex items-center space-x-2 mb-4">
+              <Avatar className="w-6 h-6">
+                <AvatarImage src={currentItem.ownerAvatar} alt={currentItem.owner} />
+                <AvatarFallback className="w-6 h-6 text-xs bg-white/20">
+                  {currentItem.owner.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+              <span className="text-white/90 text-sm font-medium">{currentItem.owner}</span>
+            </div>
+            
+            <p className="text-white/80 text-base mb-6 leading-relaxed font-light">
+              {currentItem.description}
+            </p>
+            
+            {/* Location in separate row */}
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 w-fit">
+              <MapPin className="w-4 h-4 text-white/90" />
+              <span className="text-white/90 text-sm font-medium">{currentItem.location}</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="absolute bottom-8 left-0 right-0 px-6 z-10" onClick={(e) => e.stopPropagation()}>
+            {/* Help Tooltip */}
+            {showTooltip && (
+              <Tooltip open={showTooltip}>
+                <TooltipTrigger asChild>
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 flex items-center space-x-2">
+                      <HelpCircle className="w-4 h-4 text-white/70" />
+                      <span className="text-white/70 text-xs font-light">
+                        Vuốt trái để bỏ qua • Vuốt phải để thích • Nhấn để xem chi tiết
+                      </span>
+                      <button 
+                        onClick={() => setShowTooltip(false)}
+                        className="ml-2 p-1 hover:bg-white/10 rounded-full transition-colors"
+                      >
+                        <X className="w-3 h-3 text-white/70" />
+                      </button>
+                    </div>
+                  </div>
+                </TooltipTrigger>
+              </Tooltip>
+            )}
+            
+            <div className="flex items-center justify-center space-x-4">
+              {/* Like Button */}
+              <button 
+                onClick={handleLike} 
+                className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 hover:bg-white/25 hover:scale-105"
+              >
+                <Heart className="w-6 h-6 text-white" />
+              </button>
+
+              {/* Swap Button */}
+              <button 
+                onClick={handleSwap} 
+                className="bg-white text-black px-8 py-4 rounded-full font-semibold text-base transition-all duration-200 hover:bg-white/90 hover:scale-105 shadow-lg"
+              >
+                Trao đổi
+              </button>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Main Content */}
-      <div className="relative h-screen" onClick={handleItemClick}>
-        {/* Image Background */}
-        <div className="absolute inset-0">
-          <img 
-            src={currentItem.video} 
-            alt={currentItem.title} 
-            className="w-full h-full object-cover" 
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40"></div>
-        </div>
-
-        {/* Item Info */}
-        <div className="absolute bottom-36 left-0 right-0 px-6 text-white z-10">
-          <h1 className="text-2xl font-bold mb-3 tracking-tight leading-tight">
-            {currentItem.title}
-          </h1>
-          
-          {/* Owner info under title */}
-          <div className="flex items-center space-x-2 mb-4">
-            <Avatar className="w-6 h-6">
-              <AvatarImage src={currentItem.ownerAvatar} alt={currentItem.owner} />
-              <AvatarFallback className="w-6 h-6 text-xs bg-white/20">
-                {currentItem.owner.charAt(0)}
-              </AvatarFallback>
-            </Avatar>
-            <span className="text-white/90 text-sm font-medium">{currentItem.owner}</span>
-          </div>
-          
-          <p className="text-white/80 text-base mb-6 leading-relaxed font-light">
-            {currentItem.description}
-          </p>
-          
-          {/* Location in separate row */}
-          <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 w-fit">
-            <MapPin className="w-4 h-4 text-white/90" />
-            <span className="text-white/90 text-sm font-medium">{currentItem.location}</span>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="absolute bottom-8 left-0 right-0 px-6 z-10" onClick={(e) => e.stopPropagation()}>
-          <p className="text-center text-white/60 text-xs mb-6 font-light tracking-wide">
-            Vuốt trái để bỏ qua • Vuốt phải để thích • Nhấn để xem chi tiết
-          </p>
-          
-          <div className="flex items-center justify-center space-x-4">
-            {/* Like Button */}
-            <button 
-              onClick={handleLike} 
-              className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 hover:bg-white/25 hover:scale-105"
-            >
-              <Heart className="w-6 h-6 text-white" />
-            </button>
-
-            {/* Swap Button */}
-            <button 
-              onClick={handleSwap} 
-              className="bg-white text-black px-8 py-4 rounded-full font-semibold text-base transition-all duration-200 hover:bg-white/90 hover:scale-105 shadow-lg"
-            >
-              Trao đổi
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    </TooltipProvider>
   );
 };
 
