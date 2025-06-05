@@ -35,6 +35,15 @@ const ExchangeZone = () => {
       exchanges: '203',
       image: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop',
       trend: '+31%'
+    },
+    {
+      id: 4,
+      title: 'Áo Nike Vintage',
+      category: 'Thời trang',
+      views: '1.2k',
+      exchanges: '67',
+      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop',
+      trend: '+15%'
     }
   ];
 
@@ -110,70 +119,47 @@ const ExchangeZone = () => {
       </div>
 
       <div className="px-4 space-y-6 py-0">
-        {/* Trending Section */}
-        <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-3xl p-6 mt-4 relative overflow-hidden">
-          {/* Animated Background Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
-            <div className="absolute top-32 right-8 w-16 h-16 bg-white/10 rounded-full animate-bounce"></div>
-            <div className="absolute bottom-20 left-6 w-12 h-12 bg-white/10 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute top-20 right-20 w-8 h-8 bg-white/20 rounded-full animate-ping"></div>
-            <div className="absolute bottom-10 right-16 w-6 h-6 bg-white/20 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }}></div>
-            
-            {/* Moving illustration elements */}
-            <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
-              <div className="relative">
-                <TrendingUp className="w-12 h-12 text-white/30 animate-bounce" style={{ animationDelay: '2s' }} />
-                <div className="absolute inset-0 w-12 h-12 bg-white/10 rounded-full animate-ping" style={{ animationDelay: '2s' }}></div>
-              </div>
-            </div>
-          </div>
+        {/* Trending Section - Minimized */}
+        <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-2xl p-4 mt-4 relative overflow-hidden">
+          {/* Minimized Background Elements */}
           
           {/* Content */}
           <div className="relative z-10">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="relative">
-                <TrendingUp className="w-6 h-6 text-white animate-pulse" />
-                <div className="absolute inset-0 w-6 h-6 bg-white/20 rounded-full animate-ping"></div>
-              </div>
-              <h2 className="text-xl font-bold text-white">Xu hướng trao đổi</h2>
-              <div className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full">
-                <span className="text-white text-sm font-medium animate-pulse">HOT</span>
+            <div className="flex items-center space-x-2 mb-3">
+              <TrendingUp className="w-5 h-5 text-white" />
+              <h2 className="text-lg font-bold text-white">Xu hướng trao đổi</h2>
+              <div className="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded-full">
+                <span className="text-white text-xs font-medium">HOT</span>
               </div>
             </div>
             
-            <p className="text-white/90 text-sm mb-6 leading-relaxed">
-              Khám phá những món đồ được trao đổi nhiều nhất tuần này
-            </p>
-            
-            {/* Trending Items Carousel */}
-            <div className="flex space-x-3 overflow-x-auto pb-2 scrollbar-hide">
-              {trendingItems.map((item, index) => (
+            {/* Trending Items Grid - Same as Collections */}
+            <div className="grid grid-cols-2 gap-3">
+              {trendingItems.map((item) => (
                 <div 
                   key={item.id} 
-                  className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-2xl p-4 min-w-[200px] border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 cursor-pointer"
-                  style={{ animationDelay: `${index * 0.2}s` }}
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="aspect-square bg-white/20 rounded-xl mb-3 overflow-hidden">
+                  <div className="aspect-square relative overflow-hidden">
                     <img 
                       src={item.image} 
                       alt={item.title} 
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                      className="w-full h-full object-cover" 
                     />
-                  </div>
-                  
-                  <h4 className="font-semibold text-white text-sm mb-2 line-clamp-2">
-                    {item.title}
-                  </h4>
-                  
-                  <div className="flex items-center justify-between text-xs text-white/80">
-                    <div className="flex items-center space-x-1">
-                      <Eye className="w-3 h-3" />
-                      <span>{item.views}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-3 h-3 text-yellow-300 animate-pulse" />
-                      <span className="text-green-300 font-medium">{item.trend}</span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <div className="absolute bottom-2 left-2 right-2">
+                      <h4 className="font-bold text-white text-sm leading-tight mb-1">
+                        {item.title}
+                      </h4>
+                      <div className="flex items-center justify-between text-xs text-white/80">
+                        <div className="flex items-center space-x-1">
+                          <Eye className="w-3 h-3" />
+                          <span>{item.views}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <span className="text-green-300 font-medium">{item.trend}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
