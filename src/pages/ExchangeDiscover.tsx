@@ -4,72 +4,74 @@ import { ArrowLeft, Heart, MapPin, X, HelpCircle, Share, MessageCircle, ThumbsUp
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-
 const ExchangeDiscover = () => {
   const navigate = useNavigate();
-  const { groupId } = useParams();
+  const {
+    groupId
+  } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTooltip, setShowTooltip] = useState(true);
   const [showHeartAnimation, setShowHeartAnimation] = useState(false);
 
   // Sample data - in real app this would come from API based on groupId
-  const items = [
-    {
+  const items = [{
+    id: 1,
+    title: 'Áo khoác Denim Vintage',
+    description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
+    location: 'Trung tâm, cách 2km',
+    owner: 'StyleSeeker',
+    ownerAvatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face',
+    video: 'https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=400&h=600&fit=crop',
+    offers: 3,
+    comments: [{
       id: 1,
-      title: 'Áo khoác Denim Vintage',
-      description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
-      location: 'Trung tâm, cách 2km',
-      owner: 'StyleSeeker',
-      ownerAvatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face',
-      video: 'https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=400&h=600&fit=crop',
-      offers: 3,
-      comments: [
-        {
-          id: 1,
-          user: 'FashionFan',
-          avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face',
-          text: 'Tuyệt vời! Mình cũng có một chiếc tương tự',
-          time: '2 phút trước'
-        },
-        {
-          id: 2,
-          user: 'VintageCollector',
-          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face',
-          text: 'Kiểu dáng rất đẹp, chất liệu có vẻ bền',
-          time: '5 phút trước'
-        }
-      ],
-      reactions: {
-        likes: 24,
-        hearts: 18,
-        smiles: 12
-      }
-    },
-    {
+      user: 'FashionFan',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face',
+      text: 'Tuyệt vời! Mình cũng có một chiếc tương tự',
+      time: '2 phút trước'
+    }, {
       id: 2,
-      title: 'Túi xách da thật',
-      description: 'Túi xách da thật cao cấp, được bảo quản cẩn thận. Thiết kế thanh lịch và sang trọng.',
-      location: 'Quận 1, cách 1.5km',
-      owner: 'FashionLover',
-      ownerAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face',
-      video: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=600&fit=crop',
-      offers: 5,
-      comments: [],
-      reactions: { likes: 15, hearts: 8, smiles: 5 }
-    },
-    {
-      id: 3,
-      title: 'Giày sneaker limited',
-      description: 'Giày sneaker phiên bản giới hạn, chỉ đi vài lần. Còn nguyên hộp và phụ kiện.',
-      location: 'Quận 3, cách 3km',
-      owner: 'SneakerHead',
-      ownerAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face',
-      video: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=600&fit=crop',
-      offers: 2,
-      comments: [],
-      reactions: { likes: 32, hearts: 21, smiles: 9 }
+      user: 'VintageCollector',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face',
+      text: 'Kiểu dáng rất đẹp, chất liệu có vẻ bền',
+      time: '5 phút trước'
+    }],
+    reactions: {
+      likes: 24,
+      hearts: 18,
+      smiles: 12
     }
-  ];
+  }, {
+    id: 2,
+    title: 'Túi xách da thật',
+    description: 'Túi xách da thật cao cấp, được bảo quản cẩn thận. Thiết kế thanh lịch và sang trọng.',
+    location: 'Quận 1, cách 1.5km',
+    owner: 'FashionLover',
+    ownerAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face',
+    video: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=600&fit=crop',
+    offers: 5,
+    comments: [],
+    reactions: {
+      likes: 15,
+      hearts: 8,
+      smiles: 5
+    }
+  }, {
+    id: 3,
+    title: 'Giày sneaker limited',
+    description: 'Giày sneaker phiên bản giới hạn, chỉ đi vài lần. Còn nguyên hộp và phụ kiện.',
+    location: 'Quận 3, cách 3km',
+    owner: 'SneakerHead',
+    ownerAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face',
+    video: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=600&fit=crop',
+    offers: 2,
+    comments: [],
+    reactions: {
+      likes: 32,
+      hearts: 21,
+      smiles: 9
+    }
+  }];
   const currentItem = items[currentIndex];
   const handlePass = () => {
     if (currentIndex < items.length - 1) {
@@ -80,13 +82,13 @@ const ExchangeDiscover = () => {
   };
   const handleLike = () => {
     console.log('Liked item:', currentItem.id);
-    
+
     // Trigger heart animation
     setShowHeartAnimation(true);
     setTimeout(() => {
       setShowHeartAnimation(false);
     }, 1000);
-    
+
     // Move to next item after a slight delay
     setTimeout(() => {
       if (currentIndex < items.length - 1) {
@@ -121,20 +123,17 @@ const ExchangeDiscover = () => {
         </div>
       </div>;
   }
-  return (
-    <TooltipProvider>
+  return <TooltipProvider>
       <div className="min-h-screen bg-black max-w-sm mx-auto relative overflow-hidden">
         {/* Heart Animation Overlay */}
-        {showHeartAnimation && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none">
+        {showHeartAnimation && <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none">
             <div className="animate-ping">
               <Heart className="w-20 h-20 text-red-500 fill-red-500" />
             </div>
             <div className="absolute animate-bounce">
               <Heart className="w-16 h-16 text-red-500 fill-red-500" />
             </div>
-          </div>
-        )}
+          </div>}
 
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 z-20 p-6">
@@ -196,7 +195,7 @@ const ExchangeDiscover = () => {
             {/* Reactions */}
             <div className="flex items-center space-x-4 mb-4 bg-black/40 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/10">
               <div className="flex items-center space-x-1">
-                <ThumbsUp className="w-4 h-4 text-blue-400" />
+                <ThumbsUp className="w-4 h-4 text-white/70" />
                 <span className="text-white/90 text-sm">{currentItem.reactions.likes}</span>
               </div>
               <div className="flex items-center space-x-1">
@@ -214,10 +213,8 @@ const ExchangeDiscover = () => {
             </div>
 
             {/* Comments */}
-            {currentItem.comments.length > 0 && (
-              <div className="space-y-3">
-                {currentItem.comments.map((comment) => (
-                  <div key={comment.id} className="bg-black/40 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+            {currentItem.comments.length > 0 && <div className="space-y-3">
+                {currentItem.comments.map(comment => <div key={comment.id} className="bg-black/40 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
                     <div className="flex items-start space-x-3">
                       <Avatar className="w-8 h-8">
                         <AvatarImage src={comment.avatar} alt={comment.user} />
@@ -233,17 +230,14 @@ const ExchangeDiscover = () => {
                         <p className="text-white/80 text-sm leading-relaxed">{comment.text}</p>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  </div>)}
+              </div>}
           </div>
 
           {/* Action Buttons */}
           <div className="absolute bottom-8 left-0 right-0 px-6 z-10" onClick={e => e.stopPropagation()}>
             {/* Help Tooltip */}
-            {showTooltip && (
-              <Tooltip open={showTooltip}>
+            {showTooltip && <Tooltip open={showTooltip}>
                 <TooltipTrigger asChild>
                   <div className="flex items-center justify-center mb-6">
                     <div className="backdrop-blur-sm px-4 border border-white/20 flex items-center space-x-2 rounded-2xl py-[16px] bg-zinc-950">
@@ -257,15 +251,11 @@ const ExchangeDiscover = () => {
                     </div>
                   </div>
                 </TooltipTrigger>
-              </Tooltip>
-            )}
+              </Tooltip>}
             
             <div className="flex items-center justify-center space-x-4">
               {/* Like Button */}
-              <button 
-                onClick={handleLike} 
-                className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 hover:bg-white/25 hover:scale-105 active:scale-95"
-              >
+              <button onClick={handleLike} className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 hover:bg-white/25 hover:scale-105 active:scale-95">
                 <Heart className="w-6 h-6 text-white" />
               </button>
 
@@ -277,8 +267,6 @@ const ExchangeDiscover = () => {
           </div>
         </div>
       </div>
-    </TooltipProvider>
-  );
+    </TooltipProvider>;
 };
-
 export default ExchangeDiscover;
