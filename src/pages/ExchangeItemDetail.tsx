@@ -88,7 +88,7 @@ const ExchangeItemDetail = () => {
         </div>
 
         {/* Content */}
-        <div className="p-4 space-y-6">
+        <div className="p-4 space-y-6 py-[16px]">
           {/* Image */}
           <div className="w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
             <img src={itemDetail.image} alt={itemDetail.title} className="w-full h-full object-cover" />
@@ -96,9 +96,7 @@ const ExchangeItemDetail = () => {
 
           {/* Category and Offers */}
           <div className="flex items-center justify-between">
-            <div className="bg-yellow-light px-3 py-1 rounded-full">
-              <span className="text-sm font-medium text-amber-500">{itemDetail.category}</span>
-            </div>
+            
             
           </div>
 
