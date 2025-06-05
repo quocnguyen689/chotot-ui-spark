@@ -17,7 +17,7 @@ const Index = () => {
   return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto relative">
       {/* Pop-up Overlay */}
       {showPopup && <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="bg-white p-6 m-4 max-w-sm w-full relative shadow-2xl px-[16px] py-[16px] rounded-3xl">
+          <div className="p-6 m-4 max-w-sm w-full relative shadow-2xl px-[16px] py-[16px] rounded-3xl bg-transparent">
             {/* Close Button */}
             <button onClick={closePopup} className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-10 px-0 bg-white">
               <X className="w-5 h-5 text-gray-600" />
@@ -36,7 +36,7 @@ const Index = () => {
               </Button>
               
               {/* Skip Button */}
-              <button onClick={closePopup} className="text-gray-500 text-sm hover:text-gray-700 transition-colors">
+              <button onClick={closePopup} className="text-sm transition-colors text-white">
                 Bỏ qua
               </button>
             </div>
