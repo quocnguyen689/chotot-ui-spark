@@ -63,7 +63,7 @@ const ExchangeZone = () => {
         </button>
       </div>
 
-      <div className="px-4 py-6 space-y-6">
+      <div className="px-4 space-y-6 py-0">
         {/* Tabs */}
         <Tabs defaultValue="foryou" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-gray-100 rounded-xl p-1">
