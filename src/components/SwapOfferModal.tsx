@@ -45,7 +45,7 @@ const SwapOfferModal = ({
     image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop'
   }];
   const handleRequestSwap = () => {
-    if (selectedItem) {
+    if (selectedItem || offerPrice) {
       console.log('Requesting swap:', {
         selectedItem,
         targetItem,
@@ -145,7 +145,7 @@ const SwapOfferModal = ({
             <Button variant="outline" onClick={onClose} className="flex-1 py-3 rounded-2xl">
               Hủy
             </Button>
-            <Button onClick={handleRequestSwap} disabled={!selectedItem} className="flex-1 bg-yellow-brand hover:bg-yellow-600 text-black font-semibold py-3 rounded-2xl">
+            <Button onClick={handleRequestSwap} disabled={!selectedItem && !offerPrice} className="flex-1 bg-yellow-brand hover:bg-yellow-600 text-black font-semibold py-3 rounded-2xl">
               Đề nghị trao đổi
             </Button>
           </div>
