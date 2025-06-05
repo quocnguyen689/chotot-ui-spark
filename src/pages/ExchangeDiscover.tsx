@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Heart, MapPin, X, HelpCircle, Edit2, Check } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, X, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-
 const ExchangeDiscover = () => {
   const navigate = useNavigate();
   const {
@@ -12,9 +11,6 @@ const ExchangeDiscover = () => {
   } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTooltip, setShowTooltip] = useState(true);
-  const [tooltipText, setTooltipText] = useState('Vuốt trái để bỏ qua • Vuốt phải để thích • Nhấn để xem chi tiết');
-  const [isEditingTooltip, setIsEditingTooltip] = useState(false);
-  const [tempTooltipText, setTempTooltipText] = useState(tooltipText);
 
   // Sample data - in real app this would come from API based on groupId
   const items = [{
@@ -68,21 +64,6 @@ const ExchangeDiscover = () => {
   const handleItemClick = () => {
     navigate(`/exchange/${groupId}/item/${currentItem.id}`);
   };
-  const handleEditTooltip = () => {
-    setTempTooltipText(tooltipText);
-    setIsEditingTooltip(true);
-  };
-
-  const handleSaveTooltip = () => {
-    setTooltipText(tempTooltipText);
-    setIsEditingTooltip(false);
-  };
-
-  const handleCancelEdit = () => {
-    setTempTooltipText(tooltipText);
-    setIsEditingTooltip(false);
-  };
-
   if (!currentItem) {
     return <div className="min-h-screen bg-black max-w-sm mx-auto flex items-center justify-center">
         <div className="text-center px-8">
@@ -156,58 +137,21 @@ const ExchangeDiscover = () => {
           {/* Action Buttons */}
           <div className="absolute bottom-8 left-0 right-0 px-6 z-10" onClick={e => e.stopPropagation()}>
             {/* Help Tooltip */}
-            {showTooltip && (
-              <Tooltip open={showTooltip}>
+            {showTooltip && <Tooltip open={showTooltip}>
                 <TooltipTrigger asChild>
                   <div className="flex items-center justify-center mb-6">
                     <div className="backdrop-blur-sm px-4 border border-white/20 flex items-center space-x-2 rounded-2xl py-[16px] bg-zinc-950">
                       <HelpCircle className="w-4 h-4 text-white/70" />
-                      {isEditingTooltip ? (
-                        <div className="flex items-center space-x-2">
-                          <input
-                            type="text"
-                            value={tempTooltipText}
-                            onChange={(e) => setTempTooltipText(e.target.value)}
-                            className="bg-transparent text-white/70 text-sm font-light border-none outline-none min-w-0 flex-1"
-                            autoFocus
-                          />
-                          <button
-                            onClick={handleSaveTooltip}
-                            className="p-1 hover:bg-white/10 rounded-full transition-colors"
-                          >
-                            <Check className="w-3 h-3 text-green-400" />
-                          </button>
-                          <button
-                            onClick={handleCancelEdit}
-                            className="p-1 hover:bg-white/10 rounded-full transition-colors"
-                          >
-                            <X className="w-3 h-3 text-red-400" />
-                          </button>
-                        </div>
-                      ) : (
-                        <>
-                          <span className="text-white/70 text-sm font-light">
-                            {tooltipText}
-                          </span>
-                          <button
-                            onClick={handleEditTooltip}
-                            className="p-1 hover:bg-white/10 rounded-full transition-colors"
-                          >
-                            <Edit2 className="w-3 h-3 text-white/70" />
-                          </button>
-                          <button
-                            onClick={() => setShowTooltip(false)}
-                            className="p-1 hover:bg-white/10 rounded-full transition-colors"
-                          >
-                            <X className="w-3 h-3 text-white/70" />
-                          </button>
-                        </>
-                      )}
+                      <span className="text-white/70 text-sm font-light">
+                        Vuốt trái để bỏ qua • Vuốt phải để thích • Nhấn để xem chi tiết
+                      </span>
+                      <button onClick={() => setShowTooltip(false)} className="ml-2 p-1 hover:bg-white/10 rounded-full transition-colors">
+                        <X className="w-3 h-3 text-white/70" />
+                      </button>
                     </div>
                   </div>
                 </TooltipTrigger>
-              </Tooltip>
-            )}
+              </Tooltip>}
             
             <div className="flex items-center justify-center space-x-4">
               {/* Like Button */}
