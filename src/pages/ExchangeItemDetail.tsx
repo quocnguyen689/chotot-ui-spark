@@ -80,7 +80,7 @@ const ExchangeItemDetail = () => {
   return <>
       <div className="min-h-screen bg-white max-w-sm mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 py-[16px]">
           <h1 className="text-lg font-bold text-gray-900">{itemDetail.title}</h1>
           <button onClick={() => navigate(-1)} className="p-2">
             <X className="w-6 h-6 text-gray-700" />
