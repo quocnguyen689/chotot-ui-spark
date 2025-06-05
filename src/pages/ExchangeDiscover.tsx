@@ -4,11 +4,10 @@ import { ArrowLeft, Heart, MapPin, X, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
 const ExchangeDiscover = () => {
   const navigate = useNavigate();
-  const {
-    groupId
-  } = useParams();
+  const { groupId } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTooltip, setShowTooltip] = useState(true);
 
@@ -82,7 +81,8 @@ const ExchangeDiscover = () => {
         </div>
       </div>;
   }
-  return <TooltipProvider>
+  return (
+    <TooltipProvider>
       <div className="min-h-screen bg-black max-w-sm mx-auto relative overflow-hidden">
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 z-20 p-6">
@@ -137,21 +137,23 @@ const ExchangeDiscover = () => {
           {/* Action Buttons */}
           <div className="absolute bottom-8 left-0 right-0 px-6 z-10" onClick={e => e.stopPropagation()}>
             {/* Help Tooltip */}
-            {showTooltip && <Tooltip open={showTooltip}>
+            {showTooltip && (
+              <Tooltip open={showTooltip}>
                 <TooltipTrigger asChild>
                   <div className="flex items-center justify-center mb-6">
                     <div className="backdrop-blur-sm px-4 border border-white/20 flex items-center space-x-2 rounded-2xl py-[16px] bg-zinc-950">
                       <HelpCircle className="w-4 h-4 text-white/70" />
                       <span className="text-white/70 text-sm font-light">
-                        Vuốt trái để bỏ qua • Vuốt phải để thích • Nhấn để xem chi tiết
+                        Vuốt trái để bỏ qua, vuốt phải để thích. Nhấn để xem chi tiết
                       </span>
                       <button onClick={() => setShowTooltip(false)} className="ml-2 p-1 hover:bg-white/10 rounded-full transition-colors">
-                        <X className="w-3 h-3 text-white/70" />
+                        <X className="w-4 h-4 text-white/70" />
                       </button>
                     </div>
                   </div>
                 </TooltipTrigger>
-              </Tooltip>}
+              </Tooltip>
+            )}
             
             <div className="flex items-center justify-center space-x-4">
               {/* Like Button */}
@@ -167,6 +169,8 @@ const ExchangeDiscover = () => {
           </div>
         </div>
       </div>
-    </TooltipProvider>;
+    </TooltipProvider>
+  );
 };
+
 export default ExchangeDiscover;
