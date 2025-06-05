@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Heart } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const ExchangeDiscover = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const ExchangeDiscover = () => {
       description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
       location: 'Trung tâm, cách 2km',
       owner: 'StyleSeeker',
+      ownerAvatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face',
       video: 'https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=400&h=600&fit=crop',
       offers: 3
     },
@@ -26,6 +28,7 @@ const ExchangeDiscover = () => {
       description: 'Túi xách da thật cao cấp, được bảo quản cẩn thận. Thiết kế thanh lịch và sang trọng.',
       location: 'Quận 1, cách 1.5km',
       owner: 'FashionLover',
+      ownerAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face',
       video: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=600&fit=crop',
       offers: 5
     },
@@ -35,6 +38,7 @@ const ExchangeDiscover = () => {
       description: 'Giày sneaker phiên bản giới hạn, chỉ đi vài lần. Còn nguyên hộp và phụ kiện.',
       location: 'Quận 3, cách 3km',
       owner: 'SneakerHead',
+      ownerAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face',
       video: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=600&fit=crop',
       offers: 2
     }
@@ -132,13 +136,18 @@ const ExchangeDiscover = () => {
             {currentItem.description}
           </p>
           
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
-              <span className="text-sm">📍</span>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 flex-1">
+              <MapPin className="w-4 h-4 text-white/90" />
               <span className="text-white/90 text-sm font-medium">{currentItem.location}</span>
             </div>
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
-              <span className="text-sm">👤</span>
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 flex-1">
+              <Avatar className="w-5 h-5">
+                <AvatarImage src={currentItem.ownerAvatar} alt={currentItem.owner} />
+                <AvatarFallback className="w-5 h-5 text-xs bg-white/20">
+                  {currentItem.owner.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
               <span className="text-white/90 text-sm font-medium">{currentItem.owner}</span>
             </div>
           </div>
