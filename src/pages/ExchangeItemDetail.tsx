@@ -51,13 +51,13 @@ const ExchangeItemDetail = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-700 border border-yellow-200';
+        return 'bg-yellow-50 text-yellow-700 border border-yellow-200 shadow-sm';
       case 'accepted':
-        return 'bg-gray-100 text-gray-600';
+        return 'bg-green-50 text-green-700 border border-green-200 shadow-sm';
       case 'rejected':
-        return 'bg-gray-100 text-gray-600';
+        return 'bg-gray-50 text-gray-600 border border-gray-200 shadow-sm';
       default:
-        return 'bg-gray-100 text-gray-600';
+        return 'bg-gray-50 text-gray-600 border border-gray-200 shadow-sm';
     }
   };
   const getStatusText = (status: string) => {
@@ -161,7 +161,7 @@ const ExchangeItemDetail = () => {
                 {itemDetail.recentOffers.map(offer => (
                   <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                     <div className="flex items-center space-x-3">
-                      <div className="w-16 h-16 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
+                      <div className="w-20 h-20 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                         <img src={offer.thumbnail} alt={offer.item} className="w-full h-full object-cover" />
                       </div>
                       <div className="space-y-1">
