@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Camera, Plus, X } from 'lucide-react';
@@ -16,9 +17,7 @@ const PostForm = () => {
     description: '',
     price: '',
     condition: 'Đã sử dụng',
-    freeGiveaway: false,
-    giveAway: false,
-    forSale: false
+    postType: 'exchange' // 'exchange', 'giveaway', 'sale'
   });
 
   const handleInputChange = (field: string, value: string | boolean) => {
@@ -46,7 +45,7 @@ const PostForm = () => {
         <h1 className="text-lg font-bold text-black text-center">Đăng tin với AI</h1>
       </div>
 
-      <div className="p-4 space-y-6 py-[16px]">
+      <div className="p-4 space-y-6 py-[16px] pb-32">
         {/* Category Display */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
@@ -56,7 +55,7 @@ const PostForm = () => {
           <div className="mt-2 text-sm text-gray-900">Giải trí, Thể thao, Sở thích - Sách</div>
         </div>
 
-        {/* Photo Upload Section - Moved to top */}
+        {/* Photo Upload Section */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <h3 className="font-bold text-gray-700 mb-4">THÔNG TIN CHI TIẾT</h3>
           <p className="text-sm text-gray-600 mb-4">
@@ -89,52 +88,79 @@ const PostForm = () => {
           </div>
         </div>
 
+        {/* Post Type Selection */}
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <Label className="text-gray-600 mb-3 block">
+            Loại tin đăng <span className="text-red-500">*</span>
+          </Label>
+          <div className="flex flex-wrap gap-2">
+            <button 
+              onClick={() => handleInputChange('postType', 'exchange')} 
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                formData.postType === 'exchange' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'
+              }`}
+            >
+              Tôi muốn trao đổi
+            </button>
+            <button 
+              onClick={() => handleInputChange('postType', 'giveaway')} 
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                formData.postType === 'giveaway' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'
+              }`}
+            >
+              Tôi muốn cho tặng
+            </button>
+            <button 
+              onClick={() => handleInputChange('postType', 'sale')} 
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                formData.postType === 'sale' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'
+              }`}
+            >
+              Tôi muốn bán
+            </button>
+          </div>
+        </div>
+
+        {/* Price Input - only show if not giveaway */}
+        {formData.postType !== 'giveaway' && (
+          <div className="bg-white rounded-lg border border-gray-200 p-4">
+            <Label className="text-gray-600 mb-3 block">
+              Giá {formData.postType === 'sale' ? 'bán' : 'tham khảo'} <span className="text-red-500">*</span>
+            </Label>
+            <Input 
+              type="text" 
+              value={formData.price} 
+              onChange={e => handleInputChange('price', e.target.value)} 
+              className="w-full" 
+              placeholder={`Nhập giá ${formData.postType === 'sale' ? 'bán' : 'tham khảo'}`} 
+            />
+          </div>
+        )}
+
         {/* Condition Selection */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <Label className="text-gray-600 mb-3 block">
             Tình trạng <span className="text-red-500">*</span>
           </Label>
           <div className="flex space-x-2">
-            <button onClick={() => handleInputChange('condition', 'Đã sử dụng')} className={`px-4 py-2 rounded-full text-sm font-medium ${formData.condition === 'Đã sử dụng' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'}`}>
+            <button 
+              onClick={() => handleInputChange('condition', 'Đã sử dụng')} 
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                formData.condition === 'Đã sử dụng' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'
+              }`}
+            >
               Đã sử dụng
             </button>
-            <button onClick={() => handleInputChange('condition', 'Mới')} className={`px-4 py-2 rounded-full text-sm font-medium ${formData.condition === 'Mới' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'}`}>
+            <button 
+              onClick={() => handleInputChange('condition', 'Mới')} 
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                formData.condition === 'Mới' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'
+              }`}
+            >
               Mới
             </button>
           </div>
         </div>
-
-        {/* Exchange Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 py-[16px] my-[16px]">
-          <label className="flex items-center space-x-3">
-            <input type="checkbox" checked={formData.freeGiveaway} onChange={e => handleInputChange('freeGiveaway', e.target.checked)} className="w-4 h-4" />
-            <span className="text-gray-900">Tôi muốn trao đổi</span>
-          </label>
-        </div>
-
-        {/* Give Away Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <label className="flex items-center space-x-3">
-            <input type="checkbox" checked={formData.giveAway} onChange={e => handleInputChange('giveAway', e.target.checked)} className="w-4 h-4" />
-            <span className="text-gray-900">Tôi muốn cho tặng</span>
-          </label>
-        </div>
-
-        {/* For Sale Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <label className="flex items-center space-x-3">
-            <input type="checkbox" checked={formData.forSale} onChange={e => handleInputChange('forSale', e.target.checked)} className="w-4 h-4" />
-            <span className="text-gray-900">Tôi muốn bán</span>
-          </label>
-        </div>
-
-        {/* Price Input */}
-        {!formData.freeGiveaway && <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <Label className="text-gray-600 mb-3 block">
-              Giá bán <span className="text-red-500">*</span>
-            </Label>
-            <Input type="text" value={formData.price} onChange={e => handleInputChange('price', e.target.value)} className="w-full" placeholder="Nhập giá bán" />
-          </div>}
 
         {/* Title and Description Section */}
         <div className="rounded-lg px-[16px] my-[16px] bg-white border border-gray-200 p-4">
@@ -145,7 +171,13 @@ const PostForm = () => {
               <Label className="text-gray-600 mb-2 block">
                 Tiêu đề tin đăng <span className="text-red-500">*</span>
               </Label>
-              <Input type="text" value={formData.title} onChange={e => handleInputChange('title', e.target.value)} className="w-full" placeholder="Tiêu đề tin đăng" />
+              <Input 
+                type="text" 
+                value={formData.title} 
+                onChange={e => handleInputChange('title', e.target.value)} 
+                className="w-full" 
+                placeholder="Tiêu đề tin đăng" 
+              />
               <div className="text-xs text-gray-500 mt-1">0/50 kí tự</div>
             </div>
 
@@ -153,33 +185,32 @@ const PostForm = () => {
               <Label className="text-gray-600 mb-2 block">
                 Mô tả chi tiết <span className="text-red-500">*</span>
               </Label>
-              <Textarea value={formData.description} onChange={e => handleInputChange('description', e.target.value)} className="w-full min-h-[120px]" placeholder="Sách New Moon của Stephenie Meyer, bản tiếng Anh.&#10;- Câu chuyện tiếp nối Twilight, xoay quanh Bella và Edward.&#10;- Lần này, cuộc sống của Bella sẽ có nhiều thử thách mới.&#10;- Sách được giữ gìn cẩn thận.&#10;Nội dung: Bella đối mặt với cuộc sống khó khăn sau khi chia tay Edward. Cô tìm cách vượt qua nỗi đau và khám phá những bí ẩn mới." />
+              <Textarea 
+                value={formData.description} 
+                onChange={e => handleInputChange('description', e.target.value)} 
+                className="w-full min-h-[120px]" 
+                placeholder="Sách New Moon của Stephenie Meyer, bản tiếng Anh.&#10;- Câu chuyện tiếp nối Twilight, xoay quanh Bella và Edward.&#10;- Lần này, cuộc sống của Bella sẽ có nhiều thử thách mới.&#10;- Sách được giữ gìn cẩn thận.&#10;Nội dung: Bella đối mặt với cuộc sống khó khăn sau khi chia tay Edward. Cô tìm cách vượt qua nỗi đau và khám phá những bí ẩn mới." 
+              />
               <div className="text-xs text-gray-500 mt-1">0/1500 kí tự</div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Condition Selection (repeated for form completion) */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <Label className="text-gray-600 mb-3 block">
-            Tình trạng <span className="text-red-500">*</span>
-          </Label>
-          <div className="flex space-x-2">
-            <button onClick={() => handleInputChange('condition', 'Đã sử dụng')} className={`px-4 py-2 rounded-full text-sm font-medium ${formData.condition === 'Đã sử dụng' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'}`}>
-              Đã sử dụng
-            </button>
-            <button onClick={() => handleInputChange('condition', 'Mới')} className={`px-4 py-2 rounded-full text-sm font-medium ${formData.condition === 'Mới' ? 'bg-yellow-brand text-black' : 'bg-gray-100 text-gray-600'}`}>
-              Mới
-            </button>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex space-x-2 pb-20">
-          <Button variant="outline" onClick={() => navigate('/')} className="flex-1 py-3 text-gray-900 border-gray-300">
+      {/* Floating Action Buttons */}
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-sm bg-white border-t border-gray-200 p-4">
+        <div className="flex space-x-2">
+          <Button 
+            variant="outline" 
+            onClick={() => navigate('/')} 
+            className="flex-1 py-3 text-gray-900 border-gray-300"
+          >
             Xem trước
           </Button>
-          <Button onClick={handleSubmit} className="flex-1 py-3 bg-yellow-brand text-black hover:bg-yellow-brand/90">
+          <Button 
+            onClick={handleSubmit} 
+            className="flex-1 py-3 bg-yellow-brand text-black hover:bg-yellow-brand/90"
+          >
             Đăng tin
           </Button>
         </div>
