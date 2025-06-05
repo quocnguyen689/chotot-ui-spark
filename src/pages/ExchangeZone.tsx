@@ -105,7 +105,7 @@ const ExchangeZone = () => {
   return (
     <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-md p-4 flex items-center justify-between border-b border-gray-100/50 sticky top-0 z-10">
+      <div className="bg-white backdrop-blur-md p-4 flex items-center justify-between border-b border-gray-100/50 sticky top-0 z-50">
         <button 
           onClick={() => navigate(-1)} 
           className="p-2 hover:bg-gray-100 rounded-full transition-colors"
