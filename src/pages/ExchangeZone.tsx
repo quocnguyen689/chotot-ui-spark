@@ -80,7 +80,7 @@ const ExchangeZone = () => {
           <TabsContent value="foryou" className="mt-6 space-y-5">
             {/* Collections Grid */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-gray-900">Bộ sưu tập AI gợi ý cho bạn</h3>
+              <h3 className="font-bold text-gray-900 text-base">Bộ sưu tập AI gợi ý cho bạn</h3>
               
               <div className="grid grid-cols-2 gap-3">
                 {exchangeGroups.map(group => <div key={group.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-all duration-300 hover:-translate-y-1" onClick={() => handleCollectionClick(group.id)}>
