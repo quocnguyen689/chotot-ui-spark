@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Search, MapPin, Settings } from 'lucide-react';
+import { ArrowLeft, Search, MapPin, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
@@ -95,26 +95,69 @@ const ExchangeZone = () => {
         </div>
 
         {/* Tabs */}
-        <Tabs defaultValue="nearby" className="w-full">
+        <Tabs defaultValue="foryou" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-gray-100 rounded-xl p-1">
+            <TabsTrigger 
+              value="foryou" 
+              className="rounded-lg font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
+            >
+              <Heart className="w-4 h-4 mr-2" />
+              Cho bạn
+            </TabsTrigger>
             <TabsTrigger 
               value="nearby" 
               className="rounded-lg font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
             >
               <MapPin className="w-4 h-4 mr-2" />
-              Gần tôi
-            </TabsTrigger>
-            <TabsTrigger 
-              value="mypost" 
-              className="rounded-lg font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
-            >
-              <Settings className="w-4 h-4 mr-2" />
-              Tin của tôi
+              Gần bạn
             </TabsTrigger>
           </TabsList>
 
+          <TabsContent value="foryou" className="mt-6 space-y-5">
+            {/* For You Hero */}
+            <div className="text-center py-4">
+              <div className="relative mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-400 rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-pink-400/25">
+                  <Heart className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Dành riêng cho bạn</h2>
+              <p className="text-gray-600 text-sm leading-relaxed px-2">
+                Những gợi ý trao đổi phù hợp với sở thích của bạn
+              </p>
+            </div>
+
+            {/* Collections Grid */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-gray-900">Danh mục được đề xuất</h3>
+              
+              <div className="grid grid-cols-2 gap-3">
+                {filteredGroups.map((group) => (
+                  <div 
+                    key={group.id}
+                    className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+                    onClick={() => handleCollectionClick(group.id)}
+                  >
+                    <div className="aspect-[4/3] relative overflow-hidden">
+                      <img 
+                        src={group.image} 
+                        alt={group.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                      <div className="absolute bottom-2 left-2 right-2">
+                        <h4 className="font-bold text-white text-sm leading-tight mb-1">{group.name}</h4>
+                        <p className="text-white/80 text-xs">{group.memberCount}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+
           <TabsContent value="nearby" className="mt-6 space-y-5">
-            {/* Hero Section */}
+            {/* Nearby Hero */}
             <div className="text-center py-4">
               <div className="relative mb-6">
                 <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-yellow-400/25">
@@ -152,35 +195,6 @@ const ExchangeZone = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="mypost" className="mt-6 space-y-5">
-            {/* My Posts Hero */}
-            <div className="text-center py-4">
-              <div className="relative mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-400 rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-blue-400/25">
-                  <Settings className="w-6 h-6 text-white" />
-                </div>
-              </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Tin của tôi</h2>
-              <p className="text-gray-600 text-sm leading-relaxed px-2">
-                Quản lý các món đồ bạn đã đăng và theo dõi trao đổi
-              </p>
-            </div>
-
-            {/* My Posts Content */}
-            <div className="space-y-4">
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Settings className="w-6 h-6 text-gray-400" />
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Chưa có tin đăng nào</h3>
-                <p className="text-gray-600 text-sm mb-4">Hãy bắt đầu đăng món đồ đầu tiên của bạn!</p>
-                <Button className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-white rounded-xl font-medium">
-                  Đăng tin mới
-                </Button>
               </div>
             </div>
           </TabsContent>
