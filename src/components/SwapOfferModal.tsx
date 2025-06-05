@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BookOpen, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Input } from '@/components/ui/input';
 
 interface SwapOfferModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ const SwapOfferModal = ({
 }: SwapOfferModalProps) => {
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  const [offerPrice, setOfferPrice] = useState('');
 
   // Sample user items - in real app this would come from API
   const userItems = [{
@@ -49,7 +51,8 @@ const SwapOfferModal = ({
     if (selectedItem) {
       console.log('Requesting swap:', {
         selectedItem,
-        targetItem
+        targetItem,
+        offerPrice
       });
       // Handle swap request logic here
       onClose();
@@ -59,6 +62,18 @@ const SwapOfferModal = ({
   const handleAddItem = () => {
     navigate('/post/form');
     onClose();
+  };
+
+  const formatPrice = (value: string) => {
+    // Remove non-digits
+    const numbers = value.replace(/\D/g, '');
+    // Format with thousands separator
+    return numbers.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  };
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPrice(e.target.value);
+    setOfferPrice(formatted);
   };
 
   return (
@@ -132,6 +147,26 @@ const SwapOfferModal = ({
                   Đăng món đồ mới của bạn
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* Price Input Section */}
+          <div className="bg-white rounded-2xl p-4 shadow-sm space-y-3">
+            <h3 className="font-semibold text-gray-900">Giá đề nghị (tùy chọn)</h3>
+            <p className="text-sm text-gray-600">
+              Thêm mức giá bù trừ nếu cần thiết
+            </p>
+            <div className="relative">
+              <Input
+                type="text"
+                value={offerPrice}
+                onChange={handlePriceChange}
+                placeholder="0"
+                className="pl-3 pr-12 text-right rounded-xl border-gray-200"
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                VND
+              </span>
             </div>
           </div>
         </div>
