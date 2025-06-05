@@ -1,9 +1,15 @@
+import React, { useEffect, useState } from "react";
+import { Sparkles } from "lucide-react";
+import CollectionGrid from "./CollectionGrid";
+import { DataService } from "@/services/data.service";
+import { Collection } from "@/services/marketplace.service";
 
-import React from 'react';
-import { Sparkles } from 'lucide-react';
-import CollectionGrid from './CollectionGrid';
+interface AICollectionSectionProps {
+  props: Collection[];
+  loading?: boolean;
+}
 
-const AICollectionSection = () => {
+const AICollectionSection = ({ props, loading }: AICollectionSectionProps) => {
   return (
     <div className="space-y-4">
       <div className="flex items-center space-x-2">
@@ -18,8 +24,12 @@ const AICollectionSection = () => {
           AI
         </div>
       </div>
-      
-      <CollectionGrid showAIEffects={true} />
+
+      <CollectionGrid
+        showAIEffects={true}
+        collections={props}
+        loading={loading}
+      />
     </div>
   );
 };
