@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { X, MapPin, User, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,14 +10,6 @@ const ExchangeItemDetail = () => {
   const { groupId, itemId } = useParams();
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // Add backdrop effect when component mounts
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
 
   // Sample data with multiple images for the jacket
   const itemDetail = {
@@ -107,136 +99,126 @@ const ExchangeItemDetail = () => {
 
   return (
     <>
-      {/* Backdrop overlay */}
-      <div className="fixed inset-0 bg-black/50 z-40" />
-      
-      <div className="fixed inset-0 z-50 flex items-end justify-center">
-        <div className="min-h-screen bg-gray-50 max-w-sm w-full">
-          {/* Header */}
-          <div className="flex items-center justify-end p-4 border-b border-gray-100 bg-white">
-            <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <X className="w-5 h-5 text-gray-600" />
-            </button>
-          </div>
+      <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
+          <h1 className="text-lg font-semibold text-gray-900">{itemDetail.title}</h1>
+          <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <X className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
 
-          {/* Content */}
-          <div className="p-4 space-y-5">
-            {/* Image Carousel */}
-            <div className="relative w-full h-72 bg-white rounded-2xl overflow-hidden shadow-sm">
-              <img 
-                src={itemDetail.images[currentImageIndex]} 
-                alt={itemDetail.title} 
-                className="w-full h-full object-cover" 
-              />
-              
-              {/* Navigation buttons */}
-              {itemDetail.images.length > 1 && (
-                <>
+        {/* Content */}
+        <div className="p-4 space-y-5">
+          {/* Image Carousel */}
+          <div className="relative w-full h-72 bg-white rounded-2xl overflow-hidden shadow-sm">
+            <img 
+              src={itemDetail.images[currentImageIndex]} 
+              alt={itemDetail.title} 
+              className="w-full h-full object-cover" 
+            />
+            
+            {/* Navigation buttons */}
+            {itemDetail.images.length > 1 && (
+              <>
+                <button
+                  onClick={prevImage}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4 text-gray-700" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors"
+                >
+                  <ChevronRight className="w-4 h-4 text-gray-700" />
+                </button>
+              </>
+            )}
+
+            {/* Image indicators */}
+            {itemDetail.images.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1">
+                {itemDetail.images.map((_, index) => (
                   <button
-                    onClick={prevImage}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors"
-                  >
-                    <ChevronLeft className="w-4 h-4 text-gray-700" />
-                  </button>
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors"
-                  >
-                    <ChevronRight className="w-4 h-4 text-gray-700" />
-                  </button>
-                </>
-              )}
-
-              {/* Image indicators */}
-              {itemDetail.images.length > 1 && (
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1">
-                  {itemDetail.images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Title */}
-            <div className="bg-white rounded-2xl p-4 shadow-sm">
-              <h1 className="text-xl font-bold text-gray-900">{itemDetail.title}</h1>
-              <p className="text-sm text-gray-500 mt-1">{itemDetail.category}</p>
-            </div>
-
-            {/* Description */}
-            <div className="bg-white rounded-2xl p-4 shadow-sm">
-              <p className="text-gray-700 leading-relaxed text-sm">
-                {itemDetail.description}
-              </p>
-            </div>
-
-            {/* Location and Owner */}
-            <div className="bg-white rounded-2xl p-4 shadow-sm">
-              <div className="flex items-center justify-between text-sm text-gray-600">
-                <div className="flex items-center space-x-2">
-                  <MapPin className="w-4 h-4" />
-                  <span>{itemDetail.location}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <User className="w-4 h-4" />
-                  <span>{itemDetail.owner}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <Button 
-              onClick={handleMakeOffer} 
-              className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-4 rounded-2xl font-medium transition-colors"
-            >
-              Đưa ra lời đề nghị
-            </Button>
-
-            {/* Recent Offers Section */}
-            <div className="bg-white rounded-2xl p-4 shadow-sm space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900">Lời đề nghị gần đây</h2>
-                <div className="px-3 py-1.5 bg-gray-100 rounded-full">
-                  <span className="text-gray-700 text-sm font-medium">{itemDetail.offersCount}</span>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                {itemDetail.recentOffers.map(offer => (
-                  <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
-                        <img src={offer.thumbnail} alt={offer.item} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="font-medium text-gray-900 text-sm">{offer.item}</h3>
-                        <p className="text-xs text-gray-500">bởi {offer.owner} • {offer.timeAgo}</p>
-                        <Badge className={`text-xs ${getStatusColor(offer.status)}`}>
-                          {getStatusText(offer.status)}
-                        </Badge>
-                      </div>
-                    </div>
-                    <button 
-                      onClick={() => handleViewOffer(offer.id)} 
-                      className="p-2 hover:bg-gray-200 rounded-full transition-colors"
-                    >
-                      <ChevronRight className="w-4 h-4 text-gray-600" />
-                    </button>
-                  </div>
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                    }`}
+                  />
                 ))}
               </div>
+            )}
+          </div>
+
+          {/* Description */}
+          <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <p className="text-gray-700 leading-relaxed text-sm">
+              {itemDetail.description}
+            </p>
+          </div>
+
+          {/* Location and Owner */}
+          <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <div className="flex items-center justify-between text-sm text-gray-600">
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-4 h-4" />
+                <span>{itemDetail.location}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <User className="w-4 h-4" />
+                <span>{itemDetail.owner}</span>
+              </div>
             </div>
           </div>
 
-          {/* Bottom spacing */}
-          <div className="pb-6"></div>
+          {/* CTA Button */}
+          <Button 
+            onClick={handleMakeOffer} 
+            className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-4 rounded-2xl font-medium transition-colors"
+          >
+            Đưa ra lời đề nghị
+          </Button>
+
+          {/* Recent Offers Section */}
+          <div className="bg-white rounded-2xl p-4 shadow-sm space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-gray-900">Lời đề nghị gần đây</h2>
+              <div className="px-3 py-1.5 bg-gray-100 rounded-full">
+                <span className="text-gray-700 text-sm font-medium">{itemDetail.offersCount}</span>
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              {itemDetail.recentOffers.map(offer => (
+                <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
+                      <img src={offer.thumbnail} alt={offer.item} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-medium text-gray-900 text-sm">{offer.item}</h3>
+                      <p className="text-xs text-gray-500">bởi {offer.owner} • {offer.timeAgo}</p>
+                      <Badge className={`text-xs ${getStatusColor(offer.status)}`}>
+                        {getStatusText(offer.status)}
+                      </Badge>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => handleViewOffer(offer.id)} 
+                    className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+                  >
+                    <ChevronRight className="w-4 h-4 text-gray-600" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Bottom spacing */}
+        <div className="pb-6"></div>
       </div>
 
       <SwapOfferModal 
