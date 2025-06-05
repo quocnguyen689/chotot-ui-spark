@@ -188,13 +188,13 @@ const ExchangeItemDetail = () => {
                       <div className="space-y-1">
                         <h3 className="font-medium text-gray-900 text-sm">{offer.item}</h3>
                         <p className="text-xs text-gray-500">bởi {offer.owner} • {offer.timeAgo}</p>
-                        <div className="flex items-center space-x-2">
+                        <div className="space-y-1">
+                          <span className="text-xs text-gray-600">
+                            {getOfferCount(offer.status)} đề nghị
+                          </span>
                           <Badge className={`text-xs ${getStatusColor(offer.status)}`}>
                             {getStatusText(offer.status)}
                           </Badge>
-                          <span className="text-xs text-gray-600">
-                            {getOfferCount(offer.status)} đề nghị trao đổi
-                          </span>
                         </div>
                       </div>
                     </div>
