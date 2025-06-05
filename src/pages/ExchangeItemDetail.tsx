@@ -159,9 +159,9 @@ const ExchangeItemDetail = () => {
               
               <div className="space-y-3">
                 {itemDetail.recentOffers.map(offer => (
-                  <div key={offer.id} className="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 hover:scale-[1.02]">
+                  <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                     <div className="flex items-center space-x-3">
-                      <div className="w-16 h-16 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0 ring-2 ring-yellow-300">
+                      <div className="w-16 h-16 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                         <img src={offer.thumbnail} alt={offer.item} className="w-full h-full object-cover" />
                       </div>
                       <div className="space-y-1">
@@ -172,7 +172,7 @@ const ExchangeItemDetail = () => {
                         </Badge>
                       </div>
                     </div>
-                    <button onClick={() => handleViewOffer(offer.id)} className="p-2 hover:bg-yellow-100 rounded-full transition-colors">
+                    <button onClick={() => handleViewOffer(offer.id)} className="p-2 hover:bg-gray-200 rounded-full transition-colors">
                       <ChevronRight className="w-4 h-4 text-gray-600" />
                     </button>
                   </div>
