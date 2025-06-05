@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import SwapOfferModal from '@/components/SwapOfferModal';
+
 const ExchangeItemDetail = () => {
   const navigate = useNavigate();
   const {
@@ -116,7 +117,7 @@ const ExchangeItemDetail = () => {
     }]
   };
 
-  // ... keep existing code (getStatusColor, getStatusText, getOfferCount functions)
+  // Helper functions
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -168,6 +169,7 @@ const ExchangeItemDetail = () => {
       setCommentsCount(prev => prev + 1);
     }
   };
+
   return <>
       <Sheet open={true} onOpenChange={handleClose}>
         <SheetContent side="bottom" className="h-[90vh] max-w-sm mx-auto p-0 overflow-y-auto">
