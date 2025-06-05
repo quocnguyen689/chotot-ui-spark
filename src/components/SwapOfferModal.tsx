@@ -129,7 +129,7 @@ const SwapOfferModal = ({
           <div className="rounded-2xl p-4 shadow-sm space-y-3 border-gray-400 bg-gray-100">
             <h3 className="font-semibold text-gray-900">Giá đề nghị chốt luôn </h3>
             <p className="text-sm text-gray-600">
-              Thêm mức giá bù trừ nếu cần thiết
+              Thêm mức giá trả thẳng để chốt luôn
             </p>
             <div className="relative">
               <Input type="text" value={offerPrice} onChange={handlePriceChange} placeholder="0" className="pl-3 pr-12 text-right rounded-xl border-gray-200" />
