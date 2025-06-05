@@ -218,7 +218,7 @@ const ExchangeItemDetail = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <User className="w-4 h-4" />
-                  <span>{itemDetail.owner}</span>
+                  <span className="text-gray-500">{itemDetail.owner}</span>
                 </div>
               </div>
             </div>
