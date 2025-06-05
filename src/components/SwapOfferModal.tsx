@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
-import { X, BookOpen } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
 
 interface SwapOfferModalProps {
   isOpen: boolean;
@@ -58,35 +58,35 @@ const SwapOfferModal = ({ isOpen, onClose, targetItem }: SwapOfferModalProps) =>
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="space-y-3 pb-4">
-          <div className="flex items-center space-x-2">
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent side="bottom" className="h-[90vh] max-w-sm mx-auto p-0 overflow-y-auto">
+        <SheetHeader className="p-4 border-b border-gray-100">
+          <div className="flex items-center space-x-2 justify-center">
             <div className="w-8 h-8 bg-yellow-light rounded-lg flex items-center justify-center">
               <BookOpen className="w-5 h-5 text-amber-500" />
             </div>
-            <DialogTitle className="text-lg font-bold text-gray-900">
+            <SheetTitle className="text-lg font-bold text-gray-900">
               Chọn món đồ để trao đổi
-            </DialogTitle>
+            </SheetTitle>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-gray-600 leading-relaxed text-center px-4">
             Chọn một món đồ từ bộ sưu tập của bạn để trao đổi lấy "{targetItem.title}" của {targetItem.owner}
           </p>
-        </DialogHeader>
+        </SheetHeader>
 
-        <div className="space-y-3">
+        <div className="p-4 space-y-3 flex-1">
           {userItems.map((item) => (
             <div
               key={item.id}
-              className={`p-4 border rounded-lg cursor-pointer transition-all ${
+              className={`p-4 border rounded-2xl cursor-pointer transition-all ${
                 selectedItem === item.id
                   ? 'border-yellow-brand bg-yellow-light'
-                  : 'border-gray-200 hover:border-gray-300'
+                  : 'border-gray-200 hover:border-gray-300 bg-white'
               }`}
               onClick={() => setSelectedItem(item.id)}
             >
               <div className="flex items-center space-x-3">
-                <div className="w-16 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                <div className="w-16 h-16 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                   <img 
                     src={item.image} 
                     alt={item.title}
@@ -114,24 +114,26 @@ const SwapOfferModal = ({ isOpen, onClose, targetItem }: SwapOfferModalProps) =>
           ))}
         </div>
 
-        <div className="flex space-x-3 pt-4 border-t">
-          <Button
-            variant="outline"
-            onClick={onClose}
-            className="flex-1"
-          >
-            Hủy
-          </Button>
-          <Button
-            onClick={handleRequestSwap}
-            disabled={!selectedItem}
-            className="flex-1 bg-yellow-brand hover:bg-yellow-600 text-black font-semibold"
-          >
-            Đề nghị trao đổi
-          </Button>
+        <div className="p-4 border-t border-gray-100 bg-white">
+          <div className="flex space-x-3">
+            <Button
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 py-3 rounded-2xl"
+            >
+              Hủy
+            </Button>
+            <Button
+              onClick={handleRequestSwap}
+              disabled={!selectedItem}
+              className="flex-1 bg-yellow-brand hover:bg-yellow-600 text-black font-semibold py-3 rounded-2xl"
+            >
+              Đề nghị trao đổi
+            </Button>
+          </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   );
 };
 
