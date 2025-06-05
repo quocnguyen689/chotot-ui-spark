@@ -1,7 +1,17 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { exchangeGroups } from '@/data/exchangeGroups';
+import { useQuery } from '@tanstack/react-query';
+import { fetchExchangeGroupsApi } from '@/services/exchangeGroupsApi';
+
+interface ExchangeGroup {
+  id: number;
+  name: string;
+  description: string;
+  memberCount: string;
+  image: string;
+  category: string;
+}
 
 interface CollectionGridProps {
   showAIEffects?: boolean;
@@ -10,9 +20,35 @@ interface CollectionGridProps {
 const CollectionGrid = ({ showAIEffects = false }: CollectionGridProps) => {
   const navigate = useNavigate();
 
+  const { data: exchangeGroups = [], isLoading, error } = useQuery({
+    queryKey: ['exchangeGroups'],
+    queryFn: fetchExchangeGroupsApi,
+  });
+
   const handleCollectionClick = (groupId: number) => {
     navigate(`/exchange/${groupId}/discover`);
   };
+
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-2 gap-3">
+        {[...Array(6)].map((_, index) => (
+          <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <div className="aspect-square bg-gray-200 animate-pulse"></div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    console.error('Error fetching exchange groups:', error);
+    return (
+      <div className="text-center py-8">
+        <p className="text-gray-500">Không thể tải dữ liệu. Vui lòng thử lại sau.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-2 gap-3">
