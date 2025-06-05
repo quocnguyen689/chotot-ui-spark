@@ -25,7 +25,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 max-w-sm mx-auto relative">
       {/* Pop-up Overlay */}
       {showPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md">
           <div className="bg-white rounded-2xl p-6 m-4 max-w-sm w-full relative shadow-2xl drop-shadow-2xl">
             {/* Close Button */}
             <button 
