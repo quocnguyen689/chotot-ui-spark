@@ -110,9 +110,8 @@ const ExchangeDiscover = () => {
 
         {/* Action Buttons */}
         <div className="absolute bottom-6 left-0 right-0 px-6 z-10" onClick={e => e.stopPropagation()}>
-          <p className="text-center text-gray-300 text-sm mb-4">
-            Vuốt trái để bỏ qua • Vuốt phải để thích • Nhấn để xem chi tiết
-          </p>
+          <p className="text-center text-gray-300 text-sm mb-4">Vuốt trái để bỏ qua • Vuốt phải để thích
+• Nhấn để xem chi tiết</p>
           <div className="flex items-center justify-center space-x-6">
             {/* Pass Button */}
             
