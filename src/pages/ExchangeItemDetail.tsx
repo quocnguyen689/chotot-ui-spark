@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { X, MapPin, User, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import SwapOfferModal from '@/components/SwapOfferModal';
 
 const ExchangeItemDetail = () => {
@@ -24,21 +26,53 @@ const ExchangeItemDetail = () => {
         id: 1,
         item: 'Loa Bluetooth',
         owner: 'TechLover',
-        timeAgo: '2 giờ trước'
+        timeAgo: '2 giờ trước',
+        thumbnail: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop',
+        status: 'pending'
       },
       {
         id: 2,
         item: 'Máy ảnh Retro',
         owner: 'VintageHunter',
-        timeAgo: '5 giờ trước'
+        timeAgo: '5 giờ trước',
+        thumbnail: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop',
+        status: 'accepted'
       },
       {
         id: 3,
         item: 'Bộ sách thiết kế',
         owner: 'BookWorm',
-        timeAgo: '1 ngày trước'
+        timeAgo: '1 ngày trước',
+        thumbnail: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
+        status: 'rejected'
       }
     ]
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-700';
+      case 'accepted':
+        return 'bg-green-100 text-green-700';
+      case 'rejected':
+        return 'bg-red-100 text-red-700';
+      default:
+        return 'bg-gray-100 text-gray-700';
+    }
+  };
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'pending':
+        return 'Đang chờ';
+      case 'accepted':
+        return 'Đã chấp nhận';
+      case 'rejected':
+        return 'Đã từ chối';
+      default:
+        return 'Không xác định';
+    }
   };
 
   const handleMakeOffer = () => {
@@ -111,14 +145,31 @@ const ExchangeItemDetail = () => {
 
           {/* Recent Offers Section */}
           <div className="space-y-4">
-            <h2 className="text-lg font-bold text-gray-900">Lời đề nghị gần đây</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-bold text-gray-900">Lời đề nghị gần đây</h2>
+              <div className="bg-amber-100 px-3 py-1 rounded-full">
+                <span className="text-amber-700 text-sm font-medium">Tổng: {itemDetail.offersCount}</span>
+              </div>
+            </div>
             
             <div className="space-y-3">
               {itemDetail.recentOffers.map((offer) => (
                 <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <div className="space-y-1">
-                    <h3 className="font-medium text-gray-900">{offer.item}</h3>
-                    <p className="text-sm text-gray-600">bởi {offer.owner} • {offer.timeAgo}</p>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src={offer.thumbnail} 
+                        alt={offer.item}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-medium text-gray-900">{offer.item}</h3>
+                      <p className="text-sm text-gray-600">bởi {offer.owner} • {offer.timeAgo}</p>
+                      <Badge className={`text-xs ${getStatusColor(offer.status)}`}>
+                        {getStatusText(offer.status)}
+                      </Badge>
+                    </div>
                   </div>
                   <button 
                     onClick={() => handleViewOffer(offer.id)} 
