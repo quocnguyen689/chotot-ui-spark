@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Camera, Plus, X } from 'lucide-react';
@@ -5,25 +6,36 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+
 const PostForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const category = location.state?.category || 'Chưa chọn danh mục';
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     price: '',
     condition: 'Đã sử dụng',
-    freeGiveaway: false,
-    giveAway: false,
-    forSale: false
+    postType: [] as string[] // Changed to array to allow multiple selections
   });
+
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
+
+  const handlePostTypeChange = (type: string) => {
+    setFormData(prev => ({
+      ...prev,
+      postType: prev.postType.includes(type)
+        ? prev.postType.filter(t => t !== type)
+        : [...prev.postType, type]
+    }));
+  };
+
   const handleSubmit = () => {
     console.log('Posting item:', {
       category,
@@ -31,7 +43,15 @@ const PostForm = () => {
     });
     navigate('/exchange');
   };
-  return <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+
+  const postTypeOptions = [
+    { id: 'exchange', label: 'Trao đổi' },
+    { id: 'giveaway', label: 'Cho tặng' },
+    { id: 'sell', label: 'Bán' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
       <div className="p-4 flex items-center justify-center relative bg-white">
         <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
@@ -50,7 +70,7 @@ const PostForm = () => {
           <div className="mt-2 text-sm text-gray-900">Giải trí, Thể thao, Sở thích - Sách</div>
         </div>
 
-        {/* Photo Upload Section - Moved to top */}
+        {/* Photo Upload Section */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <h3 className="font-bold text-gray-700 mb-4">THÔNG TIN CHI TIẾT</h3>
           <p className="text-sm text-gray-600 mb-4">
@@ -67,7 +87,7 @@ const PostForm = () => {
               
               {/* Uploaded Images */}
               <div className="relative aspect-square rounded-lg overflow-hidden">
-                <img alt="Uploaded product" src="/lovable-uploads/8bb782bc-9971-4492-a1bd-566fb74c9978.png" className="w-full h-full object-fill text-xs" />
+                <img alt="Uploaded product" src="/lovable-uploads/8bb782bc-9971-4492-a1bd-566fb74c9978.png" className="w-full h-full object-fill" />
                 <button className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center">
                   <X className="w-3 h-3 text-white" />
                 </button>
@@ -98,37 +118,43 @@ const PostForm = () => {
           </div>
         </div>
 
-        {/* Exchange Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 py-[16px] my-[16px]">
-          <label className="flex items-center space-x-3">
-            <input type="checkbox" checked={formData.freeGiveaway} onChange={e => handleInputChange('freeGiveaway', e.target.checked)} className="w-4 h-4" />
-            <span className="text-gray-900">Tôi muốn trao đổi</span>
-          </label>
-        </div>
-
-        {/* Give Away Option */}
+        {/* Post Type Selection - Merged Section with Chips */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <label className="flex items-center space-x-3">
-            <input type="checkbox" checked={formData.giveAway} onChange={e => handleInputChange('giveAway', e.target.checked)} className="w-4 h-4" />
-            <span className="text-gray-900">Tôi muốn cho tặng</span>
-          </label>
+          <Label className="text-gray-600 mb-3 block">
+            Loại tin đăng <span className="text-red-500">*</span>
+          </Label>
+          <div className="flex flex-wrap gap-2">
+            {postTypeOptions.map((option) => (
+              <button
+                key={option.id}
+                onClick={() => handlePostTypeChange(option.id)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  formData.postType.includes(option.id)
+                    ? 'bg-yellow-brand text-black'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* For Sale Option */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <label className="flex items-center space-x-3">
-            <input type="checkbox" checked={formData.forSale} onChange={e => handleInputChange('forSale', e.target.checked)} className="w-4 h-4" />
-            <span className="text-gray-900">Tôi muốn bán</span>
-          </label>
-        </div>
-
-        {/* Price Input */}
-        {!formData.freeGiveaway && <div className="bg-white rounded-lg border border-gray-200 p-4">
+        {/* Price Input - Only show if "sell" is selected */}
+        {formData.postType.includes('sell') && (
+          <div className="bg-white rounded-lg border border-gray-200 p-4">
             <Label className="text-gray-600 mb-3 block">
               Giá bán <span className="text-red-500">*</span>
             </Label>
-            <Input type="text" value={formData.price} onChange={e => handleInputChange('price', e.target.value)} className="w-full" placeholder="Nhập giá bán" />
-          </div>}
+            <Input 
+              type="text" 
+              value={formData.price} 
+              onChange={e => handleInputChange('price', e.target.value)} 
+              className="w-full" 
+              placeholder="Nhập giá bán" 
+            />
+          </div>
+        )}
 
         {/* Title and Description Section */}
         <div className="rounded-lg px-[16px] my-[16px] bg-white border border-gray-200 p-4">
@@ -178,6 +204,8 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PostForm;
