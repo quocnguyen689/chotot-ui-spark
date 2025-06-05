@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Heart, MapPin, X, HelpCircle, Share } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, X, HelpCircle, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -123,7 +123,7 @@ const ExchangeDiscover = () => {
               </span>
             </div>
             <button onClick={handleShare} className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all duration-200 hover:bg-black/60">
-              <Share className="w-5 h-5 text-white" />
+              <Share2 className="w-5 h-5 text-white" />
             </button>
           </div>
         </div>
