@@ -4,11 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search, MapPin, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Input } from '@/components/ui/input';
 
 const ExchangeZone = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
 
   const exchangeGroups = [
     {
@@ -65,11 +63,6 @@ const ExchangeZone = () => {
     navigate(`/exchange/${groupId}/discover`);
   };
 
-  const filteredGroups = exchangeGroups.filter(group =>
-    group.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    group.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
     <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
       {/* Header */}
@@ -78,22 +71,12 @@ const ExchangeZone = () => {
           <ArrowLeft className="w-5 h-5 text-gray-700" />
         </button>
         <h1 className="text-lg font-semibold text-gray-900">Khu vực trao đổi</h1>
-        <div className="w-9"></div>
+        <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <Search className="w-5 h-5 text-gray-700" />
+        </button>
       </div>
 
       <div className="px-4 py-6 space-y-6">
-        {/* Search Box */}
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <Input
-            type="text"
-            placeholder="Tìm kiếm danh mục..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 py-3 rounded-xl border-gray-200 focus:border-yellow-400 focus:ring-yellow-400/20"
-          />
-        </div>
-
         {/* Tabs */}
         <Tabs defaultValue="foryou" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-gray-100 rounded-xl p-1">
@@ -132,7 +115,7 @@ const ExchangeZone = () => {
               <h3 className="text-lg font-bold text-gray-900">Danh mục được đề xuất</h3>
               
               <div className="grid grid-cols-2 gap-3">
-                {filteredGroups.map((group) => (
+                {exchangeGroups.map((group) => (
                   <div 
                     key={group.id}
                     className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-all duration-300 hover:-translate-y-1"
@@ -175,7 +158,7 @@ const ExchangeZone = () => {
               <h3 className="text-lg font-bold text-gray-900">Danh mục phổ biến</h3>
               
               <div className="grid grid-cols-2 gap-3">
-                {filteredGroups.map((group) => (
+                {exchangeGroups.map((group) => (
                   <div 
                     key={group.id}
                     className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-all duration-300 hover:-translate-y-1"
