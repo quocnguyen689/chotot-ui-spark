@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MapPin, User, ChevronRight, ChevronLeft, MessageCircle, ThumbsUp, Heart, Smile, Send, DollarSign } from 'lucide-react';
+import { MapPin, User, ChevronRight, ChevronLeft, MessageCircle, ThumbsUp, Heart, Smile, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
@@ -17,7 +17,6 @@ const ExchangeItemDetail = () => {
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [commentText, setCommentText] = useState('');
-  const [offerPrice, setOfferPrice] = useState('');
   const [offerCounts, setOfferCounts] = useState({
     pending: 5,
     accepted: 3,
@@ -147,7 +146,7 @@ const ExchangeItemDetail = () => {
     return offerCounts[status as keyof typeof offerCounts] || 0;
   };
   const handleMakeOffer = () => {
-    console.log('Make offer for item:', itemDetail.id, 'with price:', offerPrice);
+    console.log('Make offer for item:', itemDetail.id);
     setIsSwapModalOpen(true);
   };
   const handleViewOffer = (offerId: number) => {
@@ -278,27 +277,6 @@ const ExchangeItemDetail = () => {
                       </div>
                     </div>)}
                 </div>}
-            </div>
-
-            {/* Price Offer Section */}
-            <div className="bg-white rounded-2xl p-4 shadow-sm space-y-4">
-              <h2 className="text-lg font-semibold text-gray-900">Đề nghị giá trao đổi</h2>
-              <div className="flex space-x-3">
-                <div className="flex-1 relative">
-                  <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                  <Input
-                    type="number"
-                    value={offerPrice}
-                    onChange={(e) => setOfferPrice(e.target.value)}
-                    placeholder="Nhập giá đề nghị..."
-                    className="pl-10 rounded-xl border-gray-200"
-                  />
-                </div>
-                <span className="flex items-center text-gray-500 text-sm">VND</span>
-              </div>
-              <p className="text-xs text-gray-500">
-                Đưa ra mức giá bạn sẵn sàng trả để trao đổi món đồ này
-              </p>
             </div>
 
             {/* CTA Button */}
