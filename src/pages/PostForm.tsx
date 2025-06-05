@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, Camera, Plus, X, Upload } from 'lucide-react';
+import { ArrowLeft, Camera, Plus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -20,8 +19,6 @@ const PostForm = () => {
     postType: 'exchange' // 'exchange', 'giveaway', 'sale'
   });
 
-  const [isUploadPopupOpen, setIsUploadPopupOpen] = useState(false);
-
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
@@ -35,14 +32,6 @@ const PostForm = () => {
       ...formData
     });
     navigate('/exchange');
-  };
-
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      console.log('Images uploaded:', files);
-      setIsUploadPopupOpen(false);
-    }
   };
 
   return (
@@ -76,12 +65,9 @@ const PostForm = () => {
           <div className="space-y-4">
             <div className="grid grid-cols-4 gap-2">
               {/* Add Photo Button */}
-              <button 
-                onClick={() => setIsUploadPopupOpen(true)}
-                className="aspect-square border-2 border-dashed border-yellow-400 rounded-lg flex items-center justify-center bg-primary-DEFAULT hover:bg-yellow-50 transition-colors"
-              >
-                <Plus className="w-6 h-6 text-yellow-600" />
-              </button>
+              <div className="aspect-square border-2 border-dashed border-yellow-400 rounded-lg flex items-center justify-center bg-primary-DEFAULT">
+                <Plus className="w-6 h-6 text-yellow-600 bg-primary-DEFAULT" />
+              </div>
               
               {/* Uploaded Images */}
               <div className="relative aspect-square rounded-lg overflow-hidden">
@@ -228,67 +214,6 @@ const PostForm = () => {
           </Button>
         </div>
       </div>
-
-      {/* Image Upload Popup Overlay */}
-      {isUploadPopupOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-sm p-6 relative animate-scale-in">
-            {/* Close Button */}
-            <button 
-              onClick={() => setIsUploadPopupOpen(false)}
-              className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
-            >
-              <X className="w-6 h-6 text-gray-600" />
-            </button>
-
-            {/* Header */}
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-yellow-brand rounded-full flex items-center justify-center mx-auto mb-4">
-                <Upload className="w-8 h-8 text-black" />
-              </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Tải ảnh lên</h2>
-              <p className="text-sm text-gray-600">Chọn ảnh từ thiết bị của bạn</p>
-            </div>
-
-            {/* Upload Area */}
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-6 hover:border-yellow-400 transition-colors">
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="hidden"
-                id="image-upload"
-              />
-              <label 
-                htmlFor="image-upload" 
-                className="cursor-pointer block"
-              >
-                <Camera className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                <p className="text-sm text-gray-600 mb-2">Nhấn để chọn ảnh</p>
-                <p className="text-xs text-gray-500">Hỗ trợ JPG, PNG (tối đa 5 ảnh)</p>
-              </label>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex space-x-3">
-              <Button 
-                variant="outline" 
-                onClick={() => setIsUploadPopupOpen(false)}
-                className="flex-1"
-              >
-                Hủy
-              </Button>
-              <Button 
-                onClick={() => document.getElementById('image-upload')?.click()}
-                className="flex-1 bg-yellow-brand text-black hover:bg-yellow-brand/90"
-              >
-                Chọn ảnh
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
