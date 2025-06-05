@@ -1,12 +1,43 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Search, MapPin, Heart, Sparkles } from 'lucide-react';
+import { ArrowLeft, Search, MapPin, Heart, Sparkles, TrendingUp, Eye, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const ExchangeZone = () => {
   const navigate = useNavigate();
+  
+  const trendingItems = [
+    {
+      id: 1,
+      title: 'iPhone 14 Pro Max',
+      category: 'Công nghệ',
+      views: '2.4k',
+      exchanges: '156',
+      image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop',
+      trend: '+23%'
+    },
+    {
+      id: 2,
+      title: 'Túi Chanel Vintage',
+      category: 'Thời trang',
+      views: '1.8k',
+      exchanges: '89',
+      image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=300&fit=crop',
+      trend: '+18%'
+    },
+    {
+      id: 3,
+      title: 'MacBook Air M2',
+      category: 'Công nghệ',
+      views: '3.1k',
+      exchanges: '203',
+      image: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop',
+      trend: '+31%'
+    }
+  ];
+
   const exchangeGroups = [
     {
       id: 1,
@@ -79,6 +110,78 @@ const ExchangeZone = () => {
       </div>
 
       <div className="px-4 space-y-6 py-0">
+        {/* Trending Section */}
+        <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-3xl p-6 mt-4 relative overflow-hidden">
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
+            <div className="absolute top-32 right-8 w-16 h-16 bg-white/10 rounded-full animate-bounce"></div>
+            <div className="absolute bottom-20 left-6 w-12 h-12 bg-white/10 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute top-20 right-20 w-8 h-8 bg-white/20 rounded-full animate-ping"></div>
+            <div className="absolute bottom-10 right-16 w-6 h-6 bg-white/20 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }}></div>
+            
+            {/* Moving illustration elements */}
+            <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
+              <div className="relative">
+                <TrendingUp className="w-12 h-12 text-white/30 animate-bounce" style={{ animationDelay: '2s' }} />
+                <div className="absolute inset-0 w-12 h-12 bg-white/10 rounded-full animate-ping" style={{ animationDelay: '2s' }}></div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="relative">
+                <TrendingUp className="w-6 h-6 text-white animate-pulse" />
+                <div className="absolute inset-0 w-6 h-6 bg-white/20 rounded-full animate-ping"></div>
+              </div>
+              <h2 className="text-xl font-bold text-white">Xu hướng trao đổi</h2>
+              <div className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full">
+                <span className="text-white text-sm font-medium animate-pulse">HOT</span>
+              </div>
+            </div>
+            
+            <p className="text-white/90 text-sm mb-6 leading-relaxed">
+              Khám phá những món đồ được trao đổi nhiều nhất tuần này
+            </p>
+            
+            {/* Trending Items Carousel */}
+            <div className="flex space-x-3 overflow-x-auto pb-2 scrollbar-hide">
+              {trendingItems.map((item, index) => (
+                <div 
+                  key={item.id} 
+                  className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-2xl p-4 min-w-[200px] border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 cursor-pointer"
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                >
+                  <div className="aspect-square bg-white/20 rounded-xl mb-3 overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                  
+                  <h4 className="font-semibold text-white text-sm mb-2 line-clamp-2">
+                    {item.title}
+                  </h4>
+                  
+                  <div className="flex items-center justify-between text-xs text-white/80">
+                    <div className="flex items-center space-x-1">
+                      <Eye className="w-3 h-3" />
+                      <span>{item.views}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Star className="w-3 h-3 text-yellow-300 animate-pulse" />
+                      <span className="text-green-300 font-medium">{item.trend}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Tabs */}
         <Tabs defaultValue="foryou" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-gray-100 rounded-xl p-1">
