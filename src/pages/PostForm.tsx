@@ -51,7 +51,7 @@ const PostForm = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto pb-24">
       {/* Header */}
       <div className="p-4 flex items-center justify-center relative bg-white">
         <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
@@ -193,9 +193,11 @@ const PostForm = () => {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Action Buttons */}
-        <div className="flex space-x-2 pb-20">
+      {/* Fixed Floating Action Buttons */}
+      <div className="fixed bottom-0 left-0 right-0 max-w-sm mx-auto bg-white border-t border-gray-200 p-4">
+        <div className="flex space-x-2">
           <Button variant="outline" onClick={() => navigate('/')} className="flex-1 py-3 text-gray-900 border-gray-300">
             Xem trước
           </Button>
