@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { X, MapPin, User, ChevronRight, ChevronLeft } from 'lucide-react';
@@ -101,8 +102,7 @@ const ExchangeItemDetail = () => {
     <>
       <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
-          <h1 className="text-lg font-semibold text-gray-900">{itemDetail.title}</h1>
+        <div className="flex items-center justify-end p-4 border-b border-gray-100 bg-white">
           <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
             <X className="w-5 h-5 text-gray-600" />
           </button>
@@ -150,6 +150,11 @@ const ExchangeItemDetail = () => {
                 ))}
               </div>
             )}
+          </div>
+
+          {/* Title */}
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">{itemDetail.title}</h1>
           </div>
 
           {/* Description */}
