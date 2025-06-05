@@ -51,9 +51,9 @@ const ExchangeItemDetail = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-50 text-yellow-700 border border-yellow-200 shadow-sm';
+        return 'bg-orange-50 text-orange-800 border border-orange-200 shadow-sm';
       case 'accepted':
-        return 'bg-green-50 text-green-700 border border-green-200 shadow-sm';
+        return 'bg-orange-50 text-orange-800 border border-orange-200 shadow-sm';
       case 'rejected':
         return 'bg-gray-50 text-gray-600 border border-gray-200 shadow-sm';
       default:
