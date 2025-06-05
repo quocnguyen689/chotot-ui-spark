@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MapPin, User, ChevronRight, ChevronLeft, Plus } from 'lucide-react';
+import { MapPin, User, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import SwapOfferModal from '@/components/SwapOfferModal';
-
 const ExchangeItemDetail = () => {
   const navigate = useNavigate();
   const {
@@ -66,7 +65,6 @@ const ExchangeItemDetail = () => {
       status: 'rejected'
     }]
   };
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -110,11 +108,6 @@ const ExchangeItemDetail = () => {
   const handleClose = () => {
     navigate(-1);
   };
-
-  const handleAddItem = () => {
-    navigate('/post/form');
-  };
-
   return <>
       <Sheet open={true} onOpenChange={handleClose}>
         <SheetContent side="bottom" className="h-[90vh] max-w-sm mx-auto p-0 overflow-y-auto">
@@ -170,19 +163,6 @@ const ExchangeItemDetail = () => {
               </div>
             </div>
 
-            {/* Add Item Section */}
-            <div className="bg-white rounded-2xl p-4 shadow-sm">
-              <button 
-                onClick={handleAddItem}
-                className="w-full flex items-center justify-center space-x-3 p-4 border-2 border-dashed border-yellow-400 rounded-xl hover:border-yellow-500 hover:bg-yellow-50 transition-colors"
-              >
-                <div className="w-12 h-12 bg-yellow-brand rounded-full flex items-center justify-center">
-                  <Plus className="w-6 h-6 text-black" />
-                </div>
-                <span className="text-gray-700 font-medium">Thêm món đồ để trao đổi</span>
-              </button>
-            </div>
-
             {/* CTA Button */}
             <Button onClick={handleMakeOffer} className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-4 rounded-2xl font-medium transition-colors">
               Đưa ra lời đề nghị
@@ -235,5 +215,4 @@ const ExchangeItemDetail = () => {
     }} />
     </>;
 };
-
 export default ExchangeItemDetail;
