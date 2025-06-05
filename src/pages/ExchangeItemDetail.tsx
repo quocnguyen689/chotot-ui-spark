@@ -99,9 +99,7 @@ const ExchangeItemDetail = () => {
             <div className="bg-yellow-light px-3 py-1 rounded-full">
               <span className="text-sm font-medium text-amber-500">{itemDetail.category}</span>
             </div>
-            <div className="bg-green-100 px-3 py-1 rounded-full">
-              <span className="text-green-600 text-sm font-medium">{itemDetail.offersCount} lời đề nghị</span>
-            </div>
+            
           </div>
 
           {/* Description */}
