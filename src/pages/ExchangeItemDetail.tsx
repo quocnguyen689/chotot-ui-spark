@@ -79,17 +79,19 @@ const ExchangeItemDetail = () => {
     }
   };
   const getStatusText = (status: string) => {
-    const count = offerCounts[status as keyof typeof offerCounts] || 0;
     switch (status) {
       case 'pending':
-        return `Đang chờ (${count})`;
+        return 'Đang chờ';
       case 'accepted':
-        return `Đang chờ (${count})`;
+        return 'Đang chờ';
       case 'rejected':
-        return `Đã từ chối (${count})`;
+        return 'Đã từ chối';
       default:
         return 'Không xác định';
     }
+  };
+  const getOfferCount = (status: string) => {
+    return offerCounts[status as keyof typeof offerCounts] || 0;
   };
   const handleMakeOffer = () => {
     console.log('Make offer for item:', itemDetail.id);
@@ -186,9 +188,14 @@ const ExchangeItemDetail = () => {
                       <div className="space-y-1">
                         <h3 className="font-medium text-gray-900 text-sm">{offer.item}</h3>
                         <p className="text-xs text-gray-500">bởi {offer.owner} • {offer.timeAgo}</p>
-                        <Badge className={`text-xs ${getStatusColor(offer.status)}`}>
-                          {getStatusText(offer.status)}
-                        </Badge>
+                        <div className="flex items-center space-x-2">
+                          <Badge className={`text-xs ${getStatusColor(offer.status)}`}>
+                            {getStatusText(offer.status)}
+                          </Badge>
+                          <span className="text-xs text-gray-600">
+                            {getOfferCount(offer.status)} đề nghị trao đổi
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <button onClick={() => handleViewOffer(offer.id)} className="p-2 hover:bg-gray-200 rounded-full transition-colors">
