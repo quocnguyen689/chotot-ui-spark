@@ -1,18 +1,18 @@
+
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { X, MapPin, User, ArrowRight } from 'lucide-react';
+import { X, MapPin, User, ArrowRight, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import SwapOfferModal from '@/components/SwapOfferModal';
+
 const ExchangeItemDetail = () => {
   const navigate = useNavigate();
-  const {
-    groupId,
-    itemId
-  } = useParams();
+  const { groupId, itemId } = useParams();
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Sample data - in real app this would come from API
+  // Sample data with multiple images for the jacket
   const itemDetail = {
     id: 1,
     title: 'Áo khoác Denim Vintage',
@@ -20,43 +20,54 @@ const ExchangeItemDetail = () => {
     description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
     location: 'Trung tâm, cách 2km',
     owner: 'StyleSeeker',
-    image: '/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png',
+    images: [
+      '/lovable-uploads/54e9d8b5-fb47-4c2e-885c-046ff5d579da.png',
+      'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop'
+    ],
     offersCount: 3,
-    recentOffers: [{
-      id: 1,
-      item: 'Loa Bluetooth',
-      owner: 'TechLover',
-      timeAgo: '2 giờ trước',
-      thumbnail: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop',
-      status: 'pending'
-    }, {
-      id: 2,
-      item: 'Máy ảnh Retro',
-      owner: 'VintageHunter',
-      timeAgo: '5 giờ trước',
-      thumbnail: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop',
-      status: 'accepted'
-    }, {
-      id: 3,
-      item: 'Bộ sách thiết kế',
-      owner: 'BookWorm',
-      timeAgo: '1 ngày trước',
-      thumbnail: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
-      status: 'rejected'
-    }]
+    recentOffers: [
+      {
+        id: 1,
+        item: 'Loa Bluetooth',
+        owner: 'TechLover',
+        timeAgo: '2 giờ trước',
+        thumbnail: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop',
+        status: 'pending'
+      },
+      {
+        id: 2,
+        item: 'Máy ảnh Retro',
+        owner: 'VintageHunter',
+        timeAgo: '5 giờ trước',
+        thumbnail: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop',
+        status: 'accepted'
+      },
+      {
+        id: 3,
+        item: 'Bộ sách thiết kế',
+        owner: 'BookWorm',
+        timeAgo: '1 ngày trước',
+        thumbnail: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
+        status: 'rejected'
+      }
+    ]
   };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-700';
+        return 'bg-gray-100 text-gray-600';
       case 'accepted':
-        return 'bg-green-100 text-green-700';
+        return 'bg-gray-100 text-gray-600';
       case 'rejected':
-        return 'bg-red-100 text-red-700';
+        return 'bg-gray-100 text-gray-600';
       default:
-        return 'bg-gray-100 text-gray-700';
+        return 'bg-gray-100 text-gray-600';
     }
   };
+
   const getStatusText = (status: string) => {
     switch (status) {
       case 'pending':
@@ -69,103 +80,159 @@ const ExchangeItemDetail = () => {
         return 'Không xác định';
     }
   };
+
   const handleMakeOffer = () => {
     console.log('Make offer for item:', itemDetail.id);
     setIsSwapModalOpen(true);
   };
+
   const handleViewOffer = (offerId: number) => {
     console.log('View offer:', offerId);
-    // Navigate to offer details
   };
-  return <>
-      <div className="min-h-screen bg-white max-w-sm mx-auto">
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % itemDetail.images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + itemDetail.images.length) % itemDetail.images.length);
+  };
+
+  return (
+    <>
+      <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 py-[16px]">
-          <h1 className="text-lg font-bold text-gray-900">{itemDetail.title}</h1>
-          <button onClick={() => navigate(-1)} className="p-2">
-            <X className="w-6 h-6 text-gray-700" />
+        <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
+          <h1 className="text-lg font-semibold text-gray-900">{itemDetail.title}</h1>
+          <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <X className="w-5 h-5 text-gray-600" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-4 space-y-6 py-[16px]">
-          {/* Image */}
-          <div className="w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
-            <img src={itemDetail.image} alt={itemDetail.title} className="w-full h-full object-cover" />
-          </div>
+        <div className="p-4 space-y-5">
+          {/* Image Carousel */}
+          <div className="relative w-full h-72 bg-white rounded-2xl overflow-hidden shadow-sm">
+            <img 
+              src={itemDetail.images[currentImageIndex]} 
+              alt={itemDetail.title} 
+              className="w-full h-full object-cover" 
+            />
+            
+            {/* Navigation buttons */}
+            {itemDetail.images.length > 1 && (
+              <>
+                <button
+                  onClick={prevImage}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4 text-gray-700" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors"
+                >
+                  <ChevronRight className="w-4 h-4 text-gray-700" />
+                </button>
+              </>
+            )}
 
-          {/* Category and Offers */}
-          <div className="flex items-center justify-between">
-            
-            
+            {/* Image indicators */}
+            {itemDetail.images.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1">
+                {itemDetail.images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Description */}
-          <div>
-            <p className="text-gray-700 leading-relaxed">
+          <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <p className="text-gray-700 leading-relaxed text-sm">
               {itemDetail.description}
             </p>
           </div>
 
           {/* Location and Owner */}
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <div className="flex items-center space-x-1">
-              <MapPin className="w-4 h-4" />
-              <span>{itemDetail.location}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <User className="w-4 h-4" />
-              <span>{itemDetail.owner}</span>
+          <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <div className="flex items-center justify-between text-sm text-gray-600">
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-4 h-4" />
+                <span>{itemDetail.location}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <User className="w-4 h-4" />
+                <span>{itemDetail.owner}</span>
+              </div>
             </div>
           </div>
 
           {/* CTA Button */}
-          <div className="py-4">
-            <Button onClick={handleMakeOffer} className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-3 rounded-lg font-semibold flex items-center justify-center space-x-2">
-              <ArrowRight className="w-5 h-5" />
-              <span>Đưa ra lời đề nghị</span>
-            </Button>
-          </div>
+          <Button 
+            onClick={handleMakeOffer} 
+            className="w-full bg-gray-900 hover:bg-gray-800 text-white py-4 rounded-2xl font-medium transition-colors"
+          >
+            <ArrowRight className="w-5 h-5 mr-2" />
+            Đưa ra lời đề nghị
+          </Button>
 
           {/* Recent Offers Section */}
-          <div className="space-y-4">
+          <div className="bg-white rounded-2xl p-4 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-gray-900">Lời đề nghị gần đây</h2>
-              <div className="px-3 py-1 bg-yellow-brand text-gray-950 text-base rounded-xl">
-                <span className="text-amber-700 text-sm font-medium">Tổng: {itemDetail.offersCount}</span>
+              <h2 className="text-lg font-semibold text-gray-900">Lời đề nghị gần đây</h2>
+              <div className="px-3 py-1.5 bg-gray-100 rounded-full">
+                <span className="text-gray-700 text-sm font-medium">{itemDetail.offersCount}</span>
               </div>
             </div>
             
             <div className="space-y-3">
-              {itemDetail.recentOffers.map(offer => <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              {itemDetail.recentOffers.map(offer => (
+                <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                    <div className="w-12 h-12 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                       <img src={offer.thumbnail} alt={offer.item} className="w-full h-full object-cover" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="font-medium text-gray-900">{offer.item}</h3>
-                      <p className="text-sm text-gray-600">bởi {offer.owner} • {offer.timeAgo}</p>
+                      <h3 className="font-medium text-gray-900 text-sm">{offer.item}</h3>
+                      <p className="text-xs text-gray-500">bởi {offer.owner} • {offer.timeAgo}</p>
                       <Badge className={`text-xs ${getStatusColor(offer.status)}`}>
                         {getStatusText(offer.status)}
                       </Badge>
                     </div>
                   </div>
-                  <button onClick={() => handleViewOffer(offer.id)} className="font-medium text-sm transition-colors text-amber-500">
-                    Xem
+                  <button 
+                    onClick={() => handleViewOffer(offer.id)} 
+                    className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+                  >
+                    <ChevronRight className="w-4 h-4 text-gray-600" />
                   </button>
-                </div>)}
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom spacing for fixed button */}
-        <div className="pb-20"></div>
+        {/* Bottom spacing */}
+        <div className="pb-6"></div>
       </div>
 
-      <SwapOfferModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} targetItem={{
-      title: itemDetail.title,
-      owner: itemDetail.owner
-    }} />
-    </>;
+      <SwapOfferModal 
+        isOpen={isSwapModalOpen} 
+        onClose={() => setIsSwapModalOpen(false)} 
+        targetItem={{
+          title: itemDetail.title,
+          owner: itemDetail.owner
+        }} 
+      />
+    </>
+  );
 };
+
 export default ExchangeItemDetail;
