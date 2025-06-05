@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import SwapOfferModal from '@/components/SwapOfferModal';
-
 const ExchangeItemDetail = () => {
   const navigate = useNavigate();
   const {
@@ -179,8 +178,7 @@ const ExchangeItemDetail = () => {
               </div>
               
               <div className="space-y-3">
-                {itemDetail.recentOffers.map(offer => (
-                  <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                {itemDetail.recentOffers.map(offer => <div key={offer.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                     <div className="flex items-center space-x-3">
                       <div className="w-20 h-20 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                         <img src={offer.thumbnail} alt={offer.item} className="w-full h-full object-cover" />
@@ -192,7 +190,7 @@ const ExchangeItemDetail = () => {
                           <Badge className={`text-xs ${getStatusColor(offer.status)}`}>
                             {getStatusText(offer.status)}
                           </Badge>
-                          <span className="text-xs text-gray-600">
+                          <span className="text-xs text-gray-600 mx-[8px]">
                             {getOfferCount(offer.status)} đề nghị
                           </span>
                         </div>
@@ -201,8 +199,7 @@ const ExchangeItemDetail = () => {
                     <button onClick={() => handleViewOffer(offer.id)} className="p-2 hover:bg-gray-200 rounded-full transition-colors">
                       <ChevronRight className="w-4 h-4 text-gray-600" />
                     </button>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
 
@@ -212,15 +209,10 @@ const ExchangeItemDetail = () => {
         </SheetContent>
       </Sheet>
 
-      <SwapOfferModal 
-        isOpen={isSwapModalOpen} 
-        onClose={() => setIsSwapModalOpen(false)} 
-        targetItem={{
-          title: itemDetail.title,
-          owner: itemDetail.owner
-        }} 
-      />
+      <SwapOfferModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} targetItem={{
+      title: itemDetail.title,
+      owner: itemDetail.owner
+    }} />
     </>;
 };
-
 export default ExchangeItemDetail;
