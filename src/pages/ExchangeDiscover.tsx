@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Heart, MapPin, X, HelpCircle, Share } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, X, HelpCircle, Share, MessageCircle, ThumbsUp, Smile } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -13,34 +13,63 @@ const ExchangeDiscover = () => {
   const [showHeartAnimation, setShowHeartAnimation] = useState(false);
 
   // Sample data - in real app this would come from API based on groupId
-  const items = [{
-    id: 1,
-    title: 'Áo khoác Denim Vintage',
-    description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
-    location: 'Trung tâm, cách 2km',
-    owner: 'StyleSeeker',
-    ownerAvatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face',
-    video: 'https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=400&h=600&fit=crop',
-    offers: 3
-  }, {
-    id: 2,
-    title: 'Túi xách da thật',
-    description: 'Túi xách da thật cao cấp, được bảo quản cẩn thận. Thiết kế thanh lịch và sang trọng.',
-    location: 'Quận 1, cách 1.5km',
-    owner: 'FashionLover',
-    ownerAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face',
-    video: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=600&fit=crop',
-    offers: 5
-  }, {
-    id: 3,
-    title: 'Giày sneaker limited',
-    description: 'Giày sneaker phiên bản giới hạn, chỉ đi vài lần. Còn nguyên hộp và phụ kiện.',
-    location: 'Quận 3, cách 3km',
-    owner: 'SneakerHead',
-    ownerAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face',
-    video: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=600&fit=crop',
-    offers: 2
-  }];
+  const items = [
+    {
+      id: 1,
+      title: 'Áo khoác Denim Vintage',
+      description: 'Áo khoác denim kinh điển thập niên 90 trong tình trạng tuyệt vời. Hoàn hảo để phối đồ!',
+      location: 'Trung tâm, cách 2km',
+      owner: 'StyleSeeker',
+      ownerAvatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face',
+      video: 'https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=400&h=600&fit=crop',
+      offers: 3,
+      comments: [
+        {
+          id: 1,
+          user: 'FashionFan',
+          avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face',
+          text: 'Tuyệt vời! Mình cũng có một chiếc tương tự',
+          time: '2 phút trước'
+        },
+        {
+          id: 2,
+          user: 'VintageCollector',
+          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face',
+          text: 'Kiểu dáng rất đẹp, chất liệu có vẻ bền',
+          time: '5 phút trước'
+        }
+      ],
+      reactions: {
+        likes: 24,
+        hearts: 18,
+        smiles: 12
+      }
+    },
+    {
+      id: 2,
+      title: 'Túi xách da thật',
+      description: 'Túi xách da thật cao cấp, được bảo quản cẩn thận. Thiết kế thanh lịch và sang trọng.',
+      location: 'Quận 1, cách 1.5km',
+      owner: 'FashionLover',
+      ownerAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face',
+      video: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=600&fit=crop',
+      offers: 5,
+      comments: [],
+      reactions: { likes: 15, hearts: 8, smiles: 5 }
+    },
+    {
+      id: 3,
+      title: 'Giày sneaker limited',
+      description: 'Giày sneaker phiên bản giới hạn, chỉ đi vài lần. Còn nguyên hộp và phụ kiện.',
+      location: 'Quận 3, cách 3km',
+      owner: 'SneakerHead',
+      ownerAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face',
+      video: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=600&fit=crop',
+      offers: 2,
+      comments: [],
+      reactions: { likes: 32, hearts: 21, smiles: 9 }
+    }
+  ];
   const currentItem = items[currentIndex];
   const handlePass = () => {
     if (currentIndex < items.length - 1) {
@@ -135,7 +164,7 @@ const ExchangeDiscover = () => {
           </div>
 
           {/* Item Info */}
-          <div className="absolute bottom-36 left-0 right-0 px-6 text-white z-10">
+          <div className="absolute bottom-80 left-0 right-0 px-6 text-white z-10">
             <h1 className="text-2xl font-bold mb-3 tracking-tight leading-tight">
               {currentItem.title}
             </h1>
@@ -160,6 +189,54 @@ const ExchangeDiscover = () => {
               <MapPin className="w-4 h-4 text-white/90" />
               <span className="text-white/90 text-sm font-medium">{currentItem.location}</span>
             </div>
+          </div>
+
+          {/* Comments and Emotions Section */}
+          <div className="absolute bottom-36 left-0 right-0 px-6 text-white z-10 max-h-40 overflow-y-auto" onClick={e => e.stopPropagation()}>
+            {/* Reactions */}
+            <div className="flex items-center space-x-4 mb-4 bg-black/40 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/10">
+              <div className="flex items-center space-x-1">
+                <ThumbsUp className="w-4 h-4 text-blue-400" />
+                <span className="text-white/90 text-sm">{currentItem.reactions.likes}</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <Heart className="w-4 h-4 text-red-400" />
+                <span className="text-white/90 text-sm">{currentItem.reactions.hearts}</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <Smile className="w-4 h-4 text-yellow-400" />
+                <span className="text-white/90 text-sm">{currentItem.reactions.smiles}</span>
+              </div>
+              <div className="flex items-center space-x-1 ml-auto">
+                <MessageCircle className="w-4 h-4 text-white/70" />
+                <span className="text-white/70 text-sm">{currentItem.comments.length}</span>
+              </div>
+            </div>
+
+            {/* Comments */}
+            {currentItem.comments.length > 0 && (
+              <div className="space-y-3">
+                {currentItem.comments.map((comment) => (
+                  <div key={comment.id} className="bg-black/40 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                    <div className="flex items-start space-x-3">
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src={comment.avatar} alt={comment.user} />
+                        <AvatarFallback className="w-8 h-8 text-xs bg-white/20">
+                          {comment.user.charAt(0)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-2 mb-1">
+                          <span className="text-white/90 text-sm font-medium">{comment.user}</span>
+                          <span className="text-white/50 text-xs">{comment.time}</span>
+                        </div>
+                        <p className="text-white/80 text-sm leading-relaxed">{comment.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Action Buttons */}
