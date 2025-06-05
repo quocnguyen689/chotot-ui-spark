@@ -17,7 +17,7 @@ const PostForm = () => {
     description: '',
     price: '',
     condition: 'Đã sử dụng',
-    postType: [] as string[] // Changed to array to allow multiple selections
+    postType: [] as string[]
   });
 
   const handleInputChange = (field: string, value: string | boolean) => {
@@ -51,7 +51,7 @@ const PostForm = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto">
+    <div className="min-h-screen bg-gray-50 max-w-sm mx-auto relative">
       {/* Header */}
       <div className="p-4 flex items-center justify-center relative bg-white">
         <button onClick={() => navigate('/post/category')} className="absolute left-4 p-2">
@@ -60,7 +60,7 @@ const PostForm = () => {
         <h1 className="text-lg font-bold text-black text-center">Đăng tin với AI</h1>
       </div>
 
-      <div className="p-4 space-y-6 py-[16px]">
+      <div className="p-4 space-y-6 py-[16px] pb-32">
         {/* Category Display */}
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
@@ -193,9 +193,11 @@ const PostForm = () => {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Action Buttons */}
-        <div className="flex space-x-2 pb-20">
+      {/* Floating Action Buttons */}
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-sm bg-white border-t border-gray-200 p-4 shadow-lg">
+        <div className="flex space-x-2">
           <Button variant="outline" onClick={() => navigate('/')} className="flex-1 py-3 text-gray-900 border-gray-300">
             Xem trước
           </Button>
