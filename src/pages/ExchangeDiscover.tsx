@@ -117,12 +117,12 @@ const ExchangeDiscover = () => {
             
 
             {/* Like Button */}
-            <button onClick={handleLike} className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-colors bg-yellow-brand">
+            <button onClick={handleLike} className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-colors bg-black/[0.31]">
               <Heart className="w-6 h-6 text-white" />
             </button>
 
             {/* Swap Button */}
-            <button onClick={handleSwap} className="bg-yellow-brand px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-yellow-brand/90 transition-colors text-white">
+            <button onClick={handleSwap} className="bg-yellow-brand px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-yellow-brand/90 transition-colors text-gray-950">
               Trao đổi
             </button>
           </div>
