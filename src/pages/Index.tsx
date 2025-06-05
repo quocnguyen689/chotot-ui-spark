@@ -14,51 +14,37 @@ const Index = () => {
     setShowPopup(false);
   };
 
-  const handleCTAClick = () => {
-    // Navigate to exchange zone or handle CTA action
-    window.location.href = '/exchange';
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 max-w-sm mx-auto relative">
       {/* Pop-up Overlay */}
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="p-6 m-4 max-w-sm w-full relative drop-shadow-2xl px-[16px] py-[16px] rounded-3xl bg-transparent">
+          <div className="bg-white rounded-2xl p-8 m-4 max-w-sm w-full relative shadow-2xl">
             {/* Close Button */}
-            <button
+            <button 
               onClick={closePopup}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-10 px-0 bg-white"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
             >
               <X className="w-5 h-5 text-gray-600" />
             </button>
             
             {/* Pop-up Content */}
             <div className="text-center">
-              {/* Swap Party Image */}
-              <div className="mb-6">
-                <img
-                  src="/lovable-uploads/3d40334a-c9c2-4295-b885-5159dbe408bd.png"
-                  alt="Chợ Tốt Swap Dzui Party"
-                  className="w-full h-auto rounded-xl"
-                />
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-yellow-brand flex items-center justify-center">
+                <span className="text-2xl">🎉</span>
               </div>
-              
-              {/* CTA Button */}
-              <Button
-                onClick={handleCTAClick}
-                className="w-full bg-yellow-brand text-black hover:bg-yellow-brand/90 font-medium py-3 mb-3"
-              >
-                Tham gia Swap Party ngay!
-              </Button>
-              
-              {/* Skip Button */}
-              <button
+              <h2 className="text-xl font-bold text-gray-900 mb-3">
+                Chào mừng đến với Chợ Tốt!
+              </h2>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Khám phá hàng ngàn sản phẩm chất lượng và kết nối với cộng đồng mua bán trao đổi lớn nhất Việt Nam.
+              </p>
+              <Button 
                 onClick={closePopup}
-                className="text-sm transition-colors text-white"
+                className="w-full bg-yellow-brand text-black hover:bg-yellow-brand/90 font-medium py-3"
               >
-                Bỏ qua
-              </button>
+                Bắt đầu khám phá
+              </Button>
             </div>
           </div>
         </div>
