@@ -11,32 +11,26 @@ const ExchangeZone = () => {
     {
       id: 1,
       name: 'Trao đổi thời trang',
-      description: 'Trao đổi phong cách với xu hướng thời trang mới nhất',
-      memberCount: 156,
-      timeAgo: 'Cập nhật hôm nay',
-      color: 'bg-gradient-to-br from-purple-50 to-pink-50',
-      iconBg: 'bg-gradient-to-br from-purple-500 to-pink-500',
-      letter: 'T'
+      description: 'Đã xem gần đây',
+      memberCount: '1 tuần trước',
+      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop',
+      isLarge: true
     },
     {
       id: 2,
       name: 'Thiết bị công nghệ',
-      description: 'Trao đổi công nghệ của bạn để có thứ gì đó mới',
-      memberCount: 89,
-      timeAgo: 'Cập nhật hôm nay',
-      color: 'bg-gradient-to-br from-blue-50 to-cyan-50',
-      iconBg: 'bg-gradient-to-br from-blue-500 to-cyan-500',
-      letter: 'C'
+      description: 'Mobile Starred Listings',
+      memberCount: 'Đã lưu 7 mục',
+      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop',
+      isLarge: true
     },
     {
       id: 3,
-      name: 'Câu lạc bộ sách',
-      description: 'Trao đổi sách và khám phá những câu chuyện mới',
-      memberCount: 234,
-      timeAgo: 'Cập nhật hôm nay',
-      color: 'bg-gradient-to-br from-emerald-50 to-teal-50',
-      iconBg: 'bg-gradient-to-br from-emerald-500 to-teal-500',
-      letter: 'S'
+      name: 'Nha Trang',
+      description: 'Đã lưu 2 mục',
+      memberCount: '',
+      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=400&fit=crop',
+      isLarge: false
     }
   ];
 
@@ -87,46 +81,52 @@ const ExchangeZone = () => {
           </Button>
         </div>
 
-        {/* Exchange Collections Section */}
+        {/* Collections Section */}
         <div className="space-y-5">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold text-gray-900">Bộ sưu tập trao đổi</h3>
-            <div className="bg-gradient-to-r from-purple-100 to-pink-100 px-3 py-1.5 rounded-full">
-              <span className="text-purple-700 text-xs font-semibold">AI tuyển chọn</span>
-            </div>
+            <h3 className="text-xl font-bold text-gray-900">Danh sách Yêu thích</h3>
           </div>
 
-          {/* Exchange Group Cards */}
-          <div className="space-y-4">
-            {exchangeGroups.map((group) => (
+          {/* Collection Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            {/* First two collections - large cards */}
+            {exchangeGroups.slice(0, 2).map((group) => (
               <div 
-                key={group.id} 
-                className="bg-white rounded-2xl border border-gray-100 p-5 cursor-pointer hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1"
+                key={group.id}
+                className="col-span-1 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 onClick={() => handleCollectionClick(group.id)}
               >
-                <div className="flex items-start space-x-4">
-                  <div className={`w-14 h-14 ${group.iconBg} rounded-xl flex items-center justify-center shadow-lg`}>
-                    <span className="text-white font-bold text-lg">{group.letter}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-gray-900 mb-2 text-base">{group.name}</h4>
-                    <p className="text-gray-600 text-sm mb-3 leading-relaxed">
-                      {group.description}
-                    </p>
-                    <div className="flex items-center space-x-4 text-xs">
-                      <div className="flex items-center space-x-1">
-                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                        <span className="font-medium text-gray-700">{group.memberCount} món đồ</span>
-                      </div>
-                      <span className="text-gray-400">•</span>
-                      <span className="text-gray-500">{group.timeAgo}</span>
-                    </div>
-                  </div>
-                  <div className="text-gray-400 mt-1">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
+                <div className="aspect-square relative overflow-hidden">
+                  <img 
+                    src={group.image} 
+                    alt={group.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h4 className="font-bold text-gray-900 mb-1 text-sm">{group.description}</h4>
+                  <p className="text-xs text-gray-500">{group.memberCount}</p>
+                </div>
+              </div>
+            ))}
+            
+            {/* Third collection - spans full width */}
+            {exchangeGroups.slice(2, 3).map((group) => (
+              <div 
+                key={group.id}
+                className="col-span-2 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                onClick={() => handleCollectionClick(group.id)}
+              >
+                <div className="aspect-[16/10] relative overflow-hidden">
+                  <img 
+                    src={group.image} 
+                    alt={group.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h4 className="font-bold text-gray-900 mb-1">{group.name}</h4>
+                  <p className="text-sm text-gray-500">{group.description}</p>
                 </div>
               </div>
             ))}
