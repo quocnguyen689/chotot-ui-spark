@@ -89,12 +89,12 @@ const ExchangeDiscover = () => {
       description:
         "Giày sneaker phiên bản giới hạn, chỉ đi vài lần. Còn nguyên hộp và phụ kiện.",
       location: "Quận 3, cách 3km",
-      owner: "SneakerHead",
+      owner: "Dung",
       ownerAvatar:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face",
+        "https://ca.slack-edge.com/T0251K7U9-U07J470DEBF-969b4113b4ed-512",
       video:
         "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=600&fit=crop",
-      offers: 2,
+      offers: 3,
       comments: [],
       reactions: {
         likes: 32,

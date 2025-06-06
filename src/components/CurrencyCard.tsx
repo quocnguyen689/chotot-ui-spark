@@ -49,14 +49,12 @@ const BidCard = ({ bid, onViewDetails }: BidCardProps) => {
   };
 
   return (
-    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+    <div className="flex items-center justify-between bg-gray-50 rounded-xl ">
       <div className="flex items-center space-x-3">
         <div className="w-20 h-20 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
           {bid.bidderAvatar ? (
             <img
-              src={
-                "https://cdn.pixabay.com/photo/2017/09/07/08/54/money-2724241_1280.jpg"
-              }
+              src={"https://cdn-icons-png.flaticon.com/512/7630/7630510.png"}
               alt={bid.bidderName}
               className="w-full h-full object-cover"
             />

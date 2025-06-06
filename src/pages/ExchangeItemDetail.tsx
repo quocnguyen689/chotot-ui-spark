@@ -40,6 +40,7 @@ const ExchangeItemDetail = () => {
     pending: 5,
     accepted: 3,
     rejected: 2,
+    new: 7,
   });
   const [reactions, setReactions] = useState({
     likes: 24,
@@ -130,8 +131,9 @@ const ExchangeItemDetail = () => {
     const interval = setInterval(() => {
       setOfferCounts((prev) => ({
         pending: prev.pending + Math.floor(Math.random() * 2) + 1,
-        accepted: prev.accepted + Math.floor(Math.random() * 2),
+        accepted: 3,
         rejected: prev.rejected + Math.floor(Math.random() * 2),
+        new: prev.new + Math.floor(Math.random() * 2),
       }));
     }, Math.random() * 2000 + 3000); // Random interval between 3-5 seconds
 
@@ -400,7 +402,7 @@ const ExchangeItemDetail = () => {
 
               <div className="space-y-3">
                 {itemProduct?.offers
-                  ?.sort((a, b) => a.id - b.id)
+                  ?.sort((a, b) => b.id - a.id)
                   ?.map((offer) =>
                     offer?.price > 0 ? (
                       <div

@@ -78,7 +78,7 @@ const SwapOfferModal = ({
         target_ads_id: target_ads_id,
         price: price,
         owner_id: 2,
-        status: "accepted",
+        status: "new",
       };
       // Handle swap request logic here
       // const { title, description } = formData;
@@ -155,7 +155,7 @@ const SwapOfferModal = ({
                   </p>
                   <div className="flex items-center space-x-2 mt-1">
                     <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
-                      không dõ
+                      #Hashtag
                     </span>
                     <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
                       Như mới
