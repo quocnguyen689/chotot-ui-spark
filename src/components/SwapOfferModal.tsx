@@ -55,11 +55,11 @@ const SwapOfferModal = ({
         offerPrice
       });
       
-      // Show success toast with modern Gen Z styling, centered
+      // Show success toast with modern Gen Z styling, centered with downward animation
       toast({
-        title: "🎉 Yay! Đề nghị đã được gửi! ✨",
-        description: `Chúng tôi sẽ thông báo khi có phản hồi từ ${targetItem.owner} 🔥\n\n💫 Tip: Hãy chuẩn bị sẵn sàng để trao đổi nhanh chóng!`,
-        className: "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[9999] border-l-4 border-l-yellow-500 bg-gradient-to-r from-white to-yellow-50 shadow-2xl max-w-md w-full mx-4 rounded-2xl border-yellow-200",
+        title: "🎉 Yay! Gửi thành công rồi! ✨",
+        description: `Mình sẽ báo bạn ngay khi ${targetItem.owner} phản hồi nhé! 💫`,
+        className: "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[9999] border-l-4 border-l-yellow-500 bg-gradient-to-r from-white to-yellow-50 shadow-xl max-w-xs w-full mx-4 rounded-xl border-yellow-200 data-[state=closed]:animate-[slide-out-down_0.3s_ease-in] data-[state=open]:animate-[slide-in-from-center_0.3s_ease-out]",
         duration: 3000,
       });
       
