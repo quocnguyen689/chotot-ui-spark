@@ -83,7 +83,7 @@ const ExchangeItemDetail = () => {
         user: "Ruby Hoang",
         avatar:
           "https://ca.slack-edge.com/T0251K7U9-USVJXGXFD-1e04d2da2bf7-512",
-        text: "Tuyệt vời! Mình cũng có một chiếc tương tự",
+        text: "Đúng chất đường phố",
         time: "2 phút trước",
       },
       {
@@ -91,7 +91,7 @@ const ExchangeItemDetail = () => {
         user: "Jacky Nguyen",
         avatar:
           "https://ca.slack-edge.com/T0251K7U9-UQL2YP8HZ-3f1926605b2e-512",
-        text: "Kiểu dáng rất đẹp, chất liệu có vẻ bền",
+        text: "Khớp vibe với mình luôn",
         time: "5 phút trước",
       },
     ],
@@ -384,14 +384,14 @@ const ExchangeItemDetail = () => {
               onClick={handleMakeOffer}
               className="w-full bg-yellow-brand hover:bg-yellow-600 text-black py-4 rounded-2xl font-medium transition-colors"
             >
-              Đưa ra lời đề nghị
+              Đưa ra đề nghị
             </Button>
 
             {/* Recent Offers Section */}
             <div className="bg-white rounded-2xl p-4 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  Lời đề nghị gần đây
+                  Đề nghị gần đây
                 </h2>
                 <div className="px-3 py-1.5 bg-gray-100 rounded-full">
                   <span className="text-gray-700 text-sm font-medium">

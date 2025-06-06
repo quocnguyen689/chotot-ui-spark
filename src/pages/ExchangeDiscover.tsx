@@ -76,7 +76,24 @@ const ExchangeDiscover = () => {
       video:
         "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=600&fit=crop",
       offers: 5,
-      comments: [],
+      comments: [
+        {
+          id: 1,
+          user: "Ruby Hoang",
+          avatar:
+            "https://ca.slack-edge.com/T0251K7U9-USVJXGXFD-1e04d2da2bf7-512",
+          text: "Thích cái màu này quá",
+          time: "2 phút trước",
+        },
+        {
+          id: 2,
+          user: "Jacky Nguyen",
+          avatar:
+            "https://ca.slack-edge.com/T0251K7U9-UQL2YP8HZ-3f1926605b2e-512",
+          text: "Cái này đi phượt đúng chất luôn",
+          time: "5 phút trước",
+        },
+      ],
       reactions: {
         likes: 15,
         hearts: 8,
@@ -95,7 +112,24 @@ const ExchangeDiscover = () => {
       video:
         "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=600&fit=crop",
       offers: 3,
-      comments: [],
+      comments: [
+        {
+          id: 1,
+          user: "Ruby Hoang",
+          avatar:
+            "https://ca.slack-edge.com/T0251K7U9-USVJXGXFD-1e04d2da2bf7-512",
+          text: "Đúng chất đường phố",
+          time: "2 phút trước",
+        },
+        {
+          id: 2,
+          user: "Jacky Nguyen",
+          avatar:
+            "https://ca.slack-edge.com/T0251K7U9-UQL2YP8HZ-3f1926605b2e-512",
+          text: "Khớp vibe với mình luôn",
+          time: "5 phút trước",
+        },
+      ],
       reactions: {
         likes: 32,
         hearts: 21,
@@ -186,7 +220,7 @@ const ExchangeDiscover = () => {
             <div className="flex items-center space-x-4">
               <div className="bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
                 <span className="text-white text-sm font-medium">
-                  {currentItem.offers} lời đề nghị
+                  {currentItem.offers} Đề nghị
                 </span>
               </div>
               <button className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all duration-200 hover:bg-black/60">
