@@ -5,6 +5,7 @@ export interface Offer {
   created_date: string; // hoặc dùng Date nếu bạn sẽ parse thành Date object
   status: string;
   image_url: string;
+  price: number;
 }
 
 export interface Product {

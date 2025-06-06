@@ -57,7 +57,7 @@ const SwapOfferModal = ({
         source_ads_id: selectedItem,
         target_ads_id: target_ads_id,
         owner_id: 2,
-        status: "accepted",
+        status: "new",
       };
       // Handle swap request logic here
       // const { title, description } = formData;

@@ -9,7 +9,7 @@ interface BidCardProps {
     bidderName: string;
     bidderAvatar?: string;
     timeAgo: string;
-    status: "highest" | "outbid" | "pending";
+    status: string;
   };
   onViewDetails?: (bidId: number) => void;
 }
@@ -35,13 +35,12 @@ const BidCard = ({ bid, onViewDetails }: BidCardProps) => {
         return "bg-gray-50 text-gray-800 border border-gray-200 shadow-sm";
     }
   };
-
   const getStatusText = (status: string) => {
     switch (status) {
-      case "pending":
+      case "new":
         return "Đang chờ";
       case "accepted":
-        return "Đang chờ";
+        return "Chấp nhận";
       case "rejected":
         return "Đã từ chối";
       default:
@@ -78,12 +77,7 @@ const BidCard = ({ bid, onViewDetails }: BidCardProps) => {
             <Badge className={`text-xs ${getStatusColor(bid.status)}`}>
               {getStatusText(bid.status)}
             </Badge>
-            {bid.status === "highest" && (
-              <span className="text-xs text-green-600 mx-[8px] flex items-center space-x-1">
-                <TrendingUp className="w-3 h-3" />
-                <span>Giá cao nhất</span>
-              </span>
-            )}
+            <span className="text-xs text-gray-600 mx-[8px]">0 đề nghị</span>
           </div>
         </div>
       </div>

@@ -154,10 +154,12 @@ const ExchangeItemDetail = () => {
   };
   const getStatusText = (status: string) => {
     switch (status) {
+      case "new":
+        return "Đang chờ";
       case "pending":
         return "Đang chờ";
       case "accepted":
-        return "Đang chờ";
+        return "Chấp nhận";
       case "rejected":
         return "Đã từ chối";
       default:
@@ -397,61 +399,78 @@ const ExchangeItemDetail = () => {
               </div>
 
               <div className="space-y-3">
-                {itemProduct?.offers?.map((offer) => (
-                  <div
-                    key={offer.id}
-                    className="flex items-center justify-between p-3 bg-gray-50 rounded-xl"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="w-20 h-20 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
-                        <img
-                          src={offer?.image_url[0]}
-                          alt={offer?.ads_name}
-                          className="w-full h-full object-cover"
+                {itemProduct?.offers
+                  ?.sort((a, b) => a.id - b.id)
+                  ?.map((offer) =>
+                    offer?.price > 0 ? (
+                      <div
+                        key={offer.id}
+                        className="flex items-center justify-between p-3 bg-gray-50 rounded-xl"
+                      >
+                        <CurrencyCard
+                          bid={{
+                            id: offer.id,
+                            amount: offer?.price,
+                            bidderName: offer?.owner_name,
+                            bidderAvatar:
+                              "https://images.unsplash.com/photo-1494790108755-2616b612b1bc?w=100&h=100&fit=crop&crop=face",
+                            timeAgo: format(offer?.created_date, "dd/MM/yyyy"),
+                            status: getStatusText(offer?.status),
+                          }}
                         />
+                        <button
+                          onClick={() => handleViewOffer(offer.id)}
+                          className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+                        >
+                          <ChevronRight className="w-4 h-4 text-gray-600" />
+                        </button>
                       </div>
-                      <div className="space-y-1">
-                        <h3 className="font-medium text-gray-900 text-sm">
-                          {offer?.ads_name}
-                        </h3>
-                        <p className="text-xs text-gray-500">
-                          bởi {offer?.owner_name} •{" "}
-                          {format(offer?.created_date, "dd/MM/yyyy")}
-                        </p>
-                        <div className="space-y-3">
-                          <Badge
-                            className={`text-xs ${getStatusColor(
-                              offer?.status
-                            )}`}
-                          >
-                            {getStatusText(offer?.status)}
-                          </Badge>
-                          <span className="text-xs text-gray-600 mx-[8px]">
-                            {getOfferCount(offer?.status)} đề nghị
-                          </span>
+                    ) : (
+                      <div
+                        key={offer.id}
+                        className="flex items-center justify-between p-3 bg-gray-50 rounded-xl"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className="w-20 h-20 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
+                            <img
+                              src={offer?.image_url?.[0] || offer?.image_url}
+                              alt={offer?.ads_name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <h3 className="font-medium text-gray-900 text-sm">
+                              {offer?.ads_name}
+                            </h3>
+                            <p className="text-xs text-gray-500">
+                              bởi {offer?.owner_name} •{" "}
+                              {format(offer?.created_date, "dd/MM/yyyy")}
+                            </p>
+                            <div className="space-y-3">
+                              <Badge
+                                className={`text-xs ${getStatusColor(
+                                  offer?.status
+                                )}`}
+                              >
+                                {getStatusText(offer?.status)}
+                              </Badge>
+                              <span className="text-xs text-gray-600 mx-[8px]">
+                                {getOfferCount(offer?.status)} đề nghị
+                              </span>
+                            </div>
+                          </div>
                         </div>
+
+                        <button
+                          onClick={() => handleViewOffer(offer.id)}
+                          className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+                        >
+                          <ChevronRight className="w-4 h-4 text-gray-600" />
+                        </button>
                       </div>
-                    </div>
-                    <button
-                      onClick={() => handleViewOffer(offer.id)}
-                      className="p-2 hover:bg-gray-200 rounded-full transition-colors"
-                    >
-                      <ChevronRight className="w-4 h-4 text-gray-600" />
-                    </button>
-                  </div>
-                ))}
+                    )
+                  )}
               </div>
-              {/* <CurrencyCard
-                bid={{
-                  id: 1,
-                  amount: 2500000,
-                  bidderName: "Minh Anh",
-                  bidderAvatar:
-                    "https://images.unsplash.com/photo-1494790108755-2616b612b1bc?w=100&h=100&fit=crop&crop=face",
-                  timeAgo: "2 phút trước",
-                  status: "highest" as const,
-                }}
-              /> */}
             </div>
             {/* Bottom spacing */}
             <div className="pb-6"></div>
