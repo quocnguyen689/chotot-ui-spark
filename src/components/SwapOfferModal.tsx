@@ -59,7 +59,7 @@ const SwapOfferModal = ({
       toast({
         title: "🎉 Yay! Gửi thành công rồi! ✨",
         description: `Mình sẽ báo bạn ngay khi ${targetItem.owner} phản hồi nhé! 💫`,
-        className: "fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[9999] border-l-4 border-l-yellow-500 bg-gradient-to-r from-white to-yellow-50 shadow-xl max-w-xs w-full mx-4 rounded-xl border-yellow-200",
+        className: "fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[9999] border-l-4 border-l-yellow-500 bg-gradient-to-r from-white to-yellow-50 shadow-xl max-w-xs w-full mx-2 rounded-xl border-yellow-200",
         duration: 3000,
       });
       
