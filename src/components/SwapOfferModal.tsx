@@ -25,28 +25,30 @@ const SwapOfferModal = ({
   const [offerPrice, setOfferPrice] = useState('');
 
   // Sample user items - in real app this would come from API
-  const userItems = [{
-    id: 1,
-    title: 'Loa Bluetooth JBL',
-    author: 'Thiết bị âm thanh',
-    category: 'Điện tử',
-    condition: 'Tốt',
-    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop'
-  }, {
-    id: 2,
-    title: 'Máy ảnh Polaroid',
-    author: 'Fujifilm Instax',
-    category: 'Điện tử',
-    condition: 'Như mới',
-    image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop'
-  }, {
-    id: 3,
-    title: 'Bộ sách thiết kế',
-    author: 'Design Collection',
-    category: 'Sách',
-    condition: 'Rất tốt',
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop'
-  }];
+  const userItems = [
+    {
+      id: 1,
+      title: 'Loa Bluetooth JBL',
+      author: 'Thiết bị âm thanh',
+      category: 'Điện tử',
+      condition: 'Tốt',
+      image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop'
+    }, {
+      id: 2,
+      title: 'Máy ảnh Polaroid',
+      author: 'Fujifilm Instax',
+      category: 'Điện tử',
+      condition: 'Như mới',
+      image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop'
+    }, {
+      id: 3,
+      title: 'Bộ sách thiết kế',
+      author: 'Design Collection',
+      category: 'Sách',
+      condition: 'Rất tốt',
+      image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop'
+    }
+  ];
   const handleRequestSwap = () => {
     if (selectedItem || offerPrice) {
       console.log('Requesting swap:', {
@@ -59,7 +61,7 @@ const SwapOfferModal = ({
       toast({
         title: "🎉 Yay! Gửi thành công rồi! ✨",
         description: `Mình sẽ báo bạn ngay khi ${targetItem.owner} phản hồi nhé! 💫`,
-        className: "fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[9999] border-l-4 border-l-yellow-500 bg-gradient-to-r from-white to-yellow-50 shadow-xl max-w-xs w-full mx-2 rounded-xl border-yellow-200",
+        className: "fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[9999] border-l-4 border-l-yellow-500 bg-gradient-to-r from-white to-yellow-50 shadow-xl max-w-xs w-full mx-1 rounded-xl border-yellow-200",
         duration: 3000,
       });
       
