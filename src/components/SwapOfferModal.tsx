@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Plus } from 'lucide-react';
+import { BookOpen, Plus, CheckCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
+
 interface SwapOfferModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -18,6 +20,7 @@ const SwapOfferModal = ({
   targetItem
 }: SwapOfferModalProps) => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const [offerPrice, setOfferPrice] = useState('');
 
@@ -51,7 +54,33 @@ const SwapOfferModal = ({
         targetItem,
         offerPrice
       });
-      // Handle swap request logic here
+      
+      // Show success toast with modern Gen Z styling
+      toast({
+        title: (
+          <div className="flex items-center space-x-2">
+            <div className="relative">
+              <CheckCircle className="w-5 h-5 text-green-500" />
+              <Sparkles className="w-3 h-3 text-yellow-400 absolute -top-1 -right-1 animate-pulse" />
+            </div>
+            <span className="font-bold text-gray-900">Yay! Đề nghị đã được gửi! ✨</span>
+          </div>
+        ),
+        description: (
+          <div className="mt-2">
+            <p className="text-gray-700 font-medium">
+              Chúng tôi sẽ thông báo khi có phản hồi từ {targetItem.owner} 🔥
+            </p>
+            <div className="mt-2 px-3 py-2 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-lg border border-yellow-200">
+              <p className="text-sm text-gray-800 font-medium">
+                💫 Tip: Hãy chuẩn bị sẵn sàng để trao đổi nhanh chóng!
+              </p>
+            </div>
+          </div>
+        ),
+        className: "border-l-4 border-l-yellow-brand bg-gradient-to-r from-white to-yellow-50 shadow-lg",
+      });
+      
       onClose();
     }
   };
